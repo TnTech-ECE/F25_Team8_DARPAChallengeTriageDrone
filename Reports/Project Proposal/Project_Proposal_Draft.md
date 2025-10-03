@@ -14,8 +14,7 @@ In search and rescue (SAR) operations, these drones could provide a semi-autonom
 - GPS Denial: Some areas have structures or obstacles that obscure, weaken, or block GPS signals, which means that the drone would have to rely on other methods to path find. 
 - Geo-Location: Enhance or implement new sensors to detect and locate victims who may be partially or completely obscured. 
 
-
-As equipment is added to the drone, it can become heavier so balancing budget, and weight is an important factor. Safety and preventative measures will also have to be taken to safely charge the drone. Overcharging Lithium Polymer batteries can be very dangerous. This is especially of concern as Li-Po batteries are a popular choice for drones. 
+While the drone will retain manual control capabilities from the previous team’s design, there will be more of a focus semi-autonomous functionality in tandem with geo-location. This will allow greater efficiency in locating and determining the condition of individuals without the need for a manual operator.
 
 ## Specification
 1. **The system shall obtain the presence of a heartbeat and its frequency (range 0.45 to 2.92 Hz).**  
