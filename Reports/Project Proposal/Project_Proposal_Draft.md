@@ -12,9 +12,8 @@ In search and rescue (SAR) operations, these drones could provide a semi-autonom
 - Range: The distance a drone can travel is dependent on weather, battery size, and weight. 
 - Pathfinding: Image processing or other sensing methods are necessary to give the drone semi-autonomous flight capabilities. 
 - GPS Denial: Some areas have structures or obstacles that obscure, weaken, or block GPS signals, which means that the drone would have to rely on other methods to path find. 
-- Geo-Location: Improve/add sensors to identify and locate fully or partially obscured individuals, to completely obscured in cases of being buried. 
+- Geo-Location: Enhance or implement new sensors to detect and locate victims who may be partially or completely obscured. 
 
-While the drone will retain manual control capabilities from the previous team’s design, there will be more of a focus semi-autonomous functionality in tandem with geo-location. This will allow greater efficiency in locating and determining the condition of individuals without the need for a manual operator. 
 
 As equipment is added to the drone, it can become heavier so balancing budget, and weight is an important factor. Safety and preventative measures will also have to be taken to safely charge the drone. Overcharging Lithium Polymer batteries can be very dangerous. This is especially of concern as Li-Po batteries are a popular choice for drones. 
 
