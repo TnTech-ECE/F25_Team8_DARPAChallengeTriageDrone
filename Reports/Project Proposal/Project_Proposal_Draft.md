@@ -33,27 +33,27 @@ While the drone will retain manual control capabilities from the previous team�
    - Measure of success: Time the drone in each operating condition until the drone runs out of battery. Drone will inform the user when the battery is below 10%.
 8. **The system shall display triage results and vitals wirelessly.**  
    - Measure of success: Triage results will display accurate data on the controller interface that is readable for first responders.
-9. **The system shall weigh less than 20 pounds as per DARPA’s requirements for the Drone Triage Challenge or DTC **[[1](#references)]**.**  
-   - Measure of success: The drone will be placed on a scale and will read under 20 lbs.
-10. **The system shall display results in close to real time.**  
-   - Measure of success: Using synced stopwatches, two group members will be placed at the max range away. The drone will then take simulated measurements, and the results will be analyzed to find the average latency for measurements. Ensure this latency does not exceed 1000 ms at full range.
-11. **The drone shall operate during daylight hours on a clear day without wind.**  
-   - Measure of success: The drone shall be able to operate in clear conditions, with wind speeds less than 10 mph.
-12. **The drone shall operate in low visibility conditions.**  
-   - Measure of success: The drone shall be able to operate in low visibility conditions such as fog or smoke with the same capability as clear conditions.
-13. **The drone shall operate under mildly windy conditions.**  
-   - Measure of success: The drone shall operate outdoors on a mildly windy day, or while having a fan pointed at the drone without loss of stability or sensing accuracy.
-14. **The system shall allow a human operator to assume full manual control of the drone at any time, overriding autonomous functions.**  
-   - Measure of success: In a simulated failure mode, operator override occurs within ≤ 2 seconds and drone responds accordingly.
-15. **The drone shall enter a safe hover or auto-land mode if communication with the operator is lost for more than 10 seconds.**  
-   - Measure of success: Communication link is cut during test flights; drone executes pre-programmed fail-safe procedure.
+9. **The system shall weigh less than 20 pounds as per DARPA’s requirements for the Drone Triage Challenge or DTC **[[1](#references)]**.**
+    - Measure of success: The drone will be placed on a scale and will read under 20 lbs.
+10. **The system shall display results in close to real time.**
+    - Measure of success: Using synced stopwatches, two group members will be placed at the max range away. The drone will then take simulated measurements, and the results will be analyzed to find the average latency for measurements. Ensure this latency does not exceed 1000 ms at full range.
+11. **The drone shall operate during daylight hours on a clear day without wind.**
+     - Measure of success: The drone shall be able to operate in clear conditions, with wind speeds less than 10 mph.
+12. **The drone shall operate in low visibility conditions.**
+     - Measure of success: The drone shall be able to operate in low visibility conditions such as fog or smoke with the same capability as clear conditions.
+13. **The drone shall operate under mildly windy conditions.**
+     - Measure of success: The drone shall operate outdoors on a mildly windy day, or while having a fan pointed at the drone without loss of stability or sensing accuracy.
+14. **The system shall allow a human operator to assume full manual control of the drone at any time, overriding autonomous functions.**
+     - Measure of success: In a simulated failure mode, operator override occurs within ≤ 2 seconds and drone responds accordingly.
+15. **The drone shall enter a safe hover or auto-land mode if communication with the operator is lost for more than 10 seconds.**
+     - Measure of success: Communication link is cut during test flights; drone executes pre-programmed fail-safe procedure.
 
 ## Constraints
 1. The drone SHALL be user-friendly.  
 2. The drone SHALL have an integrated system for security.  
-3. The drone SHALL remain under 400 ft above ground level **[[9](#references)]**.  
-4. The drone SHALL not exceed 100 mph **[[9](#references)]**.  
-5. The drone SHALL be equipped with anti-collision lighting **[[9](#references)]**.  
+3. The drone SHALL remain under 400 ft above ground level **[[9](#references)][[10](#references)]**.  
+4. The drone SHALL not exceed 100 mph **[[9](#references)][[10](#references)]**.  
+5. The drone SHALL be equipped with anti-collision lighting **[[9](#references)][[11](#references)]**.  
 
 ## Relevant Literature
 The team will have to research the following fields of study to build a successful search and rescue (SAR) drone:
@@ -93,14 +93,14 @@ Since the drone should be able to decide on and follow a path on its own, with m
 
 <div align = "center">
   
-| SUBSYSTEM   | DESCRIPTION            | QUANTITY | COST PER ITEM  | TOTAL COST OF QUANTITY |
-| :---------: | :--------------------: | :------: | :------------: | :--------------------: |
-| Geolocation | GPS Module             |    1     | $30            | $30                    |
-| Geolocation | Microphone             |    2     | $10            | $20                    |
-| Path Finding| Lidar Sensor           |    1     | $350           | $350                   |
-| Drone Parts | Motor Replacement      |    1     | $150           | $150                   |
-| 3D Filament | Sensor Casing/Mounting |    2     | $50            | $100                   |
-| **Total**   |                        |          |                | **$650**               |
+| SUBSYSTEM   | DESCRIPTION            | QUANTITY | COST PER ITEM | TOTAL COST OF QUANTITY | JUSTIFICATION |
+| :---------: | :--------------------- | :------: | :------------ | :--------------------- | :------------ |
+| Geolocation | GPS Module             |    1     | $30           | $30                    | Provides coordinates for victim geotagging and operator situational awareness, which supports triage reporting and near real-time display (Specs 8 and 10). Also aids return-to-home and link-loss behaviors that depend on position data (Spec 15). |
+| Geolocation | Microphone             |    2     | $10           | $20                    | Enables voice prompts and response capture for cognitive checks (Spec 4). Can be filtered to the 80–255 Hz band per your requirement (Spec 5). Recordings will not be stored to comply with two-party consent (Spec 6). |
+| Path Finding| Lidar Sensor           |    1     | $350          | $350                   | Core perception input for obstacle detection and semi-autonomous path planning in dynamic scenes, especially in low-visibility conditions (Specs 12 and 13). Directly addresses Pathfinding and Degraded Sensing challenges and aligns with the UAV path-planning literature you cited. |
+| Drone Parts | Motor Replacement      |    1     | $150          | $150                   | Maintains propulsion reliability during integration and field tests with added payload mass. Reduces schedule risk from hardware failures and supports meeting the 15–60 minute operational testing window (Spec 7) and safe manual override testing (Spec 14). |
+| 3D Filament | Sensor Casing/Mounting |    2     | $50           | $100                   | Custom mounts for LiDAR, GPS, and microphones to control orientation and reduce vibration-induced noise. Necessary for robust sensing accuracy in motion, which supports Specs 1, 3, 10, 12, and 13 and addresses the integration aspects called out in your radar and image-processing sections. |
+| **Total**   |                        |          |               | **$650**               |  |
 
 </div>
 
@@ -153,23 +153,29 @@ Since the drone should be able to decide on and follow a path on its own, with m
 - By demonstrating cost-effectiveness, drones may eventually reduce insurance costs related to disaster response, benefiting municipalities and taxpayers.  
 
 ## References
-[[1](#specification)] DARPA Triage Challenge. [Online]. Available: https://triagechallenge.darpa.mil/. [Accessed: 26-Jan-2024].    
+[[1](#specification)] DARPA Triage Challenge. [Online]. Available: [DARPA](https://triagechallenge.darpa.mil/). Accessed: 26-Jan-2024.    
     
-[2] “DTC: FAQ,” DTC | FAQ. [Online]. Available: https://triagechallenge.darpa.mil/faq. [Accessed: 26-Jan-2024].    
+[2] “DTC: FAQ,” DTC | FAQ. [Online]. Available: [DARPA](https://triagechallenge.darpa.mil/). Accessed: 26-Jan-2024.    
     
-[3] R. Kloet and P. Mulder, "Drones in Search and Rescue: A New Era in Emergency Response," Journal of Unmanned Vehicle Systems, MDPI. [Online]. Available: https://www.mdpi.com/2072-4292/15/13/3266. [Accessed:30-Sep-2024].    
+[3] R. Kloet and P. Mulder, "Drones in Search and Rescue: A New Era in Emergency Response," Journal of Unmanned Vehicle Systems, MDPI. [Online]. Available: [MDPI](https://www.mdpi.com/2072-4292/15/13/3266). Accessed: 30-Sep-2024.    
     
-[[4](#constraints)] Federal Aviation Administration, “Airspace 101 – Rules of the Sky | Federal Aviation Administration,” Faa.gov, 2021. https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_101  
+[[4](#constraints)] Federal Aviation Administration, “Airspace 101 – Rules of the Sky | Federal Aviation Administration,” Faa.gov, 2021. [FAA](https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_101) 
     
-[[5](#relevant-literature)] “Autonomous Vehicles for Emergency Response and Disaster Relief - IEEE Public Safety Technology Initiative,” Ieee.org, 2024. https://publicsafety.ieee.org/topics/autonomous-vehicles-for-emergency-response-and-disaster-relief    
+[[5](#relevant-literature)] “Autonomous Vehicles for Emergency Response and Disaster Relief - IEEE Public Safety Technology Initiative,” Ieee.org, 2024. [IEEE](https://publicsafety.ieee.org/topics/autonomous-vehicles-for-emergency-response-and-disaster-relief)    
     
-[[6](#relevant-literature)] “Deep Learning in Aerial Systems Using Jetson | NVIDIA Technical Blog,” NVIDIA Technical Blog, Nov. 03, 2016. https://developer.nvidia.com/blog/deep-learning-in-aerial-systems-jetson/ (accessed Oct. 01, 2024).    
+[[6](#relevant-literature)] “Deep Learning in Aerial Systems Using Jetson | NVIDIA Technical Blog,” NVIDIA Technical Blog, Nov. 03, 2016. [NVIDIA](https://developer.nvidia.com/blog/deep-learning-in-aerial-systems-jetson/) Accessed Oct. 01, 2024.    
     
-[[7](#relevant-literature)] M. Kebe, R. Gadhafi, B. Mohammad, M. Sanduleanu, H. Saleh, and M. Al-Qutayri, “Human Vital Signs Detection Methods and Potential Using Radars: A Review,” Sensors, vol. 20, no. 5, p. 1454, Mar. 2020, doi: https://doi.org/10.3390/s20051454.    
+[[7](#relevant-literature)] M. Kebe, R. Gadhafi, B. Mohammad, M. Sanduleanu, H. Saleh, and M. Al-Qutayri, “Human Vital Signs Detection Methods and Potential Using Radars: A Review,” Sensors, vol. 20, no. 5, p. 1454, Mar. 2020, [DOI](https://doi.org/10.3390/s20051454).    
     
-[8] W. Meng, X. Zhang, L. Zhou, H. Guo, and X. Hu, "Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions," Drones, vol. 9, no. 5, p. 376, May 2025, doi: 10.3390/drones9050376.     
+[8] W. Meng, X. Zhang, L. Zhou, H. Guo, and X. Hu, "Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions," Drones, vol. 9, no. 5, p. 376, May 2025, [DOI](https://doi.org/10.3390/drones9050376).     
     
-[[9](#constraints)] Federal Aviation Administration. (n.d.). Small Unmanned Aircraft System (sUAS). In Aeronautical Information Manual, Chapter 11, Section 2. Retrieved from https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap11_section_2.html     
+[[9](#constraints)] Federal Aviation Administration. (n.d.). Small Unmanned Aircraft System (sUAS). In Aeronautical Information Manual, Chapter 11, Section 2. Retrieved from [FAA](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap11_section_2.html)     
+
+[10] Electronic Code of Federal Regulations, "14 CFR §107.51 Operating limitations for small unmanned aircraft." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51?utm). Accessed: 04-Oct-2025. 
+
+[11] Electronic Code of Federal Regulations, "14 CFR §107.29 Operation at night." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.29?utm). Accessed: 04-Oct-2025.
+
+[12] Federal Aviation Administration, "Remote Identification of Drones - 14 CFR Part 89 overview and toolkit." Available: [FAA](faa.gov/uas/getting_started/remote_id). Accessed: 04-Oct-2025.
 
 ## Statement of Contribution
 The team worked on this proposal as a team through multiple revisions. Specifications and the Gantt chart were worked on together as a group while other sub-sections were delegated to individual members of the group. For revisions, the team met together to discuss changes that needed to be made. During revisions, different members were delegated to different sections to get a fresh set of eyes on each part of the document. The following breakdown shows who worked on what sections of the current version of the document:
