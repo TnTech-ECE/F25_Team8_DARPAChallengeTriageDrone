@@ -51,12 +51,12 @@ While the drone will retain manual control capabilities from the previous team�
 ## Constraints
 1. The drone SHALL be user-friendly.  
 2. The drone SHALL have an integrated system for security.  
-3. The drone SHALL remain under 400 ft above ground level **[[9](#references)][[10](#references)]**.  
-4. The drone SHALL not exceed 100 mph **[[9](#references)][[10](#references)]**.  
-5. The drone SHALL be equipped with anti-collision lighting **[[9](#references)][[11](#references)]**.  
-6. The drone SHALL utilize encrypted wireless communication conforming to IEEE 802.11 standards for control and data transmission **[[15](#references)]**.
-7. The EMI test setup shall maintain all measurement tolerances within the limits specified by MIL-STD-461G § 4.3.1 **[[16](#references)]**.
-8. The system shall operate at an autonomy level functionally equivalent to SAE J3016 Level 3, where the drone can perform mission tasks under limited conditions while maintaining continuous human oversight **[[17](#references)]**.
+3. The drone SHALL remain under 400 ft above ground level **[[2](#references)][[3](#references)]**.    
+4. The drone SHALL not exceed 100 mph **[[2](#references)][[3](#references)]**.  
+5. The drone SHALL be equipped with anti-collision lighting **[[2](#references)][[3](#references)]**.  
+6. The drone SHALL utilize encrypted wireless communication conforming to IEEE 802.11 standards for control and data transmission **[[4](#references)]**.
+7. The EMI test setup shall maintain all measurement tolerances within the limits specified by MIL-STD-461G § 4.3.1 **[[5](#references)]**.
+8. The system shall operate at an autonomy level functionally equivalent to SAE J3016 Level 3, where the drone can perform mission tasks under limited conditions while maintaining continuous human oversight **[[6](#references)]**.
 
 ## Relevant Literature
 The team will have to research the following fields of study to build a successful search and rescue (SAR) drone:
@@ -80,7 +80,7 @@ The National Library of Medicine has conducted research into reading a subject's
 
 
 #### Example: Hovering UAV with Ultra-Wideband Radar
-In [15], a hovering UAV was equipped with an Ultra-wideband radar system capable of detecting small chest movements caused by breathing and heartbeat. Because the radar operates in the same frequency range as drone-induced vibrations, the system faced interference challenges. To overcome this, the project implemented a data-driven motion cancellation technique called **signal of opportunity**, which uses echoes from stationary surfaces (e.g., ground or buildings) as reference signals.
+In **[[4](#references)]**, a hovering UAV was equipped with an Ultra-wideband radar system capable of detecting small chest movements caused by breathing and heartbeat. Because the radar operates in the same frequency range as drone-induced vibrations, the system faced interference challenges. To overcome this, the project implemented a data-driven motion cancellation technique called **signal of opportunity**, which uses echoes from stationary surfaces (e.g., ground or buildings) as reference signals.
 
 The UAV estimates its own vibration signature using these references, applies a spatial filter to isolate noise, and then uses a differential noise cancellation filter to clean the signal. For power efficiency, the drone includes onboard digital signal processing (DSP) hardware to handle filtering and analysis in real time.
 
@@ -105,7 +105,7 @@ The UAV estimates its own vibration signature using these references, applies a 
 ### Image Processing
 
 #### General Overview
-NVIDIA has published guidance on using the Jetson Nano for search and rescue applications [6]. Their recommendations emphasize real-time image processing strategies that prioritize speed and efficiency — critical for onboard systems in time-sensitive missions. Key steps include reducing image complexity, focusing on likely targets, and training detection algorithms for rapid inference.
+NVIDIA has published guidance on using the Jetson Nano for search and rescue applications **[[7](#references)]**. Their recommendations emphasize real-time image processing strategies that prioritize speed and efficiency — critical for onboard systems in time-sensitive missions. Key steps include reducing image complexity, focusing on likely targets, and training detection algorithms for rapid inference.
 
 #### Key Considerations
 
@@ -116,7 +116,7 @@ NVIDIA has published guidance on using the Jetson Nano for search and rescue app
 
 
 #### Example: YOLOv5 on Jetson Nano for Victim Detection
-Ciccone and Ceruti [10] implemented YOLOv5 on Jetson Nano to detect human figures in disaster zones. Their system achieved real-time detection at 2FPS, demonstrating a compact and deployable solution for autonomous victim identification. However, the Jetson Nano’s limited processing speed posed challenges for complex triage operations, especially in cluttered or high-resolution environments.
+Ciccone and Ceruti **[[3](#references)]** implemented YOLOv5 on Jetson Nano to detect human figures in disaster zones. Their system achieved real-time detection at 2FPS, demonstrating a compact and deployable solution for autonomous victim identification. However, the Jetson Nano’s limited processing speed posed challenges for complex triage operations, especially in cluttered or high-resolution environments.
 
 - **Benefits**:
   - Enables real-time detection on low-cost, embedded hardware.
@@ -140,7 +140,7 @@ Ciccone and Ceruti [10] implemented YOLOv5 on Jetson Nano to detect human figure
 ### Deep Learning for Object Detection
 
 #### General Overview
-Deep learning models — especially YOLO (You Only Look Once) — are widely used in SAR missions for real-time object detection. These models excel at identifying small, partially obscured targets such as human figures in rubble, forested areas, or disaster zones. When deployed on edge computing platforms like NVIDIA Jetson, they enable onboard inference without relying on remote servers — a critical capability for time-sensitive rescue operations [13][6].
+Deep learning models — especially YOLO (You Only Look Once) — are widely used in SAR missions for real-time object detection. These models excel at identifying small, partially obscured targets such as human figures in rubble, forested areas, or disaster zones. When deployed on edge computing platforms like NVIDIA Jetson, they enable onboard inference without relying on remote servers — a critical capability for time-sensitive rescue operations **[[7](#references)][[8](#references)]**.
 
 #### Key Considerations
 
@@ -150,11 +150,11 @@ Deep learning models — especially YOLO (You Only Look Once) — are widely use
 - Integrating multi-modal sensor data (e.g., radar, thermal) to improve detection in low-visibility conditions.
 
 #### Example: YOLOv5 on Jetson Nano for Victim Detection
-In [13], YOLOv5 was deployed on drones to detect small human figures in rubble with real-time performance. The system achieved high recall rates in daylight conditions but struggled in smoke-filled or low-light environments. To address this, the team integrated thermal sensors and radar overlays to improve detection reliability.
+In **[[8](#references)]**, YOLOv5 was deployed on drones to detect small human figures in rubble with real-time performance. The system achieved high recall rates in daylight conditions but struggled in smoke-filled or low-light environments. To address this, the team integrated thermal sensors and radar overlays to improve detection reliability.
 
 - **Benefits**:
-  - Real-time detection of small objects with high frame rates [13].
-  - Efficient deployment on embedded systems like Jetson, reducing latency [6].
+  - Real-time detection of small objects with high frame rates **[[8](#references)]**.
+  - Efficient deployment on embedded systems like Jetson, reducing latency **[[7](#references)]**.
   - Scalable across diverse environments with proper dataset tuning.
 
 - **Drawbacks**:
@@ -164,9 +164,9 @@ In [13], YOLOv5 was deployed on drones to detect small human figures in rubble w
 
 - **Key Takeaways**:
   - Use SAR-augmented datasets and synthetic data generation to improve detection reliability.
-  - Fuse YOLO outputs with radar and thermal sensors to enhance detection in obscured conditions [7].
+  - Fuse YOLO outputs with radar and thermal sensors to enhance detection in obscured conditions **[[9](#references)]**.
   - Implement confidence scoring and ensemble methods to reduce false alarms.
-  - Optimize Jetson deployment for power and thermal constraints [6].
+  - Optimize Jetson deployment for power and thermal constraints **[[7](#references)]**.
 
 *Additional model comparisons and sensor fusion strategies will be explored in future iterations of the system design.*
 
@@ -184,7 +184,7 @@ To enable autonomous navigation with minimal operator input, SAR drones must emp
 - Ensuring robustness in dynamic environments, including obstacle avoidance and terrain variability.
 
 #### Example: Lantern Explorer Project
-The Lantern Explorer project [11] demonstrates a LiDAR-based navigation system using the Livox Mid-360 sensor. It combines LiDAR inertial odometry for mapping, velocity, and orientation, and uses the Fuel 360 algorithm for adaptive path optimization.
+The Lantern Explorer project **[[10](#references)]** demonstrates a LiDAR-based navigation system using the Livox Mid-360 sensor. It combines LiDAR inertial odometry for mapping, velocity, and orientation, and uses the Fuel 360 algorithm for adaptive path optimization.
 
 - **Benefits**:
   - High-resolution mapping and real-time obstacle avoidance.
@@ -290,38 +290,41 @@ Dr. Christopher (Storm) Johnson from Tennessee Tech is the team’s faculty advi
 
 ## References
 [[1](#specification)] DARPA Triage Challenge. [Online]. Available: [DARPA](https://triagechallenge.darpa.mil/). Accessed: 26-Jan-2024.    
-    
-[2] “DTC: FAQ,” DTC | FAQ. [Online]. Available: [DARPA](https://triagechallenge.darpa.mil/). Accessed: 26-Jan-2024.    
-    
-[3] R. Kloet and P. Mulder, "Drones in Search and Rescue: A New Era in Emergency Response," Journal of Unmanned Vehicle Systems, MDPI. [Online]. Available: [MDPI](https://www.mdpi.com/2072-4292/15/13/3266). Accessed: 30-Sep-2024.    
-    
-[[4](#constraints)] Federal Aviation Administration, “Airspace 101 – Rules of the Sky | Federal Aviation Administration,” Faa.gov, 2021. [FAA](https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_101) 
-    
-[[5](#relevant-literature)] “Autonomous Vehicles for Emergency Response and Disaster Relief - IEEE Public Safety Technology Initiative,” Ieee.org, 2024. [IEEE](https://publicsafety.ieee.org/topics/autonomous-vehicles-for-emergency-response-and-disaster-relief)    
-    
-[[6](#relevant-literature)] “Deep Learning in Aerial Systems Using Jetson | NVIDIA Technical Blog,” NVIDIA Technical Blog, Nov. 03, 2016. [NVIDIA](https://developer.nvidia.com/blog/deep-learning-in-aerial-systems-jetson/) Accessed Oct. 01, 2024.    
-    
-[[7](#relevant-literature)] M. Kebe, R. Gadhafi, B. Mohammad, M. Sanduleanu, H. Saleh, and M. Al-Qutayri, “Human Vital Signs Detection Methods and Potential Using Radars: A Review,” Sensors, vol. 20, no. 5, p. 1454, Mar. 2020, [DOI](https://doi.org/10.3390/s20051454).    
-    
-[8] W. Meng, X. Zhang, L. Zhou, H. Guo, and X. Hu, "Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions," Drones, vol. 9, no. 5, p. 376, May 2025, [DOI](https://doi.org/10.3390/drones9050376).     
-    
-[[9](#constraints)] Federal Aviation Administration. (n.d.). Small Unmanned Aircraft System (sUAS). In Aeronautical Information Manual, Chapter 11, Section 2. Retrieved from [FAA](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap11_section_2.html)     
 
-[[10](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.51 Operating limitations for small unmanned aircraft." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51?utm). Accessed: 04-Oct-2025. 
+[[2](#constraints)] Federal Aviation Administration. (n.d.). Small Unmanned Aircraft System (sUAS). In Aeronautical Information Manual, Chapter 11, Section 2. Retrieved from [FAA](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap11_section_2.html)     
 
-[[11](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.29 Operation at night." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.29?utm). Accessed: 04-Oct-2025.
+[[3](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.51 Operating limitations for small unmanned aircraft." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51?utm). Accessed: 04-Oct-2025. 
 
-[12] Federal Aviation Administration, "Remote Identification of Drones - 14 CFR Part 89 overview and toolkit." Available: [FAA](faa.gov/uas/getting_started/remote_id). Accessed: 04-Oct-2025.      
+[[4](#constraints)] IEEE, IEEE Standard for Information Technology—Telecommunications and Information Exchange Between Systems Local and Metropolitan Area Networks—Specific Requirements—Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications—Amendment 1: Enhancements for High-Efficiency WLAN, in IEEE Std 802.11ax-2021 (Amendment to IEEE Std 802.11-2020), vol., no., pp. 1–767, May 19, 2021, [DOI](https://doi.org/10.1109/IEEESTD.2021.9442429). 
 
-[[13](#relevant-literature)] F. Ciccone and A. Ceruti, “Real-Time Search and Rescue with Drones: A Deep Learning Approach for Small-Object Detection Based on YOLO,” Drones, vol. 9, no. 8, p. 514, 2025, [DOI](https://doi.org/10.3390/drones9080514 )
+[[5](#constraints)] U.S. Department of Defense, MIL-STD-461G: Requirements for the Control of Electromagnetic Interference Characteristics of Subsystems and Equipment, Washington, D.C., 2015. Available: [NASA](https://s3vi.ndc.nasa.gov/ssri-kb/static/resources/MIL-STD-461G.pdf)   
 
-[[14](#relevant-literature)] L. Zhu, R. Zhong, D. Xie, and X. Yuan, “Lantern-Explorer: A Collision-Avoidance Autonomous Exploration Drone System Based on Laser SLAM with Optimized Hardware and Software,” ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences, vol. X-G-2025, pp. 1077–1084, 2025, [DOI](https://doi.org/10.5194/isprs-annals-X-G-2025-1077-2025).	
+[[6](#constraints)] SAE International. (2021). J3016: Taxonomy and Definitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles. SAE International, Warrendale, PA. Available: [SEA](https://www.sae.org/standards/content/j3016_202104/)      
 
-[[15](#constraints)] IEEE, IEEE Standard for Information Technology—Telecommunications and Information Exchange Between Systems Local and Metropolitan Area Networks—Specific Requirements—Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications—Amendment 1: Enhancements for High-Efficiency WLAN, in IEEE Std 802.11ax-2021 (Amendment to IEEE Std 802.11-2020), vol., no., pp. 1–767, May 19, 2021, [DOI](https://doi.org/10.1109/IEEESTD.2021.9442429). 
+[[7](#relevant-literature)] “Deep Learning in Aerial Systems Using Jetson | NVIDIA Technical Blog,” NVIDIA Technical Blog, Nov. 03, 2016. [NVIDIA](https://developer.nvidia.com/blog/deep-learning-in-aerial-systems-jetson/) Accessed Oct. 01, 2024.    
 
-[[16](#constraints)] U.S. Department of Defense, MIL-STD-461G: Requirements for the Control of Electromagnetic Interference Characteristics of Subsystems and Equipment, Washington, D.C., 2015. Available: [NASA](https://s3vi.ndc.nasa.gov/ssri-kb/static/resources/MIL-STD-461G.pdf)   
+[[8](#relevant-literature)] F. Ciccone and A. Ceruti, “Real-Time Search and Rescue with Drones: A Deep Learning Approach for Small-Object Detection Based on YOLO,” Drones, vol. 9, no. 8, p. 514, 2025, [DOI](https://doi.org/10.3390/drones9080514 )
+    
+[[9](#relevant-literature)] M. Kebe, R. Gadhafi, B. Mohammad, M. Sanduleanu, H. Saleh, and M. Al-Qutayri, “Human Vital Signs Detection Methods and Potential Using Radars: A Review,” Sensors, vol. 20, no. 5, p. 1454, Mar. 2020, [DOI](https://doi.org/10.3390/s20051454).  
 
-[[17](#constraints)] SAE International. (2021). J3016: Taxonomy and Definitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles. SAE International, Warrendale, PA. Available: [SEA](https://www.sae.org/standards/content/j3016_202104/)      
+[[10](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.29 Operation at night." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.29?utm). Accessed: 04-Oct-2025.   
+
+[11] “DTC: FAQ,” DTC | FAQ. [Online]. Available: [DARPA](https://triagechallenge.darpa.mil/). Accessed: 26-Jan-2024.    
+    
+[12] R. Kloet and P. Mulder, "Drones in Search and Rescue: A New Era in Emergency Response," Journal of Unmanned Vehicle Systems, MDPI. [Online]. Available: [MDPI](https://www.mdpi.com/2072-4292/15/13/3266). Accessed: 30-Sep-2024.    
+    
+[13] Federal Aviation Administration, “Airspace 101 – Rules of the Sky | Federal Aviation Administration,” Faa.gov, 2021. [FAA](https://www.faa.gov/uas/getting_started/where_can_i_fly/airspace_101) 
+    
+[14] “Autonomous Vehicles for Emergency Response and Disaster Relief - IEEE Public Safety Technology Initiative,” Ieee.org, 2024. [IEEE](https://publicsafety.ieee.org/topics/autonomous-vehicles-for-emergency-response-and-disaster-relief)    
+    
+[15] W. Meng, X. Zhang, L. Zhou, H. Guo, and X. Hu, "Advances in UAV Path Planning: A Comprehensive Review of Methods, Challenges, and Future Directions," Drones, vol. 9, no. 5, p. 376, May 2025, [DOI](https://doi.org/10.3390/drones9050376).    
+
+[16] Federal Aviation Administration, "Remote Identification of Drones - 14 CFR Part 89 overview and toolkit." Available: [FAA](faa.gov/uas/getting_started/remote_id). Accessed: 04-Oct-2025.      
+
+[17] L. Zhu, R. Zhong, D. Xie, and X. Yuan, “Lantern-Explorer: A Collision-Avoidance Autonomous Exploration Drone System Based on Laser SLAM with Optimized Hardware and Software,” ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences, vol. X-G-2025, pp. 1077–1084, 2025, [DOI](https://doi.org/10.5194/isprs-annals-X-G-2025-1077-2025).	
+
+
+
 
 ## Statement of Contribution
 The team worked on this proposal as a team through multiple revisions. Specifications and the Gantt chart were worked on together as a group while other sub-sections were delegated to individual members of the group. For revisions, the team met together to discuss changes that needed to be made. During revisions, different members were delegated to different sections to get a fresh set of eyes on each part of the document. The following breakdown shows who worked on what sections of the current version of the document:
