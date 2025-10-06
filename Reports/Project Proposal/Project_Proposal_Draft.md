@@ -230,7 +230,7 @@ Job Flores has experience in telecommunications, embedded systems, and programmi
 
 Wyatt Wheeler has experience in programming (C/C++/Python/SOME Rust), Google Suite, Microcomputer sys, Autodesk inventor 3D modeling, Power Systems, digital logic, soldering, technical writing. 
 
-Gideon Befekadu has experience in control systems, coding in C and C++, and microcomputer systems. His background in automation and systems integration will assist in developing the drone’s flight control and stability systems. 
+Gideon Befekadu has experience in control systems, coding in C and C++, and microcomputer systems. His background in automation and systems integration will assist in developing the drone’s flight control and stability systems. He will also contribute to designing and tuning control algorithms and implementing sensor for precise navigation.
 
 Zenkline Elle has experience in AutoCAD, MATLAB, and programming languages such as C and C++. His skills include schematic and wiring design, 3D modeling, microcomputer systems, and PCB layout. He will assist in developing and refining the drone’s electrical power system, designing sensor circuitry, and ensuring efficient energy management and low-noise signal performance. 
 
