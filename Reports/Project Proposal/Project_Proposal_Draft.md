@@ -71,7 +71,9 @@ The National Library of Medicine has already done research into reading a subjec
 NVIDIA has an article on using the chip the drone will be working with, a Jetson Nano, for search and rescue purposes. From the text, several steps in the image computing process include **[[6](#references)]**:
 - Prioritizing speed over detail when observing the landscape.  
 - Cropping images with likely targets to optimize processing.  
-- Using an algorithm to train the data.  
+- Using an algorithm to train the data.      
+
+Ciccone and Ceruti use the NVIDIA Jetson Nano as their drone’s processor. It performs real-time image processing. They utilize a YOLOv5 model for practical detection of human targets at 2FPS. This offers an example design of a compact solution for autonomous victim detection. The downside of this particular design is that the Jetson Nano struggles with processing speed, which can be less suitable for complex triage operations without improvements in processing speed **[[13](#references)]**.
 
 ### Drone Programming
 Since the drone will spend the majority of its time searching, it is important to consider potential strategies for navigating any potential terrain. The IEEE explains some important considerations regarding this:
@@ -85,7 +87,9 @@ Above are the references and considerations from the previous group’s proposal
 Since the drone should be able to decide on and follow a path on its own, with minimal input from an operator, algorithms must be employed to find the best path in a dynamic environment. Methods and challenges are highlighted and discussed in an MDPI journal review [8]. Key considerations that the team is faced with include:
 - Deciding on the right path-planning approach: classical algorithm, bio-inspired, or AI or ML techniques.  
 - Balance energy efficiency with computational load due to battery and computer constraints.  
-- Ensuring robustness in dynamic environments is imperative to get to potential victims in the quickest time possible in spite of obstacles.  
+- Ensuring robustness in dynamic environments is imperative to get to potential victims in the quickest time possible in spite of obstacles.
+
+The Lantern Explorer project utilizes LiDAR systems as its core for navigation and mapping. Using a Livox Mid 360 LiDAR to capture data in tandem with a LiDAR inertial odometry system for mapping, velocity, and orientation. With their Fuel 360 algorithm for path optimization, the project showcases autonomous adaptive exploration. For our project, this approach can be applied similarly to navigation, obstacle avoidance, and route planning in complex situations **[[14](#references)]**. 
 
 ## Timeline and Resources    
 ![https://raw.githubusercontent.com/ZenElle/F25_Team8_DARPAChallengeTriageDrone/main/Documentation/Gantt_Chart_1.png](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/9d5123e59a0d8adad053d43163a8aa5c8298888b/Documentation/Gantt_Chart_1.png)
@@ -171,11 +175,15 @@ Since the drone should be able to decide on and follow a path on its own, with m
     
 [[9](#constraints)] Federal Aviation Administration. (n.d.). Small Unmanned Aircraft System (sUAS). In Aeronautical Information Manual, Chapter 11, Section 2. Retrieved from [FAA](https://www.faa.gov/air_traffic/publications/atpubs/aim_html/chap11_section_2.html)     
 
-[10] Electronic Code of Federal Regulations, "14 CFR §107.51 Operating limitations for small unmanned aircraft." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51?utm). Accessed: 04-Oct-2025. 
+[[10](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.51 Operating limitations for small unmanned aircraft." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.51?utm). Accessed: 04-Oct-2025. 
 
-[11] Electronic Code of Federal Regulations, "14 CFR §107.29 Operation at night." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.29?utm). Accessed: 04-Oct-2025.
+[[11](#constraints)] Electronic Code of Federal Regulations, "14 CFR §107.29 Operation at night." Available: [eCFR](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-F/part-107/subpart-B/section-107.29?utm). Accessed: 04-Oct-2025.
 
-[12] Federal Aviation Administration, "Remote Identification of Drones - 14 CFR Part 89 overview and toolkit." Available: [FAA](faa.gov/uas/getting_started/remote_id). Accessed: 04-Oct-2025.
+[12] Federal Aviation Administration, "Remote Identification of Drones - 14 CFR Part 89 overview and toolkit." Available: [FAA](faa.gov/uas/getting_started/remote_id). Accessed: 04-Oct-2025.      
+
+[[13](#relevant-literature)] F. Ciccone and A. Ceruti, “Real-Time Search and Rescue with Drones: A Deep Learning Approach for Small-Object Detection Based on YOLO,” Drones, vol. 9, no. 8, p. 514, 2025, [DOI](https://doi.org/10.3390/drones9080514 )
+
+[[14](#relevant-literature)] L. Zhu, R. Zhong, D. Xie, and X. Yuan, “Lantern-Explorer: A Collision-Avoidance Autonomous Exploration Drone System Based on Laser SLAM with Optimized Hardware and Software,” ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences, vol. X-G-2025, pp. 1077–1084, 2025, [DOI](https://doi.org/10.5194/isprs-annals-X-G-2025-1077-2025).	
 
 ## Statement of Contribution
 The team worked on this proposal as a team through multiple revisions. Specifications and the Gantt chart were worked on together as a group while other sub-sections were delegated to individual members of the group. For revisions, the team met together to discuss changes that needed to be made. During revisions, different members were delegated to different sections to get a fresh set of eyes on each part of the document. The following breakdown shows who worked on what sections of the current version of the document:
