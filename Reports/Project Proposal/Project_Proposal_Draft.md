@@ -111,23 +111,23 @@ The Lantern Explorer project utilizes LiDAR systems as its core for navigation a
 
 </div>
 
-
 ## Set Goals
-1. **Ensure Cost-Effectiveness and Budget Optimization**  
-   - Objective: Manage and allocate funds and budget to balance the drone’s capabilities and performance.  
-   - Measurement: How well the team tracks and accounts for each financial decision made throughout the project. How well the team is capable of conducting an analysis comparing the cost of products to the benefits that will provide to the drone’s performance.
 
-2. **Maximize Drone Effectiveness**  
-   - Objective: Enhance the capabilities of the drone making it as effective as possible with the materials we order.  
-   - Measurement: Analyze how close the drone comes to achieving the measures of success. Routinely evaluate the trajectory of the team to ensure the timeline is kept and project scope is kept within bounds.
+1. **Achieve Semi-Autonomous Flight**
+   - **Objective:** Develop a drone capable of semi-autonomous operation through GPS-based waypoint navigation and environmental sensing technologies such as LIDAR or similar systems. The goal is for the drone to plan, generate, and follow its own safe flight paths with minimal human input.    
+   - **Success Measurement:** The drone can independently navigate a predefined area using generated waypoints while avoiding obstacles and maintaining stable flight without continuous manual control.    
 
-3. **Ensure Usability and Safety**  
-   - Objective: Optimize the drone's features to create a more user-friendly device that operates safely.  
-   - Measurement: The success rate of how well the drone operates without failure. How easy and effective the drone’s operation is when operated by different users. How effective the instruction on the drone’s usage is.
+2. **Implement Voice-Based User Interaction**      
+   - **Objective:** Expand and validate the system’s voice recognition and command features to enable human users to communicate status or identity directly to the drone (e.g., stating who they are or confirming if they are okay).    
+   - **Success Measurement:** The drone successfully recognizes and responds to at least 90% of spoken commands in field conditions, supporting identification and communication in emergency or triage scenarios.    
 
-4. **Ensure Reliable Semi-Autonomous Flight**  
-   - Objective: Optimize the drone’s semi-autonomous flight capabilities, especially pathfinding and obstacle avoidance.  
-   - Measurement: The reaction time of the drone when an obstacle appears in its path. How fast the drone can correct its course if moved off in any way. How quickly the drone can find a path and arrive at potential victims.
+3. **Increase Environmental Resilience** 
+   - **Objective:** Design the drone to operate reliably in adverse environmental conditions, including smoke, wind, and low-visibility situations common in emergency response environments.    
+   - **Success Measurement:** The drone maintains flight stability and sensor functionality in controlled tests simulating moderate wind speeds and reduced visibility (e.g., smoke or fog).    
+
+4. **Enhance Search and Detection Capabilities** 
+   - **Objective:** Integrate advanced sensing and processing methods that allow the drone to detect and locate individuals in obstructed or harsh conditions where normal visual detection is limited.   
+   - **Success Measurement:** The drone successfully identifies and locates human subjects under partial visibility or interference conditions in at least 80% of test trials. 
 
 ## Impacts of a Rescue Drone
 
