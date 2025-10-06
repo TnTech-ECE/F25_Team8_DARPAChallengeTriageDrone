@@ -84,8 +84,6 @@ Since the drone will spend the majority of its time searching, it is important t
 - SAR drones should avoid disrupting the flow of traffic or any other service.  
 - SAR drones can optimize their routes to better their performance.  
 
-Above are the references and considerations from the previous group’s proposal. Not sure if we want to keep all of them or not. Below is or are the added considerations for the additions that we are planning for.
-
 ## UAV Path Planning
 Since the drone should be able to decide on and follow a path on its own, with minimal input from an operator, algorithms must be employed to find the best path in a dynamic environment. Methods and challenges are highlighted and discussed in an MDPI journal review [8]. Key considerations that the team is faced with include:
 - Deciding on the right path-planning approach: classical algorithm, bio-inspired, or AI or ML techniques.  
@@ -103,10 +101,10 @@ The Lantern Explorer project utilizes LiDAR systems as its core for navigation a
 | SUBSYSTEM   | DESCRIPTION            | QUANTITY | COST PER ITEM | TOTAL COST OF QUANTITY | JUSTIFICATION |
 | :---------: | :--------------------- | :------: | :------------ | :--------------------- | :------------ |
 | Geolocation | GPS Module             |    1     | $30           | $30                    | Provides coordinates for victim geotagging and operator situational awareness, which supports triage reporting and near real-time display (Specs 8 and 10). Also aids return-to-home and link-loss behaviors that depend on position data (Spec 15). |
-| Geolocation | Microphone             |    2     | $10           | $20                    | Enables voice prompts and response capture for cognitive checks (Spec 4). Can be filtered to the 80–255 Hz band per your requirement (Spec 5). Recordings will not be stored to comply with two-party consent (Spec 6). |
-| Path Finding| Lidar Sensor           |    1     | $350          | $350                   | Core perception input for obstacle detection and semi-autonomous path planning in dynamic scenes, especially in low-visibility conditions (Specs 12 and 13). Directly addresses Pathfinding and Degraded Sensing challenges and aligns with the UAV path-planning literature you cited. |
+| Geolocation | Microphone             |    2     | $10           | $20                    | Enables voice prompts and response capture for cognitive checks (Spec 4). Can be filtered to the 80–255 Hz band per specification (Spec 5). Recordings will not be stored to comply with two-party consent (Spec 6). |
+| Path Finding| Lidar Sensor           |    1     | $350          | $350                   | Core perception input for obstacle detection and semi-autonomous path planning in dynamic scenes, especially in low-visibility conditions (Specs 12 and 13). Directly addresses Pathfinding and Degraded Sensing challenges and aligns with the UAV path-planning literature. |
 | Drone Parts | Motor Replacement      |    1     | $150          | $150                   | Maintains propulsion reliability during integration and field tests with added payload mass. Reduces schedule risk from hardware failures and supports meeting the 15–60 minute operational testing window (Spec 7) and safe manual override testing (Spec 14). |
-| 3D Filament | Sensor Casing/Mounting |    2     | $50           | $100                   | Custom mounts for LiDAR, GPS, and microphones to control orientation and reduce vibration-induced noise. Necessary for robust sensing accuracy in motion, which supports Specs 1, 3, 10, 12, and 13 and addresses the integration aspects called out in your radar and image-processing sections. |
+| 3D Filament | Sensor Casing/Mounting |    2     | $50           | $100                   | Custom mounts for LiDAR, GPS, and microphones to control orientation and reduce vibration-induced noise. Necessary for robust sensing accuracy in motion, which supports Specs 1, 3, 10, 12, and 13 and addresses the integration aspects called out in radar and image-processing sections. |
 | **Total**   |                        |          |               | **$650**               |               |
 
 </div>
