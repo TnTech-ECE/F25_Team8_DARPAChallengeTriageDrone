@@ -78,19 +78,71 @@ NVIDIA has an article on using the chip the drone will be working with, a Jetson
 
 Ciccone and Ceruti use the NVIDIA Jetson Nano as their drone’s processor. It performs real-time image processing. They utilize a YOLOv5 model for practical detection of human targets at 2FPS. This offers an example design of a compact solution for autonomous victim detection. The downside of this particular design is that the Jetson Nano struggles with processing speed, which can be less suitable for complex triage operations without improvements in processing speed **[[13](#references)]**.
 
-### Drone Programming
-Since the drone will spend the majority of its time searching, it is important to consider potential strategies for navigating any potential terrain. The IEEE explains some important considerations regarding this:
-- SAR drones are built to be safe and reliable, following UN regulations.  
-- SAR drones should avoid disrupting the flow of traffic or any other service.  
-- SAR drones can optimize their routes to better their performance.  
 
-## UAV Path Planning
-Since the drone should be able to decide on and follow a path on its own, with minimal input from an operator, algorithms must be employed to find the best path in a dynamic environment. Methods and challenges are highlighted and discussed in an MDPI journal review [8]. Key considerations that the team is faced with include:
-- Deciding on the right path-planning approach: classical algorithm, bio-inspired, or AI or ML techniques.  
-- Balance energy efficiency with computational load due to battery and computer constraints.  
-- Ensuring robustness in dynamic environments is imperative to get to potential victims in the quickest time possible in spite of obstacles.
+### Deep Learning for Object Detection
 
-The Lantern Explorer project utilizes LiDAR systems as its core for navigation and mapping. Using a Livox Mid 360 LiDAR to capture data in tandem with a LiDAR inertial odometry system for mapping, velocity, and orientation. With their Fuel 360 algorithm for path optimization, the project showcases autonomous adaptive exploration. For our project, this approach can be applied similarly to navigation, obstacle avoidance, and route planning in complex situations **[[14](#references)]**. 
+#### General Overview
+Deep learning models — especially YOLO (You Only Look Once) — are widely used in SAR missions for real-time object detection. These models excel at identifying small, partially obscured targets such as human figures in rubble, forested areas, or disaster zones. When deployed on edge computing platforms like NVIDIA Jetson, they enable onboard inference without relying on remote servers — a critical capability for time-sensitive rescue operations [13][6].
+
+#### Key Considerations
+
+- Selecting the right model architecture (e.g., YOLOv5 vs. YOLOv8) based on speed vs. accuracy trade-offs.
+- Training on SAR-specific datasets to improve detection of obscured or partially visible human targets.
+- Managing thermal and power constraints when deploying on embedded systems like Jetson Nano.
+- Integrating multi-modal sensor data (e.g., radar, thermal) to improve detection in low-visibility conditions.
+
+#### Example: YOLOv5 on Jetson Nano for Victim Detection
+In [13], YOLOv5 was deployed on drones to detect small human figures in rubble with real-time performance. The system achieved high recall rates in daylight conditions but struggled in smoke-filled or low-light environments. To address this, the team integrated thermal sensors and radar overlays to improve detection reliability.
+
+- **Benefits**:
+  - Real-time detection of small objects with high frame rates [13].
+  - Efficient deployment on embedded systems like Jetson, reducing latency [6].
+  - Scalable across diverse environments with proper dataset tuning.
+
+- **Drawbacks**:
+  - Accuracy drops in low-light, foggy, or cluttered scenes.
+  - Requires large, SAR-specific datasets to minimize false positives.
+  - Deep learning models are often opaque, making decisions hard to interpret.
+
+- **Key Takeaways**:
+  - Use SAR-augmented datasets and synthetic data generation to improve detection reliability.
+  - Fuse YOLO outputs with radar and thermal sensors to enhance detection in obscured conditions [7].
+  - Implement confidence scoring and ensemble methods to reduce false alarms.
+  - Optimize Jetson deployment for power and thermal constraints [6].
+
+*Additional model comparisons and sensor fusion strategies will be explored in future iterations of the system design.*
+
+
+### UAV Path Planning
+
+#### General Overview
+To enable autonomous navigation with minimal operator input, SAR drones must employ robust path-planning algorithms capable of adapting to dynamic environments. A comprehensive MDPI review [8] outlines the major approaches and challenges in this domain. Effective path planning ensures the drone reaches potential victims quickly and safely, even in unpredictable terrain.
+
+
+#### Key Considerations
+
+- Choosing the right path-planning approach: classical algorithms (e.g., A*), bio-inspired methods (e.g., ant colony optimization), or AI/ML techniques (e.g., reinforcement learning).
+- Balancing energy efficiency with computational load, given battery and onboard processor constraints.
+- Ensuring robustness in dynamic environments, including obstacle avoidance and terrain variability.
+
+#### Example: Lantern Explorer Project
+The Lantern Explorer project [11] demonstrates a LiDAR-based navigation system using the Livox Mid-360 sensor. It combines LiDAR inertial odometry for mapping, velocity, and orientation, and uses the Fuel 360 algorithm for adaptive path optimization.
+
+- **Benefits**:
+  - High-resolution mapping and real-time obstacle avoidance.
+  - Autonomous route planning in cluttered or unknown environments.
+
+- **Drawbacks**:
+  - LiDAR systems are power-intensive and add weight.
+  - May be cost-prohibitive for lightweight or budget-constrained platforms.
+
+- **Key Takeaways**:
+  - Use LiDAR for precision mapping in complex terrain.
+  - Combine inertial odometry with adaptive algorithms for robust navigation.
+  - Optimize scan frequency and processing to conserve battery life.
+
+*Additional path-planning models (e.g., SARSA, hybrid A\*/D\* Lite, terrain-aware segmentation) are covered in the full research summary.*
+ 
 
 ## Timeline and Resources    
 ![https://raw.githubusercontent.com/ZenElle/F25_Team8_DARPAChallengeTriageDrone/main/Documentation/Gantt_Chart_1.png](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/9d5123e59a0d8adad053d43163a8aa5c8298888b/Documentation/Gantt_Chart_1.png)
