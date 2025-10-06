@@ -219,6 +219,27 @@ The Lantern Explorer project [11] demonstrates a LiDAR-based navigation system u
 
 </div>
 
+
+### Personnel 
+
+The DARPA Triage Drone team is composed of six electrical engineering students who share a strong foundation in electrical systems, programming, and design, while bringing diverse technical experiences from internships and coursework. Each member contributes specialized expertise in areas such as control systems, telecommunications, power distribution, and embedded programming. Together, these complementary skill sets enable the team to design, develop and refine a semi-autonomous drone capable of performing advanced search and rescue operations. While the team possesses a broad range of capabilities, continuous learning in fields such as signal processing and autonomous navigation will be pursued to further strengthen the project’s success. 
+
+Kasey Dyess has experience in MATLAB, coding with C++, Python, Arduino and digital logic systems. He also has skills in microcomputer systems, wiring design, and power transmission, telecommunication, and signals and systems. His background in signal analysis and data processing will be valuable in filtering environmental noise captured by the drone’s microphones, enabling accurate triangulation and localization of victims during search and rescue operations. 
+
+Job Flores has experience in telecommunications, embedded systems, and programming using C, C++, and Python. His background in telecommunications should prove valuable in filtering out noise in sensor signals like in the auditory location system.  There is limited experience with digital signal processing, so necessary steps must be taken to lessen that shortcoming; steps include possibly taking the Digital Signal Processing course in the spring semester or discussing with peers who have taken DSP. He has some experience working with Artificial Intelligence and the design of algorithms, both of which are integral in the implementation of the image processing and autonomous navigation systems. With work in embedded systems and microcontrollers, he can assist in the software development and sensor integration aspects of the project. 
+
+Wyatt Wheeler has experience in 3D modeling, power systems, and programming in C and C++. 
+
+Gideon Befekadu has experience in control systems, coding in C and C++, and microcomputer systems. 
+
+Zenkline Elle has experience in AutoCAD, MATLAB, and programming languages such as C and C++. His skills include schematic and wiring design, 3D modeling, microcomputer systems, and PCB layout.    
+
+Brody Smith has experience in logic design, microcomputer systems, and programming. 
+
+Dale Blair from Georgia Tech serves as the team’s customer and has provided the budget for the drone project. His professional background includes expertise in radar signal processing, target tracking concepts, and sensor system integration. These subjects are directly relevant to the project and will provide valuable technical insight and mentorship to the team throughout development.   
+
+Dr. Christopher (Storm) Johnson from Tennessee Tech is the team’s faculty advisor and project manager. He will oversee and approve all documentation, as well as guide the assembly, testing, and evaluation of the drone. The team will hold weekly meetings with Dr. Johnson to discuss progress, design decisions, and project coordination. 
+
 ## Set Goals
 
 1. **Achieve Semi-Autonomous Flight**
