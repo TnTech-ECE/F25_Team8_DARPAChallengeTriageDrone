@@ -54,6 +54,9 @@ While the drone will retain manual control capabilities from the previous team�
 3. The drone SHALL remain under 400 ft above ground level **[[9](#references)][[10](#references)]**.  
 4. The drone SHALL not exceed 100 mph **[[9](#references)][[10](#references)]**.  
 5. The drone SHALL be equipped with anti-collision lighting **[[9](#references)][[11](#references)]**.  
+6. The drone SHALL utilize encrypted wireless communication conforming to IEEE 802.11 standards for control and data transmission **[[15](#references)]**.
+7. The EMI test setup shall maintain all measurement tolerances within the limits specified by MIL-STD-461G § 4.3.1 **[[16](#references)]**.
+8. The system shall operate at an autonomy level functionally equivalent to SAE J3016 Level 3, where the drone can perform mission tasks under limited conditions while maintaining continuous human oversight **[[17](#references)]**.
 
 ## Relevant Literature
 The team will have to research the following fields of study to build a successful search and rescue (SAR) drone:
@@ -104,7 +107,7 @@ The Lantern Explorer project utilizes LiDAR systems as its core for navigation a
 | Path Finding| Lidar Sensor           |    1     | $350          | $350                   | Core perception input for obstacle detection and semi-autonomous path planning in dynamic scenes, especially in low-visibility conditions (Specs 12 and 13). Directly addresses Pathfinding and Degraded Sensing challenges and aligns with the UAV path-planning literature you cited. |
 | Drone Parts | Motor Replacement      |    1     | $150          | $150                   | Maintains propulsion reliability during integration and field tests with added payload mass. Reduces schedule risk from hardware failures and supports meeting the 15–60 minute operational testing window (Spec 7) and safe manual override testing (Spec 14). |
 | 3D Filament | Sensor Casing/Mounting |    2     | $50           | $100                   | Custom mounts for LiDAR, GPS, and microphones to control orientation and reduce vibration-induced noise. Necessary for robust sensing accuracy in motion, which supports Specs 1, 3, 10, 12, and 13 and addresses the integration aspects called out in your radar and image-processing sections. |
-| **Total**   |                        |          |               | **$650**               |  |
+| **Total**   |                        |          |               | **$650**               |               |
 
 </div>
 
@@ -184,6 +187,12 @@ The Lantern Explorer project utilizes LiDAR systems as its core for navigation a
 [[13](#relevant-literature)] F. Ciccone and A. Ceruti, “Real-Time Search and Rescue with Drones: A Deep Learning Approach for Small-Object Detection Based on YOLO,” Drones, vol. 9, no. 8, p. 514, 2025, [DOI](https://doi.org/10.3390/drones9080514 )
 
 [[14](#relevant-literature)] L. Zhu, R. Zhong, D. Xie, and X. Yuan, “Lantern-Explorer: A Collision-Avoidance Autonomous Exploration Drone System Based on Laser SLAM with Optimized Hardware and Software,” ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences, vol. X-G-2025, pp. 1077–1084, 2025, [DOI](https://doi.org/10.5194/isprs-annals-X-G-2025-1077-2025).	
+
+[[15](#constraints)] IEEE, IEEE Standard for Information Technology—Telecommunications and Information Exchange Between Systems Local and Metropolitan Area Networks—Specific Requirements—Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications—Amendment 1: Enhancements for High-Efficiency WLAN, in IEEE Std 802.11ax-2021 (Amendment to IEEE Std 802.11-2020), vol., no., pp. 1–767, May 19, 2021, [DOI](https://doi.org/10.1109/IEEESTD.2021.9442429). 
+
+[[16](#constraints)] U.S. Department of Defense, MIL-STD-461G: Requirements for the Control of Electromagnetic Interference Characteristics of Subsystems and Equipment, Washington, D.C., 2015. Available: [NASA](https://s3vi.ndc.nasa.gov/ssri-kb/static/resources/MIL-STD-461G.pdf)   
+
+[[17](#constraints)] SAE International. (2021). J3016: Taxonomy and Definitions for Terms Related to Driving Automation Systems for On-Road Motor Vehicles. SAE International, Warrendale, PA. Available: [SEA](https://www.sae.org/standards/content/j3016_202104/)      
 
 ## Statement of Contribution
 The team worked on this proposal as a team through multiple revisions. Specifications and the Gantt chart were worked on together as a group while other sub-sections were delegated to individual members of the group. For revisions, the team met together to discuss changes that needed to be made. During revisions, different members were delegated to different sections to get a fresh set of eyes on each part of the document. The following breakdown shows who worked on what sections of the current version of the document:
