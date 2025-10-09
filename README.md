@@ -1,6 +1,6 @@
 # DARPA Triage Drone 
 
-The descriptions and information in all readme files in the starter repo (including this one) must be edited. All section descriptions must be deleted. Any failure to remove the description information (like the statement that you are currently reading) will be heavily penalized!
+We are the Fall 2024 Triage Drone capstone team at Tennessee Technological University. We are tackling the [DARPA Triage Challenge](https://www.darpa.mil/research/challenges/darpa-triage-challenge) and continuing the work of the [Fall 24 Team](https://github.com/TnTech-ECE/F24_Team5_DARPA_Triage_Drone). Our task is to implement geolocating and semi-autonomous capabilities to the previous team's drone. This will help save lives by giving first responders a better assessment of a scene so they can get to treating victims faster. This project will be easy to use and extremely versatile.
 
 ## Executive Summary
 
@@ -29,6 +29,13 @@ Below the video link show some well-taken, appropriately sized images of the pro
 ### Team
 
 Give a brief bio for each team member and their broad contribution to the project (no need to be terribly specifc).
+
+[Kasey Dyess](https://github.com/Kasey-Dyess0)    
+[Job Flores](https://github.com/jflores43)    
+[Wyatt Wheeler](https://github.com/wewheeler42)    
+[Gideon Befekadu](https://github.com/Gideon-B3)    
+[Zenkline Elle](https://github.com/ZDElle)    
+[Brody Smith](https://github.com/Brody-TTU)    
 
 ### Faculty Supervisor
 
