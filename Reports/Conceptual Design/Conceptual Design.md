@@ -327,7 +327,7 @@ This subsystem SHALL display triage results and vitals wirelessly.
 #### **Description**
 This subsystem will utilize the programmable nature of the drone to connect to a laptop and display heart rate and breathing rate information onto the screen. This subsystem will need to write a program on the laptop in order to connect to the drone as well. This program should be portable between computer to computer. 
 
-<img width="121" alt="Drawing (1)" src="https://github.com/user-attachments/assets/0d697553-49c6-4af9-b213-ad698e1283d0">
+<img width="200" alt="Drawing (1)" src="https://github.com/user-attachments/assets/0d697553-49c6-4af9-b213-ad698e1283d0">
 
 ### **Microphone and speaker subsystem**
 
