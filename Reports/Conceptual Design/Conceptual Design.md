@@ -42,14 +42,15 @@ Since we are inheriting this project from our Fall 24 predecessors, the specific
   The drones considered for the solution: **Multi-Rotor Drone** & **Hybrid Drone**.
 
 #### **Aurelia X4 Standard** **[[6](#References)]**
-[Drone 1.image]     
+![Drone1](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Drone%201.png)
+   
 
 **Description:** A light-framed, quad-rotor drone, open-source drone with path finding capabilities.  
 **Pros:** High Payload Capacity, Vertical Takeoff and Landing Capability, Improved Control and Stability, Maneuverability, includes GPS and LiDAR, Versatile, and Open Source ArduPilot . 
 **Cons:** No Horizontal Obstacle Sensor, Limited Flight Time.  
 
 #### **Parrot ANAFI Ai** **[[7](#References)]**    
-[Drone 2.image]      
+![Drone 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Drone%202.jpg)      
 
 **Description:** A compact drone with built-in obstacle avoidance cameras chosen and used by the previous capstone team.   
 **Pros:** Already in our possession, WIFI Capabilities, Has Obstacle Avoidance Capabilities, and has a Compact Design.   
@@ -65,14 +66,14 @@ Looking at the pros and cons between the X4 and the ANAFI, the X4 seems to be th
 The computing systems considered were a **Raspberry Pi** and a **NVIDIA Jetson Nano** for the triage sensor system.    
 
 #### **Raspberry Pi**    
-[Pi.image]  
+![Pi.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Pi.png)  
 
 **Description:** Small, Low-Cost Computing Device.    
 **Pros:** Cost-Friendly, Compact Size, Customizable, Low Power Consumption, and Versatility.    
 **Cons:** Low-Performance Capabilities, Limited storage, Overheating, and Limited Connectivity.    
 
 #### **NVIDIA Jetson Nano** 
-[Jetson.image]
+![Jetson.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Jetson.png)
 
 **Description:** Small, powerful, and comprehensive computing system.    
 **Pros:** AI capabilities, High performance, Expandable Storage, Graphics processing optimization, and Multiple I/O options.    
@@ -85,21 +86,21 @@ Considering both the Raspberry Pi and the NVIDIA Jetson Nano, the Jetson Nano is
 The controller options were the **Default Drone Controller**, a **Mobile Device**, or a **PC System**.
 
 #### **Default Drone Controller**
-[Controller.image]
+![Controller.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Controller.png)
 
 **Description:** It comes with the drone and is therefore low-cost, has less than ten buttons, and is handheld.    
 **Pros:** Pre-Programmed, Cost-Friendly, Simple to Use.    
 **Cons:** Not Flexible, No Display, Not Modifiable.    
 
 #### **Mobile Device**
-[Phone.image]
+![Phone.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Phone.png)
 
 **Description:** A handheld, either a dedicated or personal device that can interact with the drone controls through the drone' default web APIs with moderate modifiability.    
 **Pros:** Flexible, Potentially Cost-Friendly, Easy to Carry, Modifiable.    
 **Cons:** Difficult to handle due to small display, Can't be easily used to program drone, Many potential device models.    
 
 #### **PC System**
-[PC.image]
+![PC.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/PC.png)
 
 **Description:** Either a dedicated or personal device that can interact with the drone controls through the drone's default web APIs with high modifiability.    
 **Pros:** Flexible, Potentially Cost-Friendly, Easy to Program, Provides more Buttons to Interface with.    
@@ -112,21 +113,21 @@ Due to the higher capabilities of a modern day personal computer, it is the idea
 The radar sensors considered were the Texas Instruments IWR6843AOPEVM, Ainstein US-D1 Pro Extended-Range Radar Altimeter, and Infineon DEMO BGT60TR13C.     
 
 #### **Texas Instruments IWR6843AOPEVM**    
-[Radar 1.image]    
+![Radar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%201.png)    
 
 **Description:** A 60–64 GHz mmWave radar sensor evaluation module featuring a single-chip solution for object detection, range estimation, and velocity measurement. It integrates transmitters, receivers, DSP, and MCU cores for autonomous processing, supporting up to 4 GHz bandwidth and onboard antennas.     
 **Pros:** High range resolution, integrated processing (no external MCU required), low power consumption, compact FR4 antenna design, and strong SDK/software support (mmWave SDK, Radar Toolbox).     
 **Cons:** Limited field of view compared to some alternatives (±60° typical), short-to-medium detection range (~50 m), requires software configuration expertise, and lacks environmental protection for outdoor all-weather operation.     
 
 #### **Ainstein US-D1 Pro Extended-Range, All-Weather Radar Altimeter**    
-[Radar 2.image]    
+![Radar 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%202.png)    
 
 **Description:** An industrial-grade radar altimeter designed for UAVs and robotics, operating in 60 GHz band with advanced FMCW radar processing. Optimized for ground altitude and obstacle proximity detection in all-weather conditions (rain, fog, dust, snow).     
 **Pros:** Extended detection range (up to 50 m+), high precision (< 2 cm), robust against environmental interference, ready-to-use hardware (IP67 housing), and plug-and-play interfaces (UART/CAN).     
 **Cons:** High cost, limited modifiability, primarily designed for altitude sensing (not lateral obstacle mapping), and lower availability of open-source SDKs.     
 
 #### **Infineon DEMO BGT60TR13C**
-[Radar 3.image]    
+![Radar 3.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%203.png)    
 
 **Description:** A 60 GHz radar transceiver demo board featuring 3 transmit and 4 receive antennas for 3D motion and presence sensing. Supports range-Doppler imaging, angle estimation, and can detect multiple objects simultaneously with an on-board microcontroller interface.    
 **Pros:** High sensitivity and multi-target capability, wide field of view (≈120°), suitable for short-range mapping (< 20 m), excellent documentation and software tools (Radar Fusion GUI, MATLAB SDK), and strong community support.    
@@ -139,14 +140,14 @@ Considering the three radar sensors, the Texas Instruments IWR6843AOPEVM offers 
 The LiDAR sensors considered were the RPLIDAR A1M8 and the Unitree 4D LiDAR L2.     
 
 #### **RPLIDAR A1M8**    
-[Lidar 1.image]    
+![Lidar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Lidar%201.png)    
 
 **Description:** A cost-effective 2D LiDAR (360° horizontal scan) by SLAMTEC designed primarily for indoor mapping, robotics navigation and obstacle detection.     
 **Pros:** Provides full 360° omnidirectional scanning in a compact, lightweight, and affordable design. Has a moderate 12 m detection range suitable for small-scale mapping and navigation. Easily integrates with common interfaces such as UART or USB for quick prototyping. Consumes low power, making it ideal for mobile and battery-driven platforms.     
 **Cons:** Limited to 2D plane detection, missing obstacles above or below the scan height. Operates best indoors since bright light or outdoor conditions reduce performance. Offers a slower scan rate (~5.5 Hz), limiting performance on fast-moving platforms. Has a relatively short range compared to advanced LiDAR options.   
 
 #### **Unitree 4D LiDAR L2**      
-[Lidar 2.image]    
+![Lidar 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Lidar%202.png)    
 
 **Description:** An advanced 4D LiDAR offering 360° horizontal and 96° vertical scanning for full-environment 3D mapping and obstacle detection.     
 **Pros:** Covers a full 360×96° field of view, enabling detection of obstacles from all angles. Delivers high point density for precise environment reconstruction and SLAM applications. Reaches up to 30 m range, allowing for mid- to long-range obstacle detection. Includes built-in IMU and is designed for seamless 3D navigation integration.     
@@ -161,21 +162,21 @@ The RPLIDAR A1M8 offers a cost-effective and lightweight option suitable for sho
 ### 5. Human Finding Systems 
 
 #### **LWIR Camera**
-[IR.image]
+![IR.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/IR.png)
 
 **Description:** Longwave infrared camera module that is smaller than a dime and cost-effective. Modules have enabled thermal innovation and can depending on the module, offer either 80x60 (17 µm) or 160x120 (12 µm) pixel resolution, absolute temperature output, multiple field-of-view (FOV) options, and an expanded scene dynamic range for high-temperature scenes.   
 **Pros:** Works in darkness and moderate smoke or fog, low processing demand, Human contrast due to heat, start around $200.   
 **Cons:** Cheap models have low resolution, can’t penetrate glass, hot environments will create a lot of noise, good cameras are extremely expensive.   
 
 #### **Radar (Millimeter-Wave)**
-[Radar 1.image]
+![Radar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%201.png)
 
 **Description:** Millimeter wave radar is used to detect objects and measure distance, speed, and motion by transmitting electromagnetic waves and analyzing the reflected signals to identify movement patterns. This method is highly effective for detecting human presence.    
 **Pros:** Can sense things through light debris or smoke, unaffected by lighting or weather, very sensitive for presence data.
 **Cons:** Lots of noise since it is a good presence detector, low spatial resolution so cannot get shape, can be affected by metallic or reflective objects, better modules are expensive and large.   
 
 #### **RGB Camera + AI Integration**
-[AI.image]
+![AI.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/RGB%20Cam%20plus%20ai.png)
 
 **Description:** Combining a standard visual camera with an AI based processing tool on the already acquired Nvidia Jetson can classify Humans and objects in general by using real time camera feed and learning models. 
 **Pros:** High resolution and detail, AI flexibility (can use multiple at once), some software is available for free, large range of detection 
@@ -228,16 +229,14 @@ In order to do this, the design will be split up into devices:
 - By fusing data from radar, thermal, and visual sensors, the Human-Finding subsystem will achieve a high degree of accuracy, reliability, and environmental adaptability. This ensures that the drone can consistently identify and localize victims, providing critical input to the triage and assessment stages of the overall system. 
 
 ### Hardware Block Diagram
-[Hardware Block Diagram.image]
+![Hardware Block Diagram.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Full.png)
 
-[pdf link]
 
 The linked document contains the hardware block diagram created in Visio, centering on the drone and the computer. This visual breakdown outlines the division of our systems, focusing on the communication paths and additions between these components. We decided to omit the controller from the diagram, as no modifications are being made to it. As a result, the diagram shows the computer and drone systems. 
 
 ### Operational Flow Chart
-[Operational Flow Chart.image]
+![Operational Flow Chart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Operational%20Flow%20Chart.png)
 
-[pdf link]
 
 Below is the link to the pdf of the above image. This rudimentary operational flow chart details how a user will operate the final product specific to the decisions he or she makes while using it. 
 
@@ -258,7 +257,7 @@ The drone shall operate during daylight hours on a clear day with no wind.
 #### **Description**
 The drone will be bought and be ready to fly. Senors and a processing unit will be added to the drone to expand the capabilities of the drone. The drone will be able to fly to a victim and use the attached sensors to check vitals and cognitiveness and sort the injured person into a triage category. 
 
-[Programmable Drone Subsystem Flowchart.image]
+![Programmable Drone Subsystem Flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Programmable%20Drone%20Subsystem.png)
 
 
 ### **Power and Circuitry design subsystem**
@@ -276,7 +275,7 @@ Power signal to connect the signal processing subsystem
 The power subsystem will be responsible for converting power from the battery to the signal processing subsystem subsystem and other peripherals on the drone. The following flow chart describes the steps to meet the specifications.
 
 
-<img width="118" alt="power subsystem" src="https://github.com/user-attachments/assets/e48fe624-972f-47ee-875b-66390ba27317">
+<img width="250" alt="power subsystem" src="https://github.com/user-attachments/assets/e48fe624-972f-47ee-875b-66390ba27317">
 
 ### **Signal Processing subsystem**
 #### **Connections**
@@ -364,7 +363,7 @@ The subsystem SHALL weigh less than 1 pound including its mounting hardware.
 
 The Path Finding / Obstacle Detection subsystem will utilize the Texas Instruments IWR6843AOPEVM radar module. Mounted at a 45° forward-facing angle, this sensor will detect obstacles and terrain features along the drone’s flight path. The radar will use frequency-modulated continuous wave (FMCW) processing to measure range, velocity, and angle of nearby objects. Data from the radar will be transmitted to the signal processing subsystem, where it will be integrated into the flight control logic. This enables the drone to autonomously adjust its flight trajectory to avoid collisions and maintain stability in complex environments. 
 
-[Path Finding flowchart.image]
+![Path Finding flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Path%20Finding%20Subsystem.png)
 
 ### **Human Detection Subsystem**
 
@@ -387,6 +386,9 @@ The Human Detection Subsystem is responsible for identifying and locating indivi
 The LWIR camera serves as the primary detection device, identifying human heat signatures even in complete darkness or through moderate smoke and fog. The mmWave radar module supplements this by detecting motion and presence through visual obstructions and triggering thermal confirmation from the LWIR camera to verify living bodies. The RGB camera provides visual context and AI-driven classification, distinguishing humans from background objects using real-time inference on the Jetson Nano computing platform. 
 
 Data from all three sensors will be transmitted to the Signal Processing Subsystem, where it will be time-synchronized and fused into a unified detection output. This ensures the system maintains a high confidence level in identifying victims across variable environments, supporting accurate triage assessment, and enabling reliable coordination with other drone subsystems during search-and-rescue operations. 
+
+![Human Detection flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Human%20Finder%20Flowchart%20Subsystem.png)
+
 
 ## Ethical, Professional, and Standards Considerations
 1.	Culture  
@@ -494,7 +496,7 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 ### Timeline
 
-[Gantt Chart.image]
+![Gantt Chart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Gantt%20Chart.png)
 
 ## References
 
@@ -524,16 +526,16 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 ## Statement of Contributions
 
-Kasey Dyess: Human Finding 
+**Kasey Dyess:** Human Finding 
 
-Job Flores: F24 System Integration, Drone Comparative Analysis, Problem Introduction 
+**Job Flores:** F24 System Integration, Drone Comparative Analysis, Problem Introduction 
 
-Wyatt Wheeler: F24 System Integration, Introduction 
+**Wyatt Wheeler:** F24 System Integration, Introduction 
 
-Gideon Befekadu: Path finding comparative analysis, path finding subsystem, hardware block diagram, operational flowchart, path finding high-level solution  
+**Gideon Befekadu:** Path finding comparative analysis, path finding subsystem, hardware block diagram, operational flowchart, path finding high-level solution  
 
-Zenkline Elle: Path finding comparative analysis, path finding subsystem, managing project budget, path finding flowchart, operational flowchart, identifying necessary skills for project execution, path finding high-level solution. 
+**Zenkline Elle:** Path finding comparative analysis, path finding subsystem, managing project budget, path finding flowchart, operational flowchart, identifying necessary skills for project execution, path finding high-level solution. 
 
-Brody Smith: Human finding subsystem component comparative analysis, solution description, and high-level design description. 
+**Brody Smith:** Human finding subsystem component comparative analysis, solution description, and high-level design description. 
 
 
