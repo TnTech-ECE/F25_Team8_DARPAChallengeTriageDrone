@@ -354,13 +354,13 @@ The Path Finding / Obstacle Detection subsystem will connect digitally to the si
 
 #### **Specifications**
 
-The subsystem SHALL detect obstacles within a range of at least 50 meters. 
-The subsystem SHALL have a horizontal field of view (FoV) of at least 120° and a vertical FoV of at least 80°. 
-The subsystem SHALL update range and motion data at a minimum rate of 10 Hz. 
-The subsystem SHALL operate reliably in low-visibility conditions such as fog, light rain, or dust. 
-The subsystem SHALL communicate detection data to the signal processing subsystem with latency less than 200 ms. 
-The subsystem SHALL have onboard processing capability to filter noise and identify multiple obstacles simultaneously. 
-The subsystem SHALL weigh less than 1 pound including its mounting hardware. 
+The subsystem SHALL detect obstacles within a range of at least 50 meters.     
+The subsystem SHALL have a horizontal field of view (FoV) of at least 120° and a vertical FoV of at least 80°.     
+The subsystem SHALL update range and motion data at a minimum rate of 10 Hz.     
+The subsystem SHALL operate reliably in low-visibility conditions such as fog, light rain, or dust.     
+The subsystem SHALL communicate detection data to the signal processing subsystem with latency less than 200 ms.     
+The subsystem SHALL have onboard processing capability to filter noise and identify multiple obstacles simultaneously.     
+The subsystem SHALL weigh less than 1 pound including its mounting hardware.     
 
 #### **Description** 
 
@@ -376,11 +376,11 @@ The Human Detection subsystem will connect digitally to the Signal Processing Su
 
 #### **Specifications**
 
-The subsystem SHALL detect human presence within a range of at least 10 meters under standard ambient conditions. 
-The subsystem SHALL operate effectively in both daylight and low-visibility environments such as fog, smoke, or low light. 
-The subsystem SHALL integrate data from multiple sensor modalities (LWIR, mmWave radar, and RGB camera). 
-The subsystem SHALL output detection data to the Signal Processing Subsystem with latency less than 500 ms. 
-The subsystem SHALL be capable of operating for at least 20 minutes of continuous flight without thermal overload or sensor drift. 
+The subsystem SHALL detect human presence within a range of at least 10 meters under standard ambient conditions.     
+The subsystem SHALL operate effectively in both daylight and low-visibility environments such as fog, smoke, or low light.     
+The subsystem SHALL integrate data from multiple sensor modalities (LWIR, mmWave radar, and RGB camera).     
+The subsystem SHALL output detection data to the Signal Processing Subsystem with latency less than 500 ms.     
+The subsystem SHALL be capable of operating for at least 20 minutes of continuous flight without thermal overload or sensor drift.     
 
 #### **Description** 
 
