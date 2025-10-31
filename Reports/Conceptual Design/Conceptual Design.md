@@ -6,7 +6,7 @@ Aviation drones are useful tools in the modern age for scanning areas too diffic
 In search and rescue (SAR) operations, these drones could provide a semi-autonomous initial canvassing of an area to determine locations of human casualties and assess victims’ injuries and conditions. This could then be followed up with a helicopter and/or ground medical team to efficiently distribute aid to those most in need of it. This proposal will outline a project focused on designing and building a drone to meet these objectives. In the coming sections of this proposal, the more specific goals and objectives will be expanded upon as well as the specifications and constraints that the team will work around. The team will also examine current solutions to this problem and other approaches and then provide an argument of why this project is more effective than other contemporary solutions. 
 
 ## Restating the Fully Formulated Problem
-The problem proposed is to create a system that will semi-autonomously fly and identify victim(s) in an emergency situation and read vital signs in terms of heart rate, respiratory rate, and cognition. Then the system must relay that information back to the user and rank the victim(s) in terms of the START triage method. To understand the scope of the problem, we will be keeping to the Fall 24 Capstone team’s scenario which was outlined by their customer. This scenario is the following: 
+The problem proposed is to develop a system capable of semi-autonomously flying and identifying victim(s) in emergency situations while measuring vital signs such as heart rate, respiratory rate, and cognitive responsiveness. The system must then relay this information to the user and rank the victim(s) according to the START triage method. To define the scope of the problem, the project follows the scenario established by the Fall 2024 Capstone team as outlined by their customer.        
 
     An individual has been working on a powerline when suddenly the powerline comes crashing down.  
     The individual is unresponsive and paramedics cannot get to the individual due to the active powerline.   
@@ -14,9 +14,9 @@ The problem proposed is to create a system that will semi-autonomously fly and i
     and read their vitals.   
     The powerline and the individual are in a clear field with no wind on a clear day.   
 
-Our acting customer, Mr. Christopher Johnson, has asked us to introduce more variations to the test scenario for our drone system to adapt to. We will also test for when there is limited visibility (fog or smoke) and when there is wind (some range on the Beaufort Scale). 
+The acting customer, Mr. Christopher Johnson, has requested the introduction of additional variations to the test scenario to assess the adaptability of the drone system. These variations include conditions of limited visibility, such as fog or smoke, and the presence of wind within a defined range on the Beaufort scale.        
 
-Since we are inheriting this project from our Fall 24 predecessors, the specifications have not changed. This project does not have many constraints. The following list describes the constraints as well as reasoning and reference numbers for each constraint. 
+Since the project is inherited from the Fall 2024 Capstone team, the core specifications remain unchanged. The project operates under a limited set of constraints, which are detailed below along with their respective reasoning and reference standards:        
 
 1. The drone SHALL be user-friendly. 
 
