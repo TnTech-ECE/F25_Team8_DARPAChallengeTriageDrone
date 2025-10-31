@@ -205,7 +205,7 @@ In order to do this, the design will be split up into devices:
 - This processing unit (Jettson Nano) will process the data received from the microphone as well as the data from the heartbeat and respiratory doppler. The information will then be compared to the START triage method and the results will be wirelessly transmitted to the user interface. The processing unit will have serial or digital input lines coming from the doppler radar as well as an analog input line coming from the microphone. It will have a wireless radio frequency output going to the user control device. 
         
 **3. User Control <br />**
-- After the signlas are processed the information will be sent to a telecommunication device that will transmit the victim's vitals as well as triage level back to the user. The information will be shown on an LCD display at the controller. This device will have one radio frequency signal input that comes from the signal processing device. 
+- After the signals are processed the information will be sent to a telecommunication device that will transmit the victim's vitals as well as triage level back to the user. The information will be shown on an LCD display at the controller. This device will have one radio frequency signal input that comes from the signal processing device. 
     
 **4. Cognitive test device <br />**
 - The user will have a button to allow a procedure to occur using a speaker and a microphone. The speaker will send out a call prompt and the microphone will capture audio data and relay it back to the computing system. 
@@ -275,7 +275,7 @@ Power signal to connect the signal processing subsystem
   The power subsystem SHALL protect client circuits with fuses.  
 
 #### **Description**
-The power subsystem will be responsible for converting power from the battery to the signal processing subsystem subsystem and other peripherals on the drone. The following flow chart describes the steps to meet the specifications.
+The power subsystem will be responsible for converting power from the battery to the signal processing subsystem and other peripherals on the drone. The following flow chart describes the steps to meet the specifications.
 
 
 <img width="250" alt="power subsystem" src="https://github.com/user-attachments/assets/e48fe624-972f-47ee-875b-66390ba27317">
