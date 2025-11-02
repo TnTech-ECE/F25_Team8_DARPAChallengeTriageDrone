@@ -539,33 +539,34 @@ During times of disaster, good ethical decisions and considerations are often co
 
 ### **Standards**
 #### Drone Standard
-The drone must comply with the **Federal Aviation Administration** _Small Unmanned Aircraft Systems (UAS) Regulations (Part 107)_ [9]. Any system following these operating limits is required to meet the standard criteria for lawful operation. Through careful consideration, the team selected a drone specific to these detailed standards. This is to ensure that the drone is flight-ready per the **FAA**. Waivers and permits for flight may be required in certain areas, which can be obtained through Part 107 of the **FAA**'s _Small Unmanned Aircraft Systems (UAS) Regulations_.
+The drone must comply with the Federal Aviation Administration Small Unmanned Aircraft Systems (UAS) Regulations (Part 107) [9]. This standard establishes quantitative limits for lawful drone operation, including a maximum altitude of 400 ft above ground level, weight under 55 lb, and operations within visual line of sight. These metrics directly influence the Programmable Drone Subsystem and Path Finding Subsystem, ensuring that altitude and flight-speed limits are coded into the control firmware. The standard also defines remote pilot certification, operational restrictions near people, and maintenance documentation, which determine the drone’s design for operator override and system failsafes.
 
 #### WI-FI Standard
-The design will have to comply with IEEE standard 802.11 [10] which defines how WI-FI networks are set up and communicate. This will affect our design as the team will have to ensure the drone complies with this standard to successfully connect to the internet and communicate with the web app accessed by most browsers. The programmable drone API will most likely handle the low-level hardware-specific implementation of the standard. The higher level implementation will need to be tackled by the team. This will also define how the web app is designed as well as how the information is transmitted in packets and what protocols the video feed will be transmitted with.
+The design will comply with IEEE standard 802.11 [10], which defines Wi-Fi network architecture, data transmission rates, and security protocols. The standard specifies PHY/MAC layer parameters (channel bandwidths, modulation rates, and error correction) that impact the Interfacing and Signal Processing Subsystems. These metrics ensure stable throughput for real-time data transmission, requiring the system to maintain latency below 500 ms and use WPA2 or WPA3 encryption for secure communication. The programmable drone API will likely handle the low-level PHY/MAC operations, while the higher-level packet and video transmission protocols will be implemented by the team.
 
 #### Videography and Audio Recording Standard
-The design and project must comply with the **DEFENSE HEALTH AGENCY's [DHA]** _ADMINISTRATIVE INSTRUCTION **NUMBER** 6000.02_ [11]. Systems responsible for videotaping, filming, recording, and imaging of patients must comply with this instruction and policy to ensure lawful and ethical use of videography and audio recordings. The video and audio recording system must record and delete any data taken, ensuring no data is stored. Any video and audio recording date exploited will be a violation of the **DHA**'s standard.
+The design and project must comply with the DEFENSE HEALTH AGENCY's (DHA) Administrative Instruction Number 6000.02 [11]. This instruction governs any videotaping, imaging, or audio recording of patients, requiring that data not be stored and that any recordings be deleted immediately after transmission. These metrics directly apply to the Microphone/Speaker, Signal Processing, and Human Detection Subsystems, which must stream data in real time without local caching. The policy ensures lawful and ethical use of medical data by mandating that all captured information is temporary and anonymized during operation.
 
 #### Operational Procedure Standard
-The project must comply with ISO 21384-3:2023 [12], which establishes international operational procedures and safety requirements for unmanned aircraft systems. This standard defines how unmanned aerial vehicles (UAVs) should be operated, maintained, and tested to ensure safe and reliable performance. Compliance ensures that the drone’s flight control, navigation, and obstacle avoidance systems follow recognized operational practices, and that mission profiles include safety redundancies, pre-flight checks, and emergency procedures.
+The project will comply with ISO 21384-3:2023 [12], which defines operational procedures and safety requirements for unmanned aircraft systems. Key metrics include risk assessment thresholds, maintenance schedules, and flight operation protocols such as pre-flight checks, operator handoff, and emergency return behavior. These metrics influence the Programmable Drone and Power & Circuitry Subsystems, requiring the inclusion of redundant power checks, flight mission logging, and emergency landing procedures. The standard ensures that the system follows international best practices for safe and repeatable UAV operation.
 
 #### Health Device Communication Standard
-The project must also adhere to ISO/IEEE 11073 [13], which defines data communication protocols for health-related and medical devices. Since the system processes vital signs such as heart rate and respiratory rate, this standard guides how sensor data is formatted, transmitted, and interpreted to maintain interoperability and data integrity between devices. Implementing this standard ensures accurate physiological data transfer between the vitals sensor, signal processing subsystem, and interfacing computer while preventing data corruption or loss.
+The project must adhere to ISO/IEEE 11073 [13], which establishes data format and transmission requirements for health-related devices. It defines object models, communication protocols (PHD/Agent-Manager architecture), and data integrity checks to maintain interoperability between medical sensors and host systems. These metrics directly affect the Vitals Sensor, Signal Processing, and Human Detection Subsystems by requiring standardized data formats (e.g., numeric observation objects) and timestamp synchronization. Implementing this standard ensures accurate physiological data exchange between onboard systems and the operator interface while preventing data corruption or loss.
 
 #### Risk Management Standard
-The project shall comply with ISO 14971:2019 [14], which outlines the application of risk management to medical and health-related devices. This standard provides a structured approach to identifying hazards, assessing potential harms, implementing controls, and verifying risk mitigation throughout the system’s life cycle. Compliance with ISO 14971 ensures that all subsystems, particularly those handling physiological data and flight safety, are evaluated for potential failure modes, privacy risks, and hardware hazards, with documented procedures to reduce or eliminate them.
+The project will comply with ISO 14971:2019 [14], which defines methods for identifying, evaluating, and controlling risks associated with medical and safety-critical systems. Metrics from this standard include risk probability levels, severity classification, risk index scoring, and the requirement for traceable documentation of mitigations. These parameters influence all subsystems that handle human data or safety-critical operations, such as Signal Processing, Vitals, Path Finding, and Human Detection. Design measures include Failure Mode and Effects Analysis (FMEA), risk-control verification, and periodic review of hazard logs. Compliance ensures that the drone operates safely even during subsystem faults or data anomalies.
 
-#### Summary of Standards Used
+#### **Summary of Standards Used**
 
-| Standard | Description | Primary Subsystems Affected |
-|-----------|--------------|------------------------------|
-| **FAA Part 107** | Federal Aviation Administration regulations for small UAS operation | All airborne subsystems |
-| **IEEE 802.11** | Wireless networking protocol for telemetry and data links | Programmable Drone, Signal Processing, Interfacing |
-| **DHA 6000.02** | U.S. Defense Health Agency policy on medical imaging and audio recording | Signal Processing, Vitals, Human Detection, Microphone/Speaker |
-| **ISO 21384-3** | Operational safety and procedures for unmanned aircraft systems | Programmable Drone, Power, Path Finding, Human Detection |
-| **ISO/IEEE 11073** | Health-device communication and data format standard | Signal Processing, Vitals, Human Detection |
-| **ISO 14971** | Risk management framework for medical-related systems | Power, Signal Processing, Vitals, Interfacing, Microphone/Speaker, Path Finding, Human Detection |
+| **Standard** | **Description** | **Metrics/Clauses Applied** | **Primary Subsystems Affected** |
+|---------------|-----------------|------------------------------|----------------------------------|
+| **FAA Part 107** | Federal Aviation Administration regulations for small UAS operation | Altitude ≤ 400 ft, weight ≤ 55 lb, visual line of sight, operational waivers | All airborne subsystems |
+| **IEEE 802.11** | Wireless networking protocol for telemetry and data links | Data rate, channel frequency, WPA2/WPA3 security, latency < 500 ms | Programmable Drone, Signal Processing, Interfacing |
+| **DHA 6000.02** | U.S. Defense Health Agency policy on medical imaging and audio recording | Real-time data only, zero data storage, immediate deletion | Signal Processing, Vitals, Human Detection, Microphone/Speaker |
+| **ISO 21384-3** | Operational safety and procedures for unmanned aircraft systems | Pre-flight checks, operational risk limits, redundancy, maintenance intervals | Programmable Drone, Power, Path Finding, Human Detection |
+| **ISO/IEEE 11073** | Health-device communication and data format standard | Agent-Manager model, data object integrity, interoperability | Signal Processing, Vitals, Human Detection |
+| **ISO 14971** | Risk management framework for medical-related systems | Risk index scoring, hazard logs, FMEA verification | Power, Signal Processing, Vitals, Interfacing, Microphone/Speaker, Path Finding, Human Detection |
+
 
 ## Resources
 
@@ -691,7 +692,7 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 **Gideon Befekadu:** Path finding comparative analysis, path finding subsystem, hardware block diagram, operational flowchart, path finding high-level solution  
 
-**Zenkline Elle:** Path finding comparative analysis, path finding subsystem, managing project budget, path finding flowchart, operational flowchart, identifying necessary skills for project execution, path finding high-level solution. 
+**Zenkline Elle:** Path finding comparative analysis, path finding subsystem, managing project budget, path finding flowchart, operational flowchart, identifying necessary skills for project execution, path finding high-level solution, standards, ethical and Professional considerations. 
 
 **Brody Smith:** Human finding subsystem component comparative analysis, solution description, and high-level design description. 
 
