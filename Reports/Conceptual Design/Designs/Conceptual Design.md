@@ -229,11 +229,11 @@ In order to do this, the design will be split up into devices:
 - By fusing data from radar, thermal, and visual sensors, the Human-Finding subsystem will achieve a high degree of accuracy, reliability, and environmental adaptability. This ensures that the drone can consistently identify and localize victims, providing critical input to the triage and assessment stages of the overall system. 
 
 ### Hardware Block Diagram
-![Hardware Block Diagram Full.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Full.png)
+![Hardware Block Diagram Full - Update 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Full%20-%20Update%201.png)
 
-![Hardware Block Diagram Computer.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Computer.png)
+![Hardware Block Diagram Computer - Update 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Computer%20-%20Update%201.png)
 
-![Hardware Block Diagram Drone.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Drone.png)
+![Hardware Block Diagram Drone.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Block%20Diagram%20-%20Drone%20-%20Update%201.png)
 
 The linked document contains the hardware block diagram created in Visio, centering on the drone and the computer. This visual breakdown outlines the division of our systems, focusing on the communication paths and additions between these components. We decided to omit the controller from the diagram, as no modifications are being made to it. As a result, the diagram shows the computer and drone systems. 
 
