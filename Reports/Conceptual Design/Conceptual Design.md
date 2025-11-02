@@ -426,22 +426,25 @@ The drone must comply with the **Federal Aviation Administration** _Small Unmann
 ## Resources
 
 ### Budget
+| **Subsystem** | **Part Number** | **Description** | **Justification** | **Manufacturer** | **Quantity** | **Cost per Item** | **Total Cost** |
+|----------------|-----------------|------------------|-------------------|------------------|---------------|-------------------|----------------|
+| **Path Finding / Obstacle Detection** | 296-IWR6843AOPEVM-ND | IWR6843AOPEVM 60–64 GHz mmWave Radar EVM | Radar would be an ideal tool for degraded navigation | Texas Instruments | 1 | $249.00 | $249.00 |
+| **Path Finding / Obstacle Detection** | TBD (RPLIDAR A1M8 or Unitree L2) | LiDAR sensor (model pending; evaluating RPLIDAR A1M8 vs Unitree 4D L2) | LiDAR is the desired sensor to provide general path-finding guidance giving the drone a real-time ability to navigate | Slamtec / Unitree | 1 | $120 – $450 | $120 – $450 |
+| **Subtotal** | | | | | | **Total** | **$699** |
+| **Target Acquisition** | TBA | Thermal camera module | Using heat signatures to identify individuals in need | Lepton | 1 | $200 – $250 | $200 – $250 |
+| **Mechanical / Mounting** | PLA-1KG | PLA filament 1.75 mm (1 kg spool) | Needed to create a harness to mount to drone and carry attachments | Generic | 2 | $20.00 | $40.00 |
+| **Power & Circuitry** | CF14J1K00TR-ND | 1 kΩ 5% ¼ W axial resistor | Expected use for on-drone connections | Stackpole Electronics | 10 | $0.10 | $1.00 |
+| **Power & Circuitry** | CF14J10K00TR-ND | 10 kΩ 5% ¼ W axial resistor | Expected use for on-drone connections | Stackpole Electronics | 10 | $0.10 | $1.00 |
+| **Power & Circuitry** | 338-2641-ND | Mica 56 pF 5% 500 V radial capacitor | Expected use for on-drone connections | Cornell Dubilier Electronics | 5 | $1.79 | $8.95 |
+| **Power & Circuitry** | 338-3057-ND | Mica 8200 pF 5% 500 V radial capacitor | Expected use for on-drone connections | Cornell Dubilier Electronics | 5 | $13.47 | $67.35 |
+| **Power & Circuitry** | 3017 | DC-DC 5 A Buck Converter Module | Expected for general power distribution on drone | Valefod | 1 | $4.89 | $4.89 |
+| **Power & Circuitry** | DD39AJPA | ± Dual Output Power Supply Module | Expected for general power distribution on drone | eletechsup | 1 | $9.99 | $9.99 |
+| **Subtotal** | | | | | | **Total** | **$93.18** |
+| **Wiring & Connectors** | B08THSDF4S | 20 pcs DC Power Cable 5 A 12 V DC | Expected for general power distribution on drone | CENTROPOWER | 1 set | $9.29 | $9.29 |
+| **Wiring & Connectors** | 22-GAWIRE-KIT | 22 AWG Stranded Hook-Up Wire Kit (6 Colors) | Desired for attachment mounting and power distribution on drone | BNTECHGO | 1 | $15.00 | $15.00 |
+| **Subtotal** | | | | | | **Total** | **$24.29** |
+| **Miscellaneous** | B091TRMFYT | NP-F Battery Adapter Plate | Ideal for power distribution | SmallRig | 1 | $26.99 | $26.99 |
 
-| SUBSYSTEM                     | PART NUMBER                | DESCRIPTION                                                                 | MANUFACTURER NAME         | QUANTITY | COST PER ITEM | TOTAL COST OF QUANTITY |
-|-------------------------------|-----------------------------|------------------------------------------------------------------------------|----------------------------|-----------|----------------|------------------------|
-| Path Finding / Obstacle Detection | 296-IWR6843AOPEVM-ND        | IWR6843AOPEVM 60–64 GHz mmWave Radar EVM                                    | Texas Instruments          | 1         | $249.00        | $249.00                |
-| Path Finding / Obstacle Detection | TBD (RPLIDAR A1M8 or Unitree L2) | LiDAR sensor (model pending; evaluating RPLIDAR A1M8 vs Unitree 4D L2)       | Slamtec / Unitree          | 1         | $120 – $450    | $120 – $450            |
-| Target Acquisition             | TBD                         | Thermal camera module                                                       | Lepton                         | 1         | $200 – $250             | $200 – $250                    |
-| Mechanical / Mounting          | PLA-1KG                     | PLA filament 1.75 mm (1 kg spool)                                           | Generic                    | 2         | $20.00         | $40.00                 |
-| Power & Circuitry              | CF14J1K00TR-ND              | 1 k Ω 5% ¼ W axial resistor                                                | Stackpole Electronics      | 10        | $0.10          | $1.00                  |
-| Power & Circuitry              | CF14J10K00TR-ND             | 10 k Ω 5% ¼ W axial resistor                                               | Stackpole Electronics      | 10        | $0.10          | $1.00                  |
-| Power & Circuitry              | 338-2641-ND                 | Mica 56 pF 5% 500 V radial capacitor                                       | Cornell Dubilier Electronics | 5       | $1.79          | $8.95                  |
-| Power & Circuitry              | 338-3057-ND                 | Mica 8200 pF 5% 500 V radial capacitor                                     | Cornell Dubilier Electronics | 5       | $13.47         | $67.35                 |
-| Power & Circuitry              | 3017                        | DC-DC 5 A Buck Converter Module                                            | Valefod                    | 1         | $4.89          | $4.89                  |
-| Power & Circuitry              | DD39AJPA                    | ± Dual Output Power Supply Module                                          | eletechsup                 | 1         | $9.99          | $9.99                  |
-| Wiring & Connectors            | B08THSDF4S                  | 20 pcs DC Power Cable 5 A 12 V DC                                          | CENTROPOWER                | 1 set     | $9.29          | $9.29                  |
-| Wiring & Connectors            | 22-GAWIRE-KIT               | 22 AWG Stranded Hook-Up Wire Kit (6 Colors)                                | BNTECHGO                   | 1         | $15.00         | $15.00                 |
-| Miscellaneous                  | B091TRMFYT                  | NP-F Battery Adapter Plate                                                 | SmallRig                   | 1         | $26.99         | $26.99                 |
 
 The following budget was decided by this team, and these are the additional items that are anticipated to be required to complete our project.
 
