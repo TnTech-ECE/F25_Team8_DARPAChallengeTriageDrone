@@ -262,6 +262,21 @@ The drone will be bought and be ready to fly. Senors and a processing unit will 
 
 ![Programmable Drone Subsystem Flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Programmable%20Drone%20Subsystem.png)
 
+#### **Applicable Standards:**  
+- **FAA Part 107:** Regulates drone operation under U.S. federal law (maximum altitude, weight limits, line-of-sight).  
+- **IEEE 802.11:** Ensures reliable and encrypted Wi-Fi connectivity for control and telemetry.  
+- **ISO 21384-3:** Defines operational procedures and safety requirements for unmanned aircraft systems.
+
+#### **Implementation & Compliance:**  
+- Flight control firmware limits altitude, speed, and field operations per FAA 107.  
+- The Wi-Fi module uses 802.11ac protocol for stable control and low-latency telemetry.  
+- Emergency return-to-home, pre-flight self-checks, and operator intervention capabilities are implemented to satisfy ISO 21384-3 operational safety requirements.
+
+#### **Design Considerations:**  
+- Ensure flight-control overrides for human safety.  
+- Maintain robust encryption on command and telemetry links.  
+- Provide documented operational checklists per ISO 21384-3.
+
 
 ### **Power and Circuitry design subsystem**
 #### **Connections**
@@ -277,8 +292,23 @@ Power signal to connect the signal processing subsystem
 #### **Description**
 The power subsystem will be responsible for converting power from the battery to the signal processing subsystem and other peripherals on the drone. The following flow chart describes the steps to meet the specifications.
 
-
 <img width="250" alt="power subsystem" src="https://github.com/user-attachments/assets/e48fe624-972f-47ee-875b-66390ba27317">
+
+#### **Applicable Standards:**  
+- **FAA Part 107:** Power and wiring systems must maintain airworthiness and safety.  
+- **ISO 21384-3:** Requires power system reliability and maintenance procedures for safe flight.  
+- **ISO 14971:** Establishes risk-management framework for electrical hazards and failures.
+
+#### **Implementation & Compliance:**  
+- Power conversion maintains 5 V ± 5 % per subsystem requirements.  
+- Fused wiring and insulated conductors ensure compliance with FAA operational safety.  
+- Failure Mode and Effects Analysis (FMEA) follows ISO 14971 principles to mitigate risks like short circuits, overcurrent, or voltage sag.
+
+#### **Design Considerations:**  
+- Avoid exposed wiring; use redundant fuses.  
+- Maintain a safety factor >1.5 for current ratings.  
+- Verify thermal limits of regulators in line with ISO 21384-3 maintenance guidelines.
+
 
 ### **Signal Processing subsystem**
 #### **Connections**
@@ -295,6 +325,23 @@ The power subsystem will be responsible for converting power from the battery to
 The signal processing subsystem carries the heart of the project. It will employ signal processing algorithms to extract useful information about the heart rate and respiratory rate. The subsystem will have to be fast and accurate. The system will connect data to the drone so that the drone can transmit the data back to the pilot. The following flow chart describes the steps to meet the specifications.
 
 <img width="433" alt="Computing system (1)" src="https://github.com/user-attachments/assets/080f6b0c-3eb2-43e6-9002-d479ab09ed63">
+
+#### **Applicable Standards:**  
+- **IEEE 802.11:** Governs Wi-Fi transmission for data exchange with ground systems.  
+- **DHA 6000.02:** Protects patient data during collection and transmission.  
+- **ISO/IEEE 11073:** Defines standard protocols for health-device data exchange.  
+- **ISO 14971:** Applies to risk management of physiological-data processing.
+
+#### **Implementation & Compliance:**  
+- Data packets transmitted under 802.11 use WPA2/WPA3 encryption.  
+- Processed data are not stored beyond session duration per DHA 6000.02.  
+- Data structures follow ISO/IEEE 11073 formats (e.g., numeric OBS objects for vital readings).  
+- Failure and anomaly handling follow ISO 14971’s detection and mitigation guidelines.
+
+#### **Design Considerations:**  
+- Implement volatile memory buffers only.  
+- Use cyclic redundancy checks for data integrity.  
+- Document data-handling procedures per ISO 11073.
 
 
 ### **Vitals' Sensor subsystem**
@@ -314,6 +361,24 @@ The Vitals Sensors subsystem is dedicated to obtaining accurate readings from ea
 
 ![image](https://github.com/user-attachments/assets/0e9d64a5-9dac-4c05-89bc-5f9c991b3add)
 
+#### **Applicable Standards:**  
+- **DHA 6000.02:** Restricts recording of patient identifiable information.  
+- **ISO/IEEE 11073:** Governs data communication between physiological sensors and host processors.  
+- **ISO 14971:** Guides risk analysis of vitals measurement systems.  
+- **FAA Part 107:** Ensures sensor mounting safety and electromagnetic compliance.
+
+#### **Implementation & Compliance:**  
+- LWIR and radar data are transiently processed, never stored.  
+- Communication with the Jetson Nano uses ISO 11073-style message formats.  
+- Risk assessments consider radar emission safety, false positives, and sensor drift per ISO 14971.  
+- Payload weight and mounting follow FAA 107 limitations.
+
+#### **Design Considerations:**  
+- Apply encryption and timestamping for sensor data.  
+- Limit radar power output below safe human-exposure thresholds.  
+- Implement watchdog routines for data validity.
+
+
 ### Interfacing Subsystem
 #### **Connections**
 Wireless connection between drone and client computer.  
@@ -328,6 +393,20 @@ This subsystem SHALL display triage results and vitals wirelessly.
 This subsystem will utilize the programmable nature of the drone to connect to a laptop and display heart rate and breathing rate information onto the screen. This subsystem will need to write a program on the laptop in order to connect to the drone as well. This program should be portable between computer to computer. 
 
 <img width="200" alt="Drawing (1)" src="https://github.com/user-attachments/assets/0d697553-49c6-4af9-b213-ad698e1283d0">
+
+#### **Applicable Standards:**  
+- **IEEE 802.11:** Ensures wireless networking reliability.  
+- **DHA 6000.02:** Prevents persistent storage of patient data on local computers.  
+- **ISO 14971:** Supports risk assessment of communication errors.
+
+#### **Implementation & Compliance:**  
+- Secure socket layer (SSL/TLS) used for telemetry communication over 802.11.  
+- No local caching; data erased after each mission.  
+- Connection-failure scenarios analyzed and mitigated per ISO 14971.
+
+#### **Design Considerations:**  
+- Implement WPA3 Enterprise mode.  
+- Include data-integrity verification for all displayed readings.
 
 ### **Microphone and speaker subsystem**
 
@@ -345,6 +424,20 @@ The subsystem SHALL give vocal commands using the speaker and listen for respons
 
 The microphone and speaker subsystem is extremely important as it allows the pilot to determine the cognitive ability of the triage patient. This subsystem will have to figure out how the microphones will connect to the drone and the drone controller and figure out how to send data through the interfaces with the drone.  
 ![image](https://github.com/user-attachments/assets/68573382-bda0-4339-88e8-ce6fc51a3382)
+
+#### **Applicable Standards:**  
+- **DHA 6000.02:** Audio communication must remain transient; no storage of recordings.  
+- **FAA Part 107:** Hardware must not interfere with flight control or cause distraction.  
+- **ISO 14971:** Addresses risks related to miscommunication or acoustic interference.
+
+#### **Implementation & Compliance:**  
+- Real-time streaming without recording ensures DHA 6000.02 compliance.  
+- Audio components tested for EMI immunity and flight-noise tolerance.  
+- Hazard identification and control per ISO 14971.
+
+#### **Design Considerations:**  
+- Maintain speaker output below 80 dB SPL at 1 m.  
+- Use noise-cancellation filters for rotor interference.
 
 ### **Path Finding / Obstacle Detection Subsystem**
 
@@ -367,6 +460,20 @@ The subsystem SHALL weigh less than 1 pound including its mounting hardware.
 The Path Finding / Obstacle Detection subsystem will utilize the Texas Instruments IWR6843AOPEVM radar module. Mounted at a 45° forward-facing angle, this sensor will detect obstacles and terrain features along the drone’s flight path. The radar will use frequency-modulated continuous wave (FMCW) processing to measure range, velocity, and angle of nearby objects. Data from the radar will be transmitted to the signal processing subsystem, where it will be integrated into the flight control logic. This enables the drone to autonomously adjust its flight trajectory to avoid collisions and maintain stability in complex environments. 
 
 ![Path Finding flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Path%20Finding%20Subsystem.png)
+
+#### **Applicable Standards:**  
+- **FAA Part 107:** Requires obstacle-avoidance functions to preserve safe flight and pilot override.  
+- **ISO 21384-3:** Defines operational and procedural expectations for UAS navigation systems.  
+- **ISO 14971:** Provides risk-management framework for navigation and collision-avoidance failures.
+
+#### **Implementation & Compliance:**  
+- mmWave radar operates within FCC EIRP limits and supports pilot override.  
+- Path-planning logic validated per ISO 21384-3 safety testing methods.  
+- Risk analysis considers failure to detect obstacles and mitigation strategies.
+
+#### **Design Considerations:**  
+- Include flight-log diagnostics (non-visual data only).  
+- Maintain latency <200 ms to meet safety constraints.
 
 ### **Human Detection Subsystem**
 
@@ -392,6 +499,23 @@ Data from all three sensors will be transmitted to the Signal Processing Subsyst
 
 ![Human Detection flowchart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Human%20Finder%20Flowchart%20Subsystem.png)
 
+#### **Applicable Standards:**  
+- **DHA 6000.02:** Restricts storage of visual or thermal imagery of patients.  
+- **FAA Part 107:** Governs payload mounting and ensures flight stability.  
+- **ISO 21384-3:** Sets guidelines for sensor operations and data fusion in UAS missions.  
+- **ISO/IEEE 11073:** Guides health-data communication architecture.  
+- **ISO 14971:** Provides framework for hazard identification in patient detection.
+
+#### **Implementation & Compliance:**  
+- LWIR, RGB, and mmWave sensors operate under transient streaming conditions with no permanent storage.  
+- Data fusion algorithms log only anonymized classification results.  
+- Structural and operational safety reviewed per ISO 21384-3 and FAA 107.  
+- Risk analysis includes false-detection probability and mitigations under ISO 14971.
+
+#### **Design Considerations:**  
+- Use low-resolution video stream to prevent identifiable imagery.  
+- Encrypt thermal and RGB data during transmission.  
+- Document risk-control measures for misclassification or system failure.
 
 ## Ethical, Professional, and Standards Considerations
 ###	**Culture**  
@@ -414,14 +538,34 @@ During times of disaster, good ethical decisions and considerations are often co
 [](https://www.google.com/url?sa=i&url=https%3A%2F%2Fchemm.hhs.gov%2Fstartadult.htm&psig=AOvVaw0y8xkEmUV6EMQKV7fnoMyg&ust=1729839169189000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLDd8Ju3pokDFQAAAAAdAAAAABAE)![image](https://github.com/user-attachments/assets/3f9fa7fc-3093-4bae-8b61-276a595ef9d1)  
 
 ### **Standards**
+#### Drone Standard
+The drone must comply with the **Federal Aviation Administration** _Small Unmanned Aircraft Systems (UAS) Regulations (Part 107)_ [9]. Any system following these operating limits is required to meet the standard criteria for lawful operation. Through careful consideration, the team selected a drone specific to these detailed standards. This is to ensure that the drone is flight-ready per the **FAA**. Waivers and permits for flight may be required in certain areas, which can be obtained through Part 107 of the **FAA**'s _Small Unmanned Aircraft Systems (UAS) Regulations_.
+
 #### WI-FI Standard
-The design will have to comply with IEEE standard 802.11 [5] which defines how WI-FI networks are set up and communicate. This will affect our design as the team will have to ensure the drone complies with this standard to successfully connect to the internet and communicate with the web app accessed by most browsers. The programmable drone API will most likely handle the low-level hardware-specific implementation of the standard. The higher level implementation will need to be tackled by the team. This will also define how the web app is designed as well as how the information is transmitted in packets and what protocols the video feed will be transmitted with.
+The design will have to comply with IEEE standard 802.11 [10] which defines how WI-FI networks are set up and communicate. This will affect our design as the team will have to ensure the drone complies with this standard to successfully connect to the internet and communicate with the web app accessed by most browsers. The programmable drone API will most likely handle the low-level hardware-specific implementation of the standard. The higher level implementation will need to be tackled by the team. This will also define how the web app is designed as well as how the information is transmitted in packets and what protocols the video feed will be transmitted with.
 
 #### Videography and Audio Recording Standard
-The design and project must comply with the **DEFENSE HEALTH AGENCY's [DHA]** _ADMINISTRATIVE INSTRUCTION **NUMBER** 6000.02_ [6]. Systems responsible for videotaping, filming, recording, and imaging of patients must comply with this instruction and policy to ensure lawful and ethical use of videography and audio recordings. The video and audio recording system must record and delete any data taken, ensuring no data is stored. Any video and audio recording date exploited will be a violation of the **DHA**'s standard.
+The design and project must comply with the **DEFENSE HEALTH AGENCY's [DHA]** _ADMINISTRATIVE INSTRUCTION **NUMBER** 6000.02_ [11]. Systems responsible for videotaping, filming, recording, and imaging of patients must comply with this instruction and policy to ensure lawful and ethical use of videography and audio recordings. The video and audio recording system must record and delete any data taken, ensuring no data is stored. Any video and audio recording date exploited will be a violation of the **DHA**'s standard.
 
-#### Drone Standard
-The drone must comply with the **Federal Aviation Administration** _Small Unmanned Aircraft Systems (UAS) Regulations (Part 107)_. Any system following these operating limits is required to meet the standard criteria for lawful operation. Through careful consideration, the team selected a drone specific to these detailed standards. This is to ensure that the drone is flight-ready per the **FAA**. Waivers and permits for flight may be required in certain areas, which can be obtained through Part 107 of the **FAA**'s _Small Unmanned Aircraft Systems (UAS) Regulations_.
+#### Operational Procedure Standard
+The project must comply with ISO 21384-3:2023 [12], which establishes international operational procedures and safety requirements for unmanned aircraft systems. This standard defines how unmanned aerial vehicles (UAVs) should be operated, maintained, and tested to ensure safe and reliable performance. Compliance ensures that the drone’s flight control, navigation, and obstacle avoidance systems follow recognized operational practices, and that mission profiles include safety redundancies, pre-flight checks, and emergency procedures.
+
+#### Health Device Communication Standard
+The project must also adhere to ISO/IEEE 11073 [13], which defines data communication protocols for health-related and medical devices. Since the system processes vital signs such as heart rate and respiratory rate, this standard guides how sensor data is formatted, transmitted, and interpreted to maintain interoperability and data integrity between devices. Implementing this standard ensures accurate physiological data transfer between the vitals sensor, signal processing subsystem, and interfacing computer while preventing data corruption or loss.
+
+#### Risk Management Standard
+The project shall comply with ISO 14971:2019 [14], which outlines the application of risk management to medical and health-related devices. This standard provides a structured approach to identifying hazards, assessing potential harms, implementing controls, and verifying risk mitigation throughout the system’s life cycle. Compliance with ISO 14971 ensures that all subsystems, particularly those handling physiological data and flight safety, are evaluated for potential failure modes, privacy risks, and hardware hazards, with documented procedures to reduce or eliminate them.
+
+#### Summary of Standards Used
+
+| Standard | Description | Primary Subsystems Affected |
+|-----------|--------------|------------------------------|
+| **FAA Part 107** | Federal Aviation Administration regulations for small UAS operation | All airborne subsystems |
+| **IEEE 802.11** | Wireless networking protocol for telemetry and data links | Programmable Drone, Signal Processing, Interfacing |
+| **DHA 6000.02** | U.S. Defense Health Agency policy on medical imaging and audio recording | Signal Processing, Vitals, Human Detection, Microphone/Speaker |
+| **ISO 21384-3** | Operational safety and procedures for unmanned aircraft systems | Programmable Drone, Power, Path Finding, Human Detection |
+| **ISO/IEEE 11073** | Health-device communication and data format standard | Signal Processing, Vitals, Human Detection |
+| **ISO 14971** | Risk management framework for medical-related systems | Power, Signal Processing, Vitals, Interfacing, Microphone/Speaker, Path Finding, Human Detection |
 
 ## Resources
 
@@ -522,13 +666,20 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 [8] "START Adult Triage Method." [CHEMM](https://chemm.hhs.gov/startadult.htm) 
 
-‌[9] "802.11 "IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems - Local and Metropolitan Area Networks--Specific Requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," in IEEE Std 802.11-2020 (Revision of IEEE Std 802.11-2016) , vol., no., pp.1-4379, 26 Feb. 2021, doi: 10.1109/IEEESTD.2021.9363693" [IEEE](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9363693&isnumber=9363692)  
+[9] "Federal Aviation Administration" [FAA](https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107)
 
-[10] "Defense Health Agency" [DHA](https://www.health.mil/Reference-Center/DHA-Publications/2022/08/05/DHA-AI-6000-02)  
+‌[10] "802.11 "IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems - Local and Metropolitan Area Networks--Specific Requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," in IEEE Std 802.11-2020 (Revision of IEEE Std 802.11-2016) , vol., no., pp.1-4379, 26 Feb. 2021, doi: 10.1109/IEEESTD.2021.9363693" [IEEE](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9363693&isnumber=9363692)  
 
-[11] "Federal Aviation Administration" [FAA](https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107)
+[11] "Defense Health Agency" [DHA](https://www.health.mil/Reference-Center/DHA-Publications/2022/08/05/DHA-AI-6000-02)  
 
-[12] "Power supply considerations for Jetson Nano Developer Kit" [NVIDIA](https://forums.developer.nvidia.com/t/power-supply-considerations-for-jetson-nano-developer-kit/71637) 
+[12] International Organization for Standardization. ISO 21384-3:2023 – Unmanned aircraft systems — Part 3: Operational procedures. Geneva, Switzerland: ISO, 2023. Available: [ISO](https://www.iso.org/standard/80124.html)
+
+[13] International Organization for Standardization and Institute of Electrical and Electronics Engineers. ISO/IEEE 11073 Health informatics — Medical / health device communication standards. Geneva, Switzerland and New York, NY: ISO/IEEE, various parts, 2023. Overview available: [ISO](https://www.iso.org/standard/51869.html)
+
+[14] International Organization for Standardization. ISO 14971:2019 – Medical devices — Application of risk management to medical devices. Geneva, Switzerland: ISO, 2019. Available: [ISO](https://www.iso.org/standard/72704.html)
+
+[15] "Power supply considerations for Jetson Nano Developer Kit" [NVIDIA](https://forums.developer.nvidia.com/t/power-supply-considerations-for-jetson-nano-developer-kit/71637) 
+
 
 ## Statement of Contributions
 
@@ -543,5 +694,9 @@ If new findings arise during subsystem development, or if a team member’s expe
 **Zenkline Elle:** Path finding comparative analysis, path finding subsystem, managing project budget, path finding flowchart, operational flowchart, identifying necessary skills for project execution, path finding high-level solution. 
 
 **Brody Smith:** Human finding subsystem component comparative analysis, solution description, and high-level design description. 
+
+
+
+
 
 
