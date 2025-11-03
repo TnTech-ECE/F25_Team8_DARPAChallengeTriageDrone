@@ -46,14 +46,33 @@ Since the project is inherited from the Fall 2024 Capstone team, the core specif
    
 
 **Description:** A light-framed, quad-rotor drone, open-source drone with path finding capabilities.  
+
+**Relevant Specifications:**     
+- **Max Payload:** 1.5 kg (3.3 lb)  
+- **Flight Time:** Up to 40 minutes (with LE batteries)  
+- **Operating Range:** Up to 5 km with HereLink  
+- **Flight Controller:** Cube Orange (open-source)  
+- **Obstacle Avoidance:** None (no horizontal sensors)  
+- **Modifiability:** High (open-source ArduPilot)  
+
 **Pros:** High Payload Capacity, Vertical Takeoff and Landing Capability, Improved Control and Stability, Maneuverability, includes GPS and LiDAR, Versatile, and Open Source ArduPilot . 
+
 **Cons:** No Horizontal Obstacle Sensor, Limited Flight Time.  
 
 #### **Parrot ANAFI Ai** **[[7](#References)]**    
 ![Drone 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Drone%202.jpg)      
 
 **Description:** A compact drone with built-in obstacle avoidance cameras chosen and used by the previous capstone team.   
+
+**Relevant Specifications:**    
+- **Max Payload:** Not designed for external payloads  
+- **Flight Time:** 32 minutes  
+- **Max Speed:** 17 m/s (38 mph)  
+- **Obstacle Avoidance:** Yes (stereo vision, 330° gimbal)  
+- **Modifiability:** Low (closed hardware)
+
 **Pros:** Already in our possession, WIFI Capabilities, Has Obstacle Avoidance Capabilities, and has a Compact Design.   
+
 **Cons:** Damaged as is, Limited Payload, Limited Flight Time, and Closed Hardware System.   
 
 #### Drone Design Solution: 
@@ -65,18 +84,36 @@ Looking at the pros and cons between the X4 and the ANAFI, the X4 seems to be th
 ### 2. Computing Systems   
 The computing systems considered were a **Raspberry Pi** and a **NVIDIA Jetson Nano** for the triage sensor system.    
 
-#### **Raspberry Pi**    
+#### **Raspberry Pi** **[[8](#References)]**    
 ![Pi.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Pi.png)  
 
 **Description:** Small, Low-Cost Computing Device.    
+
+**Relevant Specifications:**  
+- **CPU:** Quad-core Cortex-A72 (1.5–2.4 GHz)  
+- **RAM:** Up to 8 GB  
+- **GPU:** VideoCore VI (no CUDA)  
+- **AI Performance:** Limited (no dedicated AI acceleration)  
+- **Power:** 3–7 W
+
 **Pros:** Cost-Friendly, Compact Size, Customizable, Low Power Consumption, and Versatility.    
+
 **Cons:** Low-Performance Capabilities, Limited storage, Overheating, and Limited Connectivity.    
 
-#### **NVIDIA Jetson Nano** 
+#### **NVIDIA Jetson Nano** **[[9](#References)]**    
 ![Jetson.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Jetson.png)
 
 **Description:** Small, powerful, and comprehensive computing system.    
+
+**Relevant Specifications:**  
+- **GPU:** 128-core Maxwell  
+- **RAM:** 4 GB LPDDR4  
+- **AI Performance:** ~472 GFLOPS  
+- **Power Consumption:** 5–10 W  
+- **Connectivity:** No built-in Wi-Fi  
+
 **Pros:** AI capabilities, High performance, Expandable Storage, Graphics processing optimization, and Multiple I/O options.    
+
 **Cons:** Power Consumption, Larger Size, Lack of built-in Wi-Fi, Complexity, and High Cost.    
   
 #### Computing Systems Solution:
@@ -89,14 +126,18 @@ The controller options were the **Default Drone Controller**, a **Mobile Device*
 ![Controller.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Controller.png)
 
 **Description:** It comes with the drone and is therefore low-cost, has less than ten buttons, and is handheld.    
+
 **Pros:** Pre-Programmed, Cost-Friendly, Simple to Use.    
+
 **Cons:** Not Flexible, No Display, Not Modifiable.    
 
 #### **Mobile Device**
 ![Phone.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Phone.png)
 
 **Description:** A handheld, either a dedicated or personal device that can interact with the drone controls through the drone' default web APIs with moderate modifiability.    
+
 **Pros:** Flexible, Potentially Cost-Friendly, Easy to Carry, Modifiable.    
+
 **Cons:** Difficult to handle due to small display, Can't be easily used to program drone, Many potential device models.    
 
 #### **PC System**
@@ -112,25 +153,54 @@ Due to the higher capabilities of a modern day personal computer, it is the idea
 ### 4. Path Finding / Obstacle Detection Systems - Radar    
 The radar sensors considered were the Texas Instruments IWR6843AOPEVM, Ainstein US-D1 Pro Extended-Range Radar Altimeter, and Infineon DEMO BGT60TR13C.     
 
-#### **Texas Instruments IWR6843AOPEVM**    
+#### **Texas Instruments IWR6843AOPEVM** **[[10](#References)]**    
 ![Radar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%201.png)    
 
 **Description:** A 60–64 GHz mmWave radar sensor evaluation module featuring a single-chip solution for object detection, range estimation, and velocity measurement. It integrates transmitters, receivers, DSP, and MCU cores for autonomous processing, supporting up to 4 GHz bandwidth and onboard antennas.     
+
+**Relevant Specifications:**  
+- **Frequency:** 60–64 GHz  
+- **Range:** Up to 50 m  
+- **FoV:** ±60° azimuth & elevation  
+- **Resolution:** 29° angular  
+- **Onboard Processing:** Yes (DSP + MCU)  
+- **Power:** Low (integrated design) 
+
 **Pros:** High range resolution, integrated processing (no external MCU required), low power consumption, compact FR4 antenna design, and strong SDK/software support (mmWave SDK, Radar Toolbox).     
+
 **Cons:** Limited field of view compared to some alternatives (±60° typical), short-to-medium detection range (~50 m), requires software configuration expertise, and lacks environmental protection for outdoor all-weather operation.     
 
-#### **Ainstein US-D1 Pro Extended-Range, All-Weather Radar Altimeter**    
+#### **Ainstein US-D1 Pro Extended-Range, All-Weather Radar Altimeter** **[[11](#References)]**    
 ![Radar 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%202.png)    
 
 **Description:** An industrial-grade radar altimeter designed for UAVs and robotics, operating in 60 GHz band with advanced FMCW radar processing. Optimized for ground altitude and obstacle proximity detection in all-weather conditions (rain, fog, dust, snow).     
+
+**Relevant Specifications:**  
+- **Range:** 0.5–120 m  
+- **Precision:** ±0.1 m (<10 m), 1% (>10 m)  
+- **FoV:** ±20° × ±20°  
+- **Update Rate:** 20 Hz  
+- **IP Rating:** IP69K (all-weather)  
+- **Power:** 3 W  
+
 **Pros:** Extended detection range (up to 50 m+), high precision (< 2 cm), robust against environmental interference, ready-to-use hardware (IP67 housing), and plug-and-play interfaces (UART/CAN).     
+
 **Cons:** High cost, limited modifiability, primarily designed for altitude sensing (not lateral obstacle mapping), and lower availability of open-source SDKs.     
 
-#### **Infineon DEMO BGT60TR13C**
+#### **Infineon DEMO BGT60TR13C** **[[12](#References)]**    
 ![Radar 3.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%203.png)    
 
 **Description:** A 60 GHz radar transceiver demo board featuring 3 transmit and 4 receive antennas for 3D motion and presence sensing. Supports range-Doppler imaging, angle estimation, and can detect multiple objects simultaneously with an on-board microcontroller interface.    
+
+**Relevant Specifications:**  
+- **Range:** Up to 15 m  
+- **FoV:** ~120° horizontal  
+- **Resolution:** ~3 cm  
+- **Power:** <200 mA @ 1.8V  
+- **Multi-target Detection:** Yes  
+
 **Pros:** High sensitivity and multi-target capability, wide field of view (≈120°), suitable for short-range mapping (< 20 m), excellent documentation and software tools (Radar Fusion GUI, MATLAB SDK), and strong community support.    
+
 **Cons:** Shorter detection range than US-D1 Pro, requires USB/host interface for processing, not weatherproof, and higher power consumption during full operation.    
 
 #### Path Finding / Obstacle Detection for Radar Solution:     
@@ -139,17 +209,36 @@ Considering the three radar sensors, the Texas Instruments IWR6843AOPEVM offers 
 ### 4. Path Finding / Obstacle Detection Systems - LiDAR    
 The LiDAR sensors considered were the RPLIDAR A1M8 and the Unitree 4D LiDAR L2.     
 
-#### **RPLIDAR A1M8**    
+#### **RPLIDAR A1M8** **[[13](#References)]**    
 ![Lidar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Lidar%201.png)    
 
-**Description:** A cost-effective 2D LiDAR (360° horizontal scan) by SLAMTEC designed primarily for indoor mapping, robotics navigation and obstacle detection.     
+**Description:** A cost-effective 2D LiDAR (360° horizontal scan) by SLAMTEC designed primarily for indoor mapping, robotics navigation and obstacle detection.   
+
+**Relevant Specifications:**  
+- **Scan Range:** Up to 12 m  
+- **Scan Rate:** 5.5–10 Hz  
+- **Resolution:** <1% of distance  
+- **FoV:** 360° (2D only)  
+
 **Pros:** Provides full 360° omnidirectional scanning in a compact, lightweight, and affordable design. Has a moderate 12 m detection range suitable for small-scale mapping and navigation. Easily integrates with common interfaces such as UART or USB for quick prototyping. Consumes low power, making it ideal for mobile and battery-driven platforms.     
+
 **Cons:** Limited to 2D plane detection, missing obstacles above or below the scan height. Operates best indoors since bright light or outdoor conditions reduce performance. Offers a slower scan rate (~5.5 Hz), limiting performance on fast-moving platforms. Has a relatively short range compared to advanced LiDAR options.   
 
-#### **Unitree 4D LiDAR L2**      
+#### **Unitree 4D LiDAR L2** **[[14](#References)]**           
 ![Lidar 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Lidar%202.png)    
 
 **Description:** An advanced 4D LiDAR offering 360° horizontal and 96° vertical scanning for full-environment 3D mapping and obstacle detection.     
+
+**Relevant Specifications:**  
+- **Scan Range:** 30 m (@90% reflectivity)  
+- **FoV:** 360° horizontal × 96° vertical  
+- **Resolution:** 4.5 mm  
+- **Effective Frequency:** 64,000 points/sec  
+- **Weight:** 230 g  
+- **Power:** 10 W  
+- **IMU:** Built-in (3-axis accel + gyro)  
+- **Outdoor Performance:** Excellent (100kLux light resistance)
+
 **Pros:** Covers a full 360×96° field of view, enabling detection of obstacles from all angles. Delivers high point density for precise environment reconstruction and SLAM applications. Reaches up to 30 m range, allowing for mid- to long-range obstacle detection. Includes built-in IMU and is designed for seamless 3D navigation integration.     
 **Cons:** Costs significantly more than entry-level LiDARs, increasing project budget. Generates large data volumes requiring a powerful processor for real-time use. Outdoor performance may still degrade under extreme lighting or weather conditions. Requires more careful integration due to its higher complexity and power needs.   
 
@@ -165,21 +254,37 @@ The RPLIDAR A1M8 offers a cost-effective and lightweight option suitable for sho
 ![IR.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/IR.png)
 
 **Description:** Longwave infrared camera module that is smaller than a dime and cost-effective. Modules have enabled thermal innovation and can depending on the module, offer either 80x60 (17 µm) or 160x120 (12 µm) pixel resolution, absolute temperature output, multiple field-of-view (FOV) options, and an expanded scene dynamic range for high-temperature scenes.   
+
+**Relevant Specifications:**  
+- **Resolution:** 80×60 or 160×120  
+- **Detection Range:** ~10–50 m (depending on optics)
+  
 **Pros:** Works in darkness and moderate smoke or fog, low processing demand, Human contrast due to heat, start around $200.   
+
 **Cons:** Cheap models have low resolution, can’t penetrate glass, hot environments will create a lot of noise, good cameras are extremely expensive.   
 
-#### **Radar (Millimeter-Wave)**
+#### **Radar (Millimeter-Wave)**  **[[10](#References)]**    
 ![Radar 1.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Radar%201.png)
 
 **Description:** Millimeter wave radar is used to detect objects and measure distance, speed, and motion by transmitting electromagnetic waves and analyzing the reflected signals to identify movement patterns. This method is highly effective for detecting human presence.    
+#### **Radar (Millimeter-Wave)**
+
+**Relevant Specifications:**  
+- **Range:** Up to 50 m  
+- **FoV:** ±60° azimuth & elevation  
+- **Resolution:** 29° angular
+  
 **Pros:** Can sense things through light debris or smoke, unaffected by lighting or weather, very sensitive for presence data.
+
 **Cons:** Lots of noise since it is a good presence detector, low spatial resolution so cannot get shape, can be affected by metallic or reflective objects, better modules are expensive and large.   
 
 #### **RGB Camera + AI Integration**
 ![AI.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/RGB%20Cam%20plus%20ai.png)
 
 **Description:** Combining a standard visual camera with an AI based processing tool on the already acquired Nvidia Jetson can classify Humans and objects in general by using real time camera feed and learning models. 
+
 **Pros:** High resolution and detail, AI flexibility (can use multiple at once), some software is available for free, large range of detection 
+
 **Cons:** High processing power, poor in darker or more obscure environments, harder integration, AI learning curve 
 
 #### Human Finding Solution: 
@@ -283,8 +388,8 @@ The drone will be bought and be ready to fly. Senors and a processing unit will 
 Power signal to connect the signal processing subsystem
 
 #### **Specifications**
-  The power subsystem SHALL supply a minimum voltage of 4.75v and a maximum voltage of 5.25v to power the Jetson Nano and its peripherals. **[[8](#References)]**   
-  The power subsystem SHALL supply up to 4A to power the Jetson Nano and its peripherals. **[[8](#References)]**  
+  The power subsystem SHALL supply a minimum voltage of 4.75v and a maximum voltage of 5.25v to power the Jetson Nano and its peripherals. **[[9](#References)]**   
+  The power subsystem SHALL supply up to 4A to power the Jetson Nano and its peripherals. **[[9](#References)]**  
   The power subsystem SHALL optimally use the battery on the drone to prevent unnecessary discharge.  
   The power subsystem SHALL not have exposed wiring to ensure safety.  
   The power subsystem SHALL protect client circuits with fuses.  
@@ -533,28 +638,29 @@ Data from all three sensors will be transmitted to the Signal Processing Subsyst
 ##	**Economy**  
 \-	Economically, the development and implementation of triage drones introduce an ethical balance between cost-efficiency and accessibility. While automation reduces the resource demands of traditional search-and-rescue teams, engineers must ensure that such technology does not exclude less wealthy regions or agencies from its benefits. Ethical economic design calls for scalable systems that can be adapted to local budgets without sacrificing reliability or safety. Professionally, this technology supports job creation in AI development, sensor design, drone maintenance, and disaster logistics, while also encouraging collaboration between public and private sectors. The long-term economic benefit, through reduced response costs, improved disaster outcomes, and industry growth, must always align with the moral responsibility to prioritize human life over profit. 
 
-**START Adult Triage Method** [4]     
+**START Adult Triage Method** [15]     
 During times of disaster, good ethical decisions and considerations are often compromised. However, the START Method can better the decision-making for individuals in these situations. The Drone’s Triage system considers the START Method, thus influencing the design and selection of each subsystem to easily navigate the START Method for better and more ethical  life-saving decisions.
+
 [](https://www.google.com/url?sa=i&url=https%3A%2F%2Fchemm.hhs.gov%2Fstartadult.htm&psig=AOvVaw0y8xkEmUV6EMQKV7fnoMyg&ust=1729839169189000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLDd8Ju3pokDFQAAAAAdAAAAABAE)![image](https://github.com/user-attachments/assets/3f9fa7fc-3093-4bae-8b61-276a595ef9d1)  
 
 ### **Standards**
 #### Drone Standard
-The drone must comply with the Federal Aviation Administration Small Unmanned Aircraft Systems (UAS) Regulations (Part 107) [9]. This standard establishes quantitative limits for lawful drone operation, including a maximum altitude of 400 ft above ground level, weight under 55 lb, and operations within visual line of sight. These metrics directly influence the Programmable Drone Subsystem and Path Finding Subsystem, ensuring that altitude and flight-speed limits are coded into the control firmware. The standard also defines remote pilot certification, operational restrictions near people, and maintenance documentation, which determine the drone’s design for operator override and system failsafes.
+The drone must comply with the Federal Aviation Administration Small Unmanned Aircraft Systems (UAS) Regulations (Part 107) [16]. This standard establishes quantitative limits for lawful drone operation, including a maximum altitude of 400 ft above ground level, weight under 55 lb, and operations within visual line of sight. These metrics directly influence the Programmable Drone Subsystem and Path Finding Subsystem, ensuring that altitude and flight-speed limits are coded into the control firmware. The standard also defines remote pilot certification, operational restrictions near people, and maintenance documentation, which determine the drone’s design for operator override and system failsafes.
 
 #### WI-FI Standard
-The design will comply with IEEE standard 802.11 [10], which defines Wi-Fi network architecture, data transmission rates, and security protocols. The standard specifies PHY/MAC layer parameters (channel bandwidths, modulation rates, and error correction) that impact the Interfacing and Signal Processing Subsystems. These metrics ensure stable throughput for real-time data transmission, requiring the system to maintain latency below 500 ms and use WPA2 or WPA3 encryption for secure communication. The programmable drone API will likely handle the low-level PHY/MAC operations, while the higher-level packet and video transmission protocols will be implemented by the team.
+The design will comply with IEEE standard 802.11 [17], which defines Wi-Fi network architecture, data transmission rates, and security protocols. The standard specifies PHY/MAC layer parameters (channel bandwidths, modulation rates, and error correction) that impact the Interfacing and Signal Processing Subsystems. These metrics ensure stable throughput for real-time data transmission, requiring the system to maintain latency below 500 ms and use WPA2 or WPA3 encryption for secure communication. The programmable drone API will likely handle the low-level PHY/MAC operations, while the higher-level packet and video transmission protocols will be implemented by the team.
 
 #### Videography and Audio Recording Standard
-The design and project must comply with the DEFENSE HEALTH AGENCY's (DHA) Administrative Instruction Number 6000.02 [11]. This instruction governs any videotaping, imaging, or audio recording of patients, requiring that data not be stored and that any recordings be deleted immediately after transmission. These metrics directly apply to the Microphone/Speaker, Signal Processing, and Human Detection Subsystems, which must stream data in real time without local caching. The policy ensures lawful and ethical use of medical data by mandating that all captured information is temporary and anonymized during operation.
+The design and project must comply with the DEFENSE HEALTH AGENCY's (DHA) Administrative Instruction Number 6000.02 [18]. This instruction governs any videotaping, imaging, or audio recording of patients, requiring that data not be stored and that any recordings be deleted immediately after transmission. These metrics directly apply to the Microphone/Speaker, Signal Processing, and Human Detection Subsystems, which must stream data in real time without local caching. The policy ensures lawful and ethical use of medical data by mandating that all captured information is temporary and anonymized during operation.
 
 #### Operational Procedure Standard
-The project will comply with ISO 21384-3:2023 [12], which defines operational procedures and safety requirements for unmanned aircraft systems. Key metrics include risk assessment thresholds, maintenance schedules, and flight operation protocols such as pre-flight checks, operator handoff, and emergency return behavior. These metrics influence the Programmable Drone and Power & Circuitry Subsystems, requiring the inclusion of redundant power checks, flight mission logging, and emergency landing procedures. The standard ensures that the system follows international best practices for safe and repeatable UAV operation.
+The project will comply with ISO 21384-3:2023 [19], which defines operational procedures and safety requirements for unmanned aircraft systems. Key metrics include risk assessment thresholds, maintenance schedules, and flight operation protocols such as pre-flight checks, operator handoff, and emergency return behavior. These metrics influence the Programmable Drone and Power & Circuitry Subsystems, requiring the inclusion of redundant power checks, flight mission logging, and emergency landing procedures. The standard ensures that the system follows international best practices for safe and repeatable UAV operation.
 
 #### Health Device Communication Standard
-The project must adhere to ISO/IEEE 11073 [13], which establishes data format and transmission requirements for health-related devices. It defines object models, communication protocols (PHD/Agent-Manager architecture), and data integrity checks to maintain interoperability between medical sensors and host systems. These metrics directly affect the Vitals Sensor, Signal Processing, and Human Detection Subsystems by requiring standardized data formats (e.g., numeric observation objects) and timestamp synchronization. Implementing this standard ensures accurate physiological data exchange between onboard systems and the operator interface while preventing data corruption or loss.
+The project must adhere to ISO/IEEE 11073 [20], which establishes data format and transmission requirements for health-related devices. It defines object models, communication protocols (PHD/Agent-Manager architecture), and data integrity checks to maintain interoperability between medical sensors and host systems. These metrics directly affect the Vitals Sensor, Signal Processing, and Human Detection Subsystems by requiring standardized data formats (e.g., numeric observation objects) and timestamp synchronization. Implementing this standard ensures accurate physiological data exchange between onboard systems and the operator interface while preventing data corruption or loss.
 
 #### Risk Management Standard
-The project will comply with ISO 14971:2019 [14], which defines methods for identifying, evaluating, and controlling risks associated with medical and safety-critical systems. Metrics from this standard include risk probability levels, severity classification, risk index scoring, and the requirement for traceable documentation of mitigations. These parameters influence all subsystems that handle human data or safety-critical operations, such as Signal Processing, Vitals, Path Finding, and Human Detection. Design measures include Failure Mode and Effects Analysis (FMEA), risk-control verification, and periodic review of hazard logs. Compliance ensures that the drone operates safely even during subsystem faults or data anomalies.
+The project will comply with ISO 14971:2019 [21], which defines methods for identifying, evaluating, and controlling risks associated with medical and safety-critical systems. Metrics from this standard include risk probability levels, severity classification, risk index scoring, and the requirement for traceable documentation of mitigations. These parameters influence all subsystems that handle human data or safety-critical operations, such as Signal Processing, Vitals, Path Finding, and Human Detection. Design measures include Failure Mode and Effects Analysis (FMEA), risk-control verification, and periodic review of hazard logs. Compliance ensures that the drone operates safely even during subsystem faults or data anomalies.
 
 #### **Summary of Standards Used**
 
@@ -570,7 +676,7 @@ The project will comply with ISO 14971:2019 [14], which defines methods for iden
 
 ## Resources
 
-### Budget
+### **Budget**
 | **Subsystem** | **Part Number** | **Description** | **Justification** | **Manufacturer** | **Quantity** | **Cost per Item** | **Total Cost** |
 |----------------|-----------------|------------------|-------------------|------------------|---------------|-------------------|----------------|
 | **Path Finding / Obstacle Detection** | 296-IWR6843AOPEVM-ND | IWR6843AOPEVM 60–64 GHz mmWave Radar EVM | Radar would be an ideal tool for degraded navigation | Texas Instruments | 1 | $249.00 | $249.00 |
@@ -590,9 +696,24 @@ The project will comply with ISO 14971:2019 [14], which defines methods for iden
 | **Subtotal** | | | | | | **Total** | **$24.29** |
 | **Miscellaneous** | B091TRMFYT | NP-F Battery Adapter Plate | Ideal for power distribution | SmallRig | 1 | $26.99 | $26.99 |
 
+### **Overall Project Cost Summary**
 
-The following budget was decided by this team, and these are the additional items that are anticipated to be required to complete our project.
+| **Subsystem** | **Estimated Cost** |
+|----------------|-------------------:|
+| Path Finding / Obstacle Detection | $699.00 |
+| Target Acquisition | $200 – $250 |
+| Mechanical / Mounting | $40.00 |
+| Power & Circuitry | $93.18 |
+| Wiring & Connectors | $24.29 |
+| Miscellaneous | $26.99 |
+| **Grand Total (Estimated)** | **$1,083 – $1,133 USD** |
 
+### **Budget Notes**
+
+- The **mmWave Radar (IWR6843AOPEVM)**, **LiDAR**, and **Thermal camera** are **new additions** and will be **purchased by this year’s team**.  
+- **Resistors, capacitors, wiring kits, and converters** may be **inherited** from the **previous year’s Capstone team** if inventory allows; otherwise, they are budgeted as backup purchases.  
+- The **PLA filament** and **battery adapter plate** are **new consumables** that will need to be purchased due to expected custom mounts and power configuration updates.  
+- The **final total** will depend on the LiDAR model selected and confirmation of inherited stock from the prior team.
 
 ### Division of Labor
 
@@ -647,7 +768,7 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 ### Timeline
 
-![Gantt Chart.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Gantt%20Chart.png)
+![Gantt Chart - Update 2.image](https://github.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/blob/main/Reports/Conceptual%20Design/Gantt%20Chart%20-%20Update%202.png)
 
 ## References
 
@@ -665,21 +786,35 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 [7] Parrot Drones S.A.S., “Parrot ANAFI Ai Drone and User Manual (v7.4.0.0).” Parrot, 2025. [Online]. Available: [Parrot](https://www.parrot.com/en/drones/anafi-ai) 
 
-[8] "START Adult Triage Method." [CHEMM](https://chemm.hhs.gov/startadult.htm) 
+[8] Raspberry Pi Foundation. “Raspberry Pi 4 Model B Specifications.” [Online]. Available: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/ 
 
-[9] "Federal Aviation Administration" [FAA](https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107)
+[9] NVIDIA. “Jetson Nano – NVIDIA Developer.” [Online]. Available: https://developer.nvidia.com/embedded/jetson-nano 
 
-‌[10] "802.11 "IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems - Local and Metropolitan Area Networks--Specific Requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," in IEEE Std 802.11-2020 (Revision of IEEE Std 802.11-2016) , vol., no., pp.1-4379, 26 Feb. 2021, doi: 10.1109/IEEESTD.2021.9363693" [IEEE](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9363693&isnumber=9363692)  
+[10] Texas Instruments. “IWR6843AOP mmWave Sensor Datasheet.” [Online]. Available: https://www.ti.com/product/IWR6843AOP 
 
-[11] "Defense Health Agency" [DHA](https://www.health.mil/Reference-Center/DHA-Publications/2022/08/05/DHA-AI-6000-02)  
+[11] Ainstein. “US-D1 Pro: Extended-Range, All-Weather Radar Altimeter.” [Online]. Available: https://ainstein.ai/us-d1-pro-extended-range-all-weather-radar-altimeter/ 
 
-[12] International Organization for Standardization. ISO 21384-3:2023 – Unmanned aircraft systems — Part 3: Operational procedures. Geneva, Switzerland: ISO, 2023. Available: [ISO](https://www.iso.org/standard/80124.html)
+[12] Infineon Technologies. “BGT60TR13C – 60 GHz Radar Sensor.” [Online]. Available: https://www.infineon.com/part/BGT60TR13C 
 
-[13] International Organization for Standardization and Institute of Electrical and Electronics Engineers. ISO/IEEE 11073 Health informatics — Medical / health device communication standards. Geneva, Switzerland and New York, NY: ISO/IEEE, various parts, 2023. Overview available: [ISO](https://www.iso.org/standard/51869.html)
+[13] SLAMTEC. “RPLIDAR A1 – Cost-Effective 360° Lidar Sensor.” [Online]. Available: https://www.slamtec.com/en/Lidar/A1 
 
-[14] International Organization for Standardization. ISO 14971:2019 – Medical devices — Application of risk management to medical devices. Geneva, Switzerland: ISO, 2019. Available: [ISO](https://www.iso.org/standard/72704.html)
+[14] Unitree Robotics. “Unitree 4D LiDAR L2.” [Online]. Available: https://www.unitree.com/L2 
 
-[15] "Power supply considerations for Jetson Nano Developer Kit" [NVIDIA](https://forums.developer.nvidia.com/t/power-supply-considerations-for-jetson-nano-developer-kit/71637) 
+[15] "START Adult Triage Method." [CHEMM](https://chemm.hhs.gov/startadult.htm) 
+
+[16] "Federal Aviation Administration" [FAA](https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107)
+
+‌[17] "802.11 "IEEE Standard for Information Technology--Telecommunications and Information Exchange between Systems - Local and Metropolitan Area Networks--Specific Requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," in IEEE Std 802.11-2020 (Revision of IEEE Std 802.11-2016) , vol., no., pp.1-4379, 26 Feb. 2021, doi: 10.1109/IEEESTD.2021.9363693" [IEEE](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9363693&isnumber=9363692)  
+
+[18] "Defense Health Agency" [DHA](https://www.health.mil/Reference-Center/DHA-Publications/2022/08/05/DHA-AI-6000-02)  
+
+[19] International Organization for Standardization. ISO 21384-3:2023 – Unmanned aircraft systems — Part 3: Operational procedures. Geneva, Switzerland: ISO, 2023. Available: [ISO](https://www.iso.org/standard/80124.html)
+
+[20] International Organization for Standardization and Institute of Electrical and Electronics Engineers. ISO/IEEE 11073 Health informatics — Medical / health device communication standards. Geneva, Switzerland and New York, NY: ISO/IEEE, various parts, 2023. Overview available: [ISO](https://www.iso.org/standard/51869.html)
+
+[21] International Organization for Standardization. ISO 14971:2019 – Medical devices — Application of risk management to medical devices. Geneva, Switzerland: ISO, 2019. Available: [ISO](https://www.iso.org/standard/72704.html)
+
+[22] "Power supply considerations for Jetson Nano Developer Kit" [NVIDIA](https://forums.developer.nvidia.com/t/power-supply-considerations-for-jetson-nano-developer-kit/71637) 
 
 
 ## Statement of Contributions
