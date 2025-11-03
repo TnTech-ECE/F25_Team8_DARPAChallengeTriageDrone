@@ -299,7 +299,7 @@ Combining LWIR, mmWave radar, and AI-driven RGB vision enables multi-modal data 
 
 ## High-Level Solution
 
-The solution to this problem requires an aviation drone as well as integrated sensors to record data. The drone will be manually flown to the victim and have the ability to hover 1 meter above the target. Attached to the drone will be a sensing system that can measure one's, heart rate and respiratory rate, and cognitiveness all without contacting the individual. The data gathered by the sensors will then be sent to the computing system. The information will be processed and the person will be categorized by severity of injuries in accordance with the START method, which is gone into further detail in the START Adult Triage Method section[4]. 
+The solution to this problem requires an aviation drone as well as integrated sensors to record data. The drone will be manually flown to the victim and have the ability to hover 1 meter above the target. Attached to the drone will be a sensing system that can measure one's, heart rate and respiratory rate, and cognitiveness all without contacting the individual. The data gathered by the sensors will then be sent to the computing system. The information will be processed and the person will be categorized by severity of injuries in accordance with the START method, which is gone into further detail in the START Adult Triage Method section**[[4](#References)]**. 
 
 In order to do this, the design will be split up into devices:
 
@@ -638,29 +638,29 @@ Data from all three sensors will be transmitted to the Signal Processing Subsyst
 ##	**Economy**  
 \-	Economically, the development and implementation of triage drones introduce an ethical balance between cost-efficiency and accessibility. While automation reduces the resource demands of traditional search-and-rescue teams, engineers must ensure that such technology does not exclude less wealthy regions or agencies from its benefits. Ethical economic design calls for scalable systems that can be adapted to local budgets without sacrificing reliability or safety. Professionally, this technology supports job creation in AI development, sensor design, drone maintenance, and disaster logistics, while also encouraging collaboration between public and private sectors. The long-term economic benefit, through reduced response costs, improved disaster outcomes, and industry growth, must always align with the moral responsibility to prioritize human life over profit. 
 
-**START Adult Triage Method** [15]     
+**START Adult Triage Method** **[[15](#References)]**     
 During times of disaster, good ethical decisions and considerations are often compromised. However, the START Method can better the decision-making for individuals in these situations. The Drone’s Triage system considers the START Method, thus influencing the design and selection of each subsystem to easily navigate the START Method for better and more ethical  life-saving decisions.
 
 [](https://www.google.com/url?sa=i&url=https%3A%2F%2Fchemm.hhs.gov%2Fstartadult.htm&psig=AOvVaw0y8xkEmUV6EMQKV7fnoMyg&ust=1729839169189000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLDd8Ju3pokDFQAAAAAdAAAAABAE)![image](https://github.com/user-attachments/assets/3f9fa7fc-3093-4bae-8b61-276a595ef9d1)  
 
 ### **Standards**
 #### Drone Standard
-The drone must comply with the Federal Aviation Administration Small Unmanned Aircraft Systems (UAS) Regulations (Part 107) [16]. This standard establishes quantitative limits for lawful drone operation, including a maximum altitude of 400 ft above ground level, weight under 55 lb, and operations within visual line of sight. These metrics directly influence the Programmable Drone Subsystem and Path Finding Subsystem, ensuring that altitude and flight-speed limits are coded into the control firmware. The standard also defines remote pilot certification, operational restrictions near people, and maintenance documentation, which determine the drone’s design for operator override and system failsafes.
+The drone must comply with the Federal Aviation Administration Small Unmanned Aircraft Systems (UAS) Regulations (Part 107) **[[16](#References)]**. This standard establishes quantitative limits for lawful drone operation, including a maximum altitude of 400 ft above ground level, weight under 55 lb, and operations within visual line of sight. These metrics directly influence the Programmable Drone Subsystem and Path Finding Subsystem, ensuring that altitude and flight-speed limits are coded into the control firmware. The standard also defines remote pilot certification, operational restrictions near people, and maintenance documentation, which determine the drone’s design for operator override and system failsafes.
 
 #### WI-FI Standard
-The design will comply with IEEE standard 802.11 [17], which defines Wi-Fi network architecture, data transmission rates, and security protocols. The standard specifies PHY/MAC layer parameters (channel bandwidths, modulation rates, and error correction) that impact the Interfacing and Signal Processing Subsystems. These metrics ensure stable throughput for real-time data transmission, requiring the system to maintain latency below 500 ms and use WPA2 or WPA3 encryption for secure communication. The programmable drone API will likely handle the low-level PHY/MAC operations, while the higher-level packet and video transmission protocols will be implemented by the team.
+The design will comply with IEEE standard 802.11 **[[17](#References)]**, which defines Wi-Fi network architecture, data transmission rates, and security protocols. The standard specifies PHY/MAC layer parameters (channel bandwidths, modulation rates, and error correction) that impact the Interfacing and Signal Processing Subsystems. These metrics ensure stable throughput for real-time data transmission, requiring the system to maintain latency below 500 ms and use WPA2 or WPA3 encryption for secure communication. The programmable drone API will likely handle the low-level PHY/MAC operations, while the higher-level packet and video transmission protocols will be implemented by the team.
 
 #### Videography and Audio Recording Standard
-The design and project must comply with the DEFENSE HEALTH AGENCY's (DHA) Administrative Instruction Number 6000.02 [18]. This instruction governs any videotaping, imaging, or audio recording of patients, requiring that data not be stored and that any recordings be deleted immediately after transmission. These metrics directly apply to the Microphone/Speaker, Signal Processing, and Human Detection Subsystems, which must stream data in real time without local caching. The policy ensures lawful and ethical use of medical data by mandating that all captured information is temporary and anonymized during operation.
+The design and project must comply with the DEFENSE HEALTH AGENCY's (DHA) Administrative Instruction Number 6000.02 **[[18](#References)]**. This instruction governs any videotaping, imaging, or audio recording of patients, requiring that data not be stored and that any recordings be deleted immediately after transmission. These metrics directly apply to the Microphone/Speaker, Signal Processing, and Human Detection Subsystems, which must stream data in real time without local caching. The policy ensures lawful and ethical use of medical data by mandating that all captured information is temporary and anonymized during operation.
 
 #### Operational Procedure Standard
-The project will comply with ISO 21384-3:2023 [19], which defines operational procedures and safety requirements for unmanned aircraft systems. Key metrics include risk assessment thresholds, maintenance schedules, and flight operation protocols such as pre-flight checks, operator handoff, and emergency return behavior. These metrics influence the Programmable Drone and Power & Circuitry Subsystems, requiring the inclusion of redundant power checks, flight mission logging, and emergency landing procedures. The standard ensures that the system follows international best practices for safe and repeatable UAV operation.
+The project will comply with ISO 21384-3:2023 **[[19](#References)]**, which defines operational procedures and safety requirements for unmanned aircraft systems. Key metrics include risk assessment thresholds, maintenance schedules, and flight operation protocols such as pre-flight checks, operator handoff, and emergency return behavior. These metrics influence the Programmable Drone and Power & Circuitry Subsystems, requiring the inclusion of redundant power checks, flight mission logging, and emergency landing procedures. The standard ensures that the system follows international best practices for safe and repeatable UAV operation.
 
 #### Health Device Communication Standard
-The project must adhere to ISO/IEEE 11073 [20], which establishes data format and transmission requirements for health-related devices. It defines object models, communication protocols (PHD/Agent-Manager architecture), and data integrity checks to maintain interoperability between medical sensors and host systems. These metrics directly affect the Vitals Sensor, Signal Processing, and Human Detection Subsystems by requiring standardized data formats (e.g., numeric observation objects) and timestamp synchronization. Implementing this standard ensures accurate physiological data exchange between onboard systems and the operator interface while preventing data corruption or loss.
+The project must adhere to ISO/IEEE 11073 **[[20](#References)]**, which establishes data format and transmission requirements for health-related devices. It defines object models, communication protocols (PHD/Agent-Manager architecture), and data integrity checks to maintain interoperability between medical sensors and host systems. These metrics directly affect the Vitals Sensor, Signal Processing, and Human Detection Subsystems by requiring standardized data formats (e.g., numeric observation objects) and timestamp synchronization. Implementing this standard ensures accurate physiological data exchange between onboard systems and the operator interface while preventing data corruption or loss.
 
 #### Risk Management Standard
-The project will comply with ISO 14971:2019 [21], which defines methods for identifying, evaluating, and controlling risks associated with medical and safety-critical systems. Metrics from this standard include risk probability levels, severity classification, risk index scoring, and the requirement for traceable documentation of mitigations. These parameters influence all subsystems that handle human data or safety-critical operations, such as Signal Processing, Vitals, Path Finding, and Human Detection. Design measures include Failure Mode and Effects Analysis (FMEA), risk-control verification, and periodic review of hazard logs. Compliance ensures that the drone operates safely even during subsystem faults or data anomalies.
+The project will comply with ISO 14971:2019 **[[21](#References)]**, which defines methods for identifying, evaluating, and controlling risks associated with medical and safety-critical systems. Metrics from this standard include risk probability levels, severity classification, risk index scoring, and the requirement for traceable documentation of mitigations. These parameters influence all subsystems that handle human data or safety-critical operations, such as Signal Processing, Vitals, Path Finding, and Human Detection. Design measures include Failure Mode and Effects Analysis (FMEA), risk-control verification, and periodic review of hazard logs. Compliance ensures that the drone operates safely even during subsystem faults or data anomalies.
 
 #### **Summary of Standards Used**
 
@@ -786,19 +786,19 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 [7] Parrot Drones S.A.S., “Parrot ANAFI Ai Drone and User Manual (v7.4.0.0).” Parrot, 2025. [Online]. Available: [Parrot](https://www.parrot.com/en/drones/anafi-ai) 
 
-[8] Raspberry Pi Foundation. “Raspberry Pi 4 Model B Specifications.” [Online]. Available: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/ 
+[8] Raspberry Pi Foundation. “Raspberry Pi 4 Model B Specifications.” [Online]. Available: [RaspberryPi](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/) 
 
-[9] NVIDIA. “Jetson Nano – NVIDIA Developer.” [Online]. Available: https://developer.nvidia.com/embedded/jetson-nano 
+[9] NVIDIA. “Jetson Nano – NVIDIA Developer.” [Online]. Available: [NVIDIA](https://developer.nvidia.com/embedded/jetson-nano) 
 
-[10] Texas Instruments. “IWR6843AOP mmWave Sensor Datasheet.” [Online]. Available: https://www.ti.com/product/IWR6843AOP 
+[10] Texas Instruments. “IWR6843AOP mmWave Sensor Datasheet.” [Online]. Available: [TI](https://www.ti.com/product/IWR6843AOP) 
 
-[11] Ainstein. “US-D1 Pro: Extended-Range, All-Weather Radar Altimeter.” [Online]. Available: https://ainstein.ai/us-d1-pro-extended-range-all-weather-radar-altimeter/ 
+[11] Ainstein. “US-D1 Pro: Extended-Range, All-Weather Radar Altimeter.” [Online]. Available: [AINSTEIN](https://ainstein.ai/us-d1-pro-extended-range-all-weather-radar-altimeter/) 
 
-[12] Infineon Technologies. “BGT60TR13C – 60 GHz Radar Sensor.” [Online]. Available: https://www.infineon.com/part/BGT60TR13C 
+[12] Infineon Technologies. “BGT60TR13C – 60 GHz Radar Sensor.” [Online]. Available: [INFINEON](https://www.infineon.com/part/BGT60TR13C) 
 
-[13] SLAMTEC. “RPLIDAR A1 – Cost-Effective 360° Lidar Sensor.” [Online]. Available: https://www.slamtec.com/en/Lidar/A1 
+[13] SLAMTEC. “RPLIDAR A1 – Cost-Effective 360° Lidar Sensor.” [Online]. Available: [Slamtec](https://www.slamtec.com/en/Lidar/A1) 
 
-[14] Unitree Robotics. “Unitree 4D LiDAR L2.” [Online]. Available: https://www.unitree.com/L2 
+[14] Unitree Robotics. “Unitree 4D LiDAR L2.” [Online]. Available: [Unitree](https://www.unitree.com/L2) 
 
 [15] "START Adult Triage Method." [CHEMM](https://chemm.hhs.gov/startadult.htm) 
 
@@ -821,7 +821,7 @@ If new findings arise during subsystem development, or if a team member’s expe
 
 **Kasey Dyess:** Human Finding 
 
-**Job Flores:** F24 System Integration, Drone Comparative Analysis, Problem Introduction 
+**Job Flores:** F24 System Integration, Problem Introduction, Comparative Analysis Specifications and Editing 
 
 **Wyatt Wheeler:** F24 System Integration, Introduction 
 
