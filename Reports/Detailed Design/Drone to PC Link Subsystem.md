@@ -190,16 +190,19 @@ The Drone to PC Link subsystem is implemented using commercial off the shelf com
 
 All wiring in this schematic focuses on:
 
-- Connecting regulated **5 V** and **GND** from the Power subsystem to the Jetson Nano  
-- Connecting the Jetson Nano to the USB Wi Fi adapter  
-- Providing data interfaces to the Signal Processing and Programmable Drone subsystems  
+- The Jetson Nano (onboard computer).  
+- A TP Link Archer T4U Plus USB Wi Fi adapter.  
+- Simple wiring to receive regulated 5 V from the Power subsystem.  
+- An optional status LED connected to a Jetson GPIO pin.  
 
-For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **Powersubsystemlinkhere**.
+For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **[Power subsystem link here]**.
 
-## Schematic Overview (Text Representation)
+## Schematic Overview
+# [PUT SCHEMATIC HERE - FROM POWER - PSC1]
 
-# PUT SCHEMATIC DIAGRAM HERE
+# [PUT MANUFACTURER PCB HERE - PCB1]
 
+# [PUT DIAGRAM HERE - FC1]
 
 
 ## Notes
@@ -261,4 +264,58 @@ These detailed interfaces are defined in each subsystem’s documentation. The s
 ---
 
 This schematic provides enough detail for physical assembly of the Drone to PC Link subsystem, assuming the builder follows the Power subsystem schematic and the Jetson Nano documentation for pinout and mounting **[REF]**.
+
+## Flowchart
+
+The Drone to PC Link subsystem includes software that runs on both the Jetson Nano (airborne) and the laptop (ground). The goal of this logic is to:
+
+- Establish a secure Wi Fi connection.  
+- Set up WebRTC for audio and video streaming **[REF: WebRTC behavior]**.  
+- Set up WebSockets for vitals and telemetry **[REF: WebSocket behavior]**.  
+- Ensure that no patient related data is stored at any point **[REF: privacy requirement]**.  
+
+The flowcharts below describe the high level behavior. They are not tied to a specific language and can be implemented using Python, JavaScript, and HTML as outlined in the Interfacing Detailed Design.
+
+### Jetson Nano Side Flowchart (Onboard)
+# [ADD FLOWCHART HERE - FC2]
+
+All audio, video, and vitals are processed and streamed in memory only. No file writes or persistent storage are performed to comply with privacy constraints **[REF: DHA AI 6000.02]**.
+
+### Laptop Side Flowchart (Ground Interfacing)
+# [ADD FLOWCHART HERE - FC3]
+
+This flow ensures that:
+
+- All media and vitals data are streamed in real time.  
+- Any disconnection leads to reconnection attempts and visible error reporting.  
+- No received media or telemetry is written to disk, which maintains compliance with medical privacy and data handling requirements **[REF]**.  
+
+## Bill of Materials (BOM)
+
+- The **Jetson Nano** is already budgeted in the Signal Processing or Computing subsystem.  
+- The **Power subsystem** already includes all DC DC converters, battery interfaces, fuses, and protection circuitry.  
+- Only the Wi Fi adapter and small optional interface components are included here.
+
+| Item | Designator(s) | Description                                           | Manufacturer | Manufacturer P/N | Distributor | Qty | Unit Price (USD) | Notes |
+| :--: | :-----------: | ----------------------------------------------------- | :----------: | :--------------: | :---------: | :-: | :--------------: | :---- |
+| 1    | U1            | TP Link Archer T4U Plus USB Wi Fi Adapter            | TP Link      | Archer T4U Plus  | [Amazon](https://www.amazon.com/dp/B08KHV7H1S) | 1   | $29.99          | Primary Wi Fi adapter for Jetson Nano providing 802.11ac wireless link. |
+| 2 (optional) | W1     | Hookup wire, 22–24 AWG, stranded                    | Generic      | N/A              | [Amazon](https://www.amazon.com/0-35mm%C2%B2-Electrical-Colors-Tinned-breadboard/dp/B09WHQ18KL) | 1   | $7.88           | Optional for short power or GPIO wiring to LED. |
+| 3 (optional) | R1     | Series resistor for status LED (1 kΩ – 2.2 kΩ)       | Generic      | N/A              | [Amazon](https://www.amazon.com/Resistor-Tolerance-Resistors-Limiting-Certificated/dp/B08QRPRVMJ) | 1   | $5.49           | Current limiting resistor for optional LED. |
+| 4 (optional) | LED1   | 3 mm or 0603 green LED for link status              | Generic      | N/A              | [Amazon](https://www.amazon.com/Blinking-Flashing-Electronics-Components-Indicator/dp/B0895MYM4F) | 1   | $5.99           | Optional indicator LED for link or streaming status. |
+
+
+**Cost Summary**
+
+- **Required Total:** $29.99  
+- **Optional Total:** $19.36  
+- **Grand Total (Required + Optional):** $49.35  
+
+
+### Notes
+
+- No PCB fabrication is required unless the project team chooses to add a small breakout board.  
+- No additional USB protection components are listed because the Jetson Nano carrier board already includes USB protection circuitry.  
+- Only one Archer T4U Plus is strictly required for the drone; the laptop may use built in Wi Fi.
+
+This BOM represents the **minimum required hardware** for the Drone to PC Link subsystem.
 
