@@ -1,5 +1,3 @@
-# Drone to PC Link Subsystem
-
 ## Introduction
 
 The Drone to PC Link subsystem enables all wireless communication between the triage drone and the operator’s laptop. The triage system uses the **Aurelia X4 Standard** multirotor platform, which supports the payload and power required to carry an onboard computing module such as the **NVIDIA Jetson Nano** **[REF: Aurelia X4 specifications]**. The Jetson Nano processes Doppler radar vitals, microphone audio, and camera video in real time **[REF: Jetson Nano capabilities]**.
@@ -186,4 +184,81 @@ The Interfacing subsystem then displays all incoming information on the laptop�
 | Programmable Drone Subsystem   | Telemetry and optional camera routing               | WebRTC or WebSockets **[REF]**              |
 | Interfacing Subsystem (Laptop) | Receives all transmitted data                       | Wi Fi plus WebRTC or WebSockets **[REF]**   |
 
+## Buildable Schematic
+
+The Drone to PC Link subsystem is implemented using commercial off the shelf components: the **NVIDIA Jetson Nano** and a **USB dual band Wi Fi adapter**. The Power subsystem is responsible for generating a regulated **5 V** supply from the drone battery. This detailed design only uses that regulated supply and does not modify or redefine any power conversion circuitry.
+
+All wiring in this schematic focuses on:
+
+- Connecting regulated **5 V** and **GND** from the Power subsystem to the Jetson Nano  
+- Connecting the Jetson Nano to the USB Wi Fi adapter  
+- Providing data interfaces to the Signal Processing and Programmable Drone subsystems  
+
+For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **Powersubsystemlinkhere**.
+
+## Schematic Overview (Text Representation)
+
+# PUT SCHEMATIC DIAGRAM HERE
+
+
+
+## Notes
+
+- **+5V_REG** and **GND** are provided by the Power subsystem and treated as external inputs.  
+- **J1** represents the Jetson Nano module, which is part of the Drone to PC Link + Signal Processing environment.  
+- **U1** is the USB dual band Wi Fi adapter used to establish the IEEE 802.11 link.  
+- Wireless communication is represented as a logical, not physical, connection.  
+
+
+## Jetson Nano Power Interface
+
+The Jetson Nano is powered directly from the regulated **5 V** output provided by the Power subsystem:
+
+- **+5V_REG → J1 5 V input pin** or barrel connector, according to Jetson Nano carrier documentation **[REF: Jetson Nano power input specification]**.  
+- **GND → J1 ground pin(s)** and chassis ground **[REF]**.
+
+All details about how +5V_REG is produced (buck converter, protection circuits, battery interface) are defined in the Power subsystem schematic **Powersubsystemlinkhere**.
+
+
+## USB Wi Fi Adapter Connection
+
+The USB Wi Fi adapter is connected to a USB host port on the Jetson Nano:
+
+- **J1 USB0 (Type A) → U1 USB plug**  
+- Signals: **USB_VBUS**, **USB_D+**, **USB_D−**, **GND**
+
+No additional components are required between J1 and U1 because the Jetson carrier board already includes USB protection and required terminations **[REF: Jetson Nano carrier board documentation]**.
+
+
+## Data Interfaces to Other Subsystems
+
+### To Signal Processing Subsystem
+
+- **Interface:** Ethernet, UART, SPI, or other digital bus  
+- **Purpose:** Receive processed vitals and telemetry data for packaging and wireless transmission **[REF]**
+
+### To Programmable Drone Subsystem (Cube Orange / FC)
+
+- **Interface:** MAVLink over UART or UDP  
+- **Purpose:** Optionally forward telemetry values to the laptop interface **[REF]**
+
+These detailed interfaces are defined in each subsystem’s documentation. The schematic above shows only the necessary attachment points for wireless transmission.
+
+
+## Net List Summary
+
+| Net Name        | Description                                 | Source                    | Destination                               |
+|-----------------|---------------------------------------------|---------------------------|--------------------------------------------|
+| +5V_REG         | Regulated 5 V from Power subsystem          | Power subsystem output    | J1 5 V input                               |
+| GND             | Common ground                               | Power subsystem / drone   | J1 GND, U1 GND                             |
+| USB_VBUS        | USB 5 V from Jetson USB host port           | J1 USB0                   | U1 USB VBUS                                |
+| USB_D+ / D−     | USB 2.0 data lines                          | J1 USB0                   | U1 USB D+ / U1 USB D−                      |
+| ETH_TX / RX *   | Ethernet differential pairs (if used)       | J1 Ethernet               | Signal Processing / Drone Comms subsystem  |
+| UART_TX / RX *  | UART serial lines (if used)                 | J1 UART                   | Flight controller / Signal Processing      |
+
+\* Exact use of Ethernet or UART is defined in the corresponding subsystem detailed designs.
+
+---
+
+This schematic provides enough detail for physical assembly of the Drone to PC Link subsystem, assuming the builder follows the Power subsystem schematic and the Jetson Nano documentation for pinout and mounting **[REF]**.
 
