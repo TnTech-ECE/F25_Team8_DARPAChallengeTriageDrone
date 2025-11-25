@@ -550,25 +550,25 @@ As long as the Power subsystem has budgeted at least this much extra current on 
 Overall, these calculations support the conclusion that the proposed Drone to PC Link design can meet the specified performance and ethical constraints, provided that implementation follows the design assumptions and is verified in field tests.
 
 ## References
-[1] "Aurelia X4 Standard - Ready To Fly," UAV Systems International, product page, accessed Nov. 24, 2025. https://uavsystemsinternational.com/products/aurelia-x4-standard :contentReference[oaicite:0]{index=0}  
+[1] "Aurelia X4 Standard - Ready To Fly," UAV Systems International, product page, accessed Nov. 24, 2025. https://uavsystemsinternational.com/products/aurelia-x4-standard
 
-[2] "Jetson Nano Developer Kit," NVIDIA Developer, board overview, documentation, and power requirements, accessed Nov. 24, 2025. https://developer.nvidia.com/embedded/jetson-nano-developer-kit :contentReference[oaicite:1]{index=1}  
+[2] "Jetson Nano Developer Kit," NVIDIA Developer, board overview, documentation, and power requirements, accessed Nov. 24, 2025. https://developer.nvidia.com/embedded/jetson-nano-developer-kit
 
-[3] "Archer T4U Plus - AC1300 High Gain Dual Band USB Adapter," TP-Link product page, accessed Nov. 24, 2025. https://www.tp-link.com/us/home-networking/usb-adapter/archer-t4u-plus/ :contentReference[oaicite:2]{index=2}  
+[3] "Archer T4U Plus - AC1300 High Gain Dual Band USB Adapter," TP-Link product page, accessed Nov. 24, 2025. https://www.tp-link.com/us/home-networking/usb-adapter/archer-t4u-plus/
 
-[4] IEEE Computer Society, "IEEE Standard for Information Technology - Telecommunications and information exchange between systems - Local and metropolitan area networks - Specific requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," IEEE Std 802.11-2020, Feb. 2021. :contentReference[oaicite:3]{index=3}  
+[4] IEEE Computer Society, "IEEE Standard for Information Technology - Telecommunications and information exchange between systems - Local and metropolitan area networks - Specific requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," IEEE Std 802.11-2020, Feb. 2021.
 
-[5] World Wide Web Consortium (W3C), "WebRTC 1.0: Real-Time Communication Between Browsers," Recommendation, accessed Nov. 24, 2025. https://www.w3.org/TR/webrtc/ :contentReference[oaicite:4]{index=4}  
+[5] World Wide Web Consortium (W3C), "WebRTC 1.0: Real-Time Communication Between Browsers," Recommendation, accessed Nov. 24, 2025. https://www.w3.org/TR/webrtc/ 
 
-[6] Nanocosmos, "WebRTC Latency: Comparing Low-Latency Streaming Protocols," blog and related materials, accessed Nov. 24, 2025. (Example entry point) https://www.nanocosmos.de/blog/webrtc-latency/ :contentReference[oaicite:5]{index=5}  
+[6] Nanocosmos, "WebRTC Latency: Comparing Low-Latency Streaming Protocols," blog and related materials, accessed Nov. 24, 2025. (Example entry point) https://www.nanocosmos.de/blog/webrtc-latency/
 
-[7] I. Fette, A. Melnikov, "The WebSocket Protocol," RFC 6455, Internet Engineering Task Force (IETF), Dec. 2011. https://datatracker.ietf.org/doc/html/rfc6455 :contentReference[oaicite:6]{index=6}  
+[7] I. Fette, A. Melnikov, "The WebSocket Protocol," RFC 6455, Internet Engineering Task Force (IETF), Dec. 2011. https://datatracker.ietf.org/doc/html/rfc6455
 
-[8] Defense Health Agency, "DHA Administrative Instruction 6000.02: Photography, Videotaping, Filming, Recording, and Imaging of Patients, Visitors, and Staff," policy and fact sheet, accessed Nov. 24, 2025. :contentReference[oaicite:7]{index=7}  
+[8] Defense Health Agency, "DHA Administrative Instruction 6000.02: Photography, Videotaping, Filming, Recording, and Imaging of Patients, Visitors, and Staff," policy and fact sheet, accessed Nov. 24, 2025.
 
-[9] U.S. Department of Health and Human Services, "Summary of the HIPAA Privacy Rule," and related Privacy Rule resources, accessed Nov. 24, 2025. https://www.hhs.gov/hipaa/for-professionals/privacy/index.html :contentReference[oaicite:8]{index=8}  
+[9] U.S. Department of Health and Human Services, "Summary of the HIPAA Privacy Rule," and related Privacy Rule resources, accessed Nov. 24, 2025. https://www.hhs.gov/hipaa/for-professionals/privacy/index.html 
 
-[10] F24 DARPA Triage Drone Team, "Conceptual Design" and customer specification (scenario description, triage requirements, and internal performance targets), GitHub repository, accessed Nov. 24, 2025. (Use your team’s actual GitHub link.)  
+[10] F24 DARPA Triage Drone Team, "Conceptual Design" and customer specification (scenario description, triage requirements, and internal performance targets), GitHub repository, accessed Nov. 24, 2025. [use fall 24 link]  
 
 [11] PX4 Autopilot Project, "Companion Computers" and MAVLink telemetry integration guides, accessed Nov. 24, 2025. https://docs.px4.io/ and related pages on companion computer integration.   
 
