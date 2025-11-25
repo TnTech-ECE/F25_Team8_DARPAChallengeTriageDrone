@@ -1,3 +1,5 @@
+# Drone to PC Link Subsystem
+
 ## Introduction
 
 The Drone to PC Link subsystem enables all wireless communication between the triage drone and the operator’s laptop. The triage system uses the **Aurelia X4 Standard** multirotor platform, which supports the payload and power required to carry an onboard computing module such as the **NVIDIA Jetson Nano** **[REF: Aurelia X4 specifications]**. The Jetson Nano processes Doppler radar vitals, microphone audio, and camera video in real time **[REF: Jetson Nano capabilities]**.
@@ -319,3 +321,230 @@ This flow ensures that:
 
 This BOM represents the **minimum required hardware** for the Drone to PC Link subsystem.
 
+## Analysis
+
+This section provides a quantitative analysis showing that the Drone to PC Link subsystem can satisfy the latency, throughput, and reliability requirements using the Jetson Nano and the TP Link Archer T4U Plus Wi Fi adapter.
+
+All numerical values below are **design assumptions** for analysis and must be validated experimentally during testing.
+
+
+## 1. Throughput and Data Rate Analysis
+
+We need to confirm that the Wi Fi link can carry:
+
+- One compressed video stream  
+- One audio stream  
+- Telemetry and vitals data  
+
+with comfortable margin.
+
+### 1.1 Video bit rate
+
+Assume the onboard camera streams H.264 video at:
+
+- Resolution: 1280 × 720 (720p)  
+- Frame rate: 30 fps  
+- Compressed bit rate:  
+
+`R_video = 3 Mbit/s`
+
+This is a common design target for real time video at 720p with moderate quality.
+
+### 1.2 Audio bit rate
+
+Assume mono audio:
+
+- Sample rate: 48 kHz  
+- Sample size: 16 bits  
+- Mono channel  
+
+Raw bit rate:
+
+`R_audio_raw = 48,000 × 16 = 768,000 bit/s = 0.768 Mbit/s`
+
+With a typical audio codec such as Opus you can compress significantly. To be conservative, assume:
+
+`R_audio ≈ 0.1 Mbit/s`
+
+### 1.3 Vitals and telemetry bit rate
+
+Assume vitals and telemetry are sent as small JSON messages at 10 Hz:
+
+- Payload per message: 200 bytes (heart rate, respiratory rate, triage class, timestamps, flags)  
+- Frequency: 10 messages per second  
+
+Bit rate:
+
+`R_telemetry = 200 bytes/msg × 8 bit/byte × 10 msg/s = 16,000 bit/s = 0.016 Mbit/s`
+
+### 1.4 Total application payload rate
+
+Total payload rate:
+
+`R_total,payload = R_video + R_audio + R_telemetry  
+                  = 3.0 + 0.1 + 0.016  
+                  = 3.116 Mbit/s`
+
+Even after adding protocol overhead (RTP, SRTP, UDP, IP, MAC headers), you can conservatively scale by a factor of 2:
+
+`R_total,link ≈ 2 × 3.116 = 6.232 Mbit/s`
+
+So if the wireless link can reliably support at least
+
+`R_required ≈ 7 Mbit/s`
+
+then your specification “The subsystem SHALL support a minimum sustained throughput of 5 to 10 Mbps” is justified.
+
+Short range 802.11ac links under line of sight are typically capable of tens of Mbit/s or more, so 7 Mbit/s is well within realistic capability, with margin.
+
+---
+
+## 2. Latency Budget
+
+The specification requires **end to end latency < 1 second** for video, audio, and data. We can break total latency into:
+
+`T_total = T_capture + T_encode + T_network + T_decode + T_render`
+
+We consider a reasonable design target for each term:
+
+1. **Capture latency**  
+   Camera exposure plus buffering:
+
+   `T_capture ≈ 10 ms`
+
+2. **Encode latency (Jetson Nano)**  
+   Hardware H.264 encoder (NVENC) on Jetson is typically on the order of a few frames of delay.  
+   For 30 fps, one frame period is:
+
+   `T_frame = 1 / 30 s ≈ 33.3 ms`
+
+   If the encoder introduces at most 2 frames of pipeline delay, then:
+
+   `T_encode ≈ 2 × 33.3 ms ≈ 67 ms`
+
+3. **Network latency (Wi Fi + WebRTC)**  
+   For short range 802.11ac Wi Fi plus WebRTC over UDP, one way latency is typically in the tens of milliseconds if the link is not congested.  
+   Assume:
+
+   `T_network ≈ 50 ms`
+
+4. **Decode latency (laptop)**  
+   Hardware accelerated H.264 decode on a modern laptop can be assumed similar to encode, about 1 to 2 frames of latency:
+
+   `T_decode ≈ 33 ms`
+
+5. **Render latency**  
+   Display pipeline on the OS and browser might add another frame of delay:
+
+   `T_render ≈ 33 ms`
+
+Now estimate total one way latency:
+
+`T_total ≈ T_capture + T_encode + T_network + T_decode + T_render  
+         ≈ 10 + 67 + 50 + 33 + 33 ms  
+         ≈ 193 ms`
+
+This is about:
+
+`T_total ≈ 0.19 s`
+
+which is well below 1 second. Even if real world conditions double this estimate, you still remain under the 1 second requirement:
+
+`0.19 s × 2 = 0.38 s < 1 s`
+
+So the latency specification is supported by conservative assumptions.
+
+---
+
+## 3. Packet Error Rate and Reliability
+
+The constraint requires a packet error rate (PER) below 1 percent.
+
+Let:
+
+- `p` be the probability that a single packet is lost or corrupted on the link.  
+- Suppose that at the MAC/PHY level, raw PER is around 5 percent in a conservative case due to collisions or interference.  
+- Higher layers (WebRTC with FEC, NACKs, retransmissions) can reduce effective application level PER.
+
+If we model application level PER as:
+
+`p_app = p_raw × (1 − recovery_efficiency)`
+
+Assume recovery mechanisms can correct or conceal 80 percent of lost packets:
+
+`recovery_efficiency = 0.8`
+
+then:
+
+`p_app = 0.05 × (1 − 0.8)  
+       = 0.05 × 0.2  
+       = 0.01 = 1%`
+
+Under typical short range, line of sight conditions, raw PER will usually be much lower than 5 percent, so this calculation shows that even in a conservative case the system can meet the **< 1 percent** application level PER constraint, assuming WebRTC’s built in FEC and retransmission model functions as designed.
+
+For telemetry sent via WebSocket over TCP, the effective PER at the application level is essentially zero in normal operation, since TCP will retransmit until success or connection failure.
+
+---
+
+## 4. Range Considerations
+
+The triage scenario specifies a drone distance of about 20–50 ft from the victim and operator. This is a relatively short range compared to typical indoor or outdoor Wi Fi.
+
+If we treat the link as operating in free space for a rough estimate, the free space path loss at 5 GHz can be approximated by:
+
+`FSPL (dB) = 20 log10(d) + 20 log10(f) + 32.44`
+
+where:
+
+- `d` is the distance in kilometers  
+- `f` is the frequency in MHz  
+
+For `d = 15 m = 0.015 km` and `f = 5000 MHz`:
+
+`FSPL ≈ 20 log10(0.015) + 20 log10(5000) + 32.44  
+      ≈ 20 (−1.824) + 20 (3.699) + 32.44  
+      ≈ −36.48 + 73.98 + 32.44  
+      ≈ 69.94 dB`
+
+Typical 802.11ac systems can tolerate path losses significantly higher than 70 dB with standard transmit power and antenna gains, so at 15 m the link margin is comfortable. This supports the assumption that the throughput and latency performance used above is realistic for the 20–50 ft triage range.
+
+---
+
+## 5. Power and USB Constraints
+
+The Archer T4U Plus draws power entirely from the Jetson Nano USB host port. For a basic power check:
+
+Assume:
+
+- Maximum current draw of the Archer T4U Plus:  
+  `I_WiFi ≈ 500 mA`  
+  (typical upper bound for a USB powered adapter; actual value should be checked in product documentation).  
+
+- USB port rating on Jetson Nano: up to around 900 mA at 5 V for a USB 3.0 port in many designs (to be confirmed with Jetson documentation).
+
+Then the power draw:
+
+`P_WiFi = V × I = 5 V × 0.5 A = 2.5 W`
+
+As long as the Power subsystem has budgeted at least this much extra current on the 5 V rail for the Jetson USB port, the constraint “The subsystem MUST remain within the power and payload limits” is achievable.
+
+---
+
+## 6. Summary of Constraint Satisfaction
+
+- **Latency < 1 s**  
+  Estimated `T_total ≈ 0.19 s` with generous safety margin.
+
+- **Throughput ≥ 5–10 Mbit/s**  
+  Required `R_total,link` is about `6.232 Mbit/s`, which is well below typical short range 802.11ac capacity.
+
+- **Error rate < 1 percent**  
+  Combination of short range, strong signal, and WebRTC recovery mechanisms supports this constraint.
+
+- **No storage of patient data**  
+  Achieved by using streaming only (WebRTC, WebSockets) and by not implementing any file based recording in software.
+
+- **Range (20–50 ft)**  
+  Free space path loss calculations show that this distance is trivial for 5 GHz Wi Fi with the assumed hardware.
+
+Overall, these calculations support the conclusion that the proposed Drone to PC Link design can meet the specified performance and ethical constraints, provided that implementation follows the design assumptions and is verified in field tests.
