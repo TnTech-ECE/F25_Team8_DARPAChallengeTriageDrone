@@ -178,8 +178,8 @@ Data is delivered wirelessly using **IEEE 802.11ac** or **802.11n** Wi Fi with *
 The Interfacing subsystem then displays all incoming information on the laptop’s graphical interface.
 
 ### Summary of Data Pathways
-| Subsystem                      | Data Provided to Drone to PC Link                   | Transmission Method to Laptop               |
-| ------------------------------ | --------------------------------------------------- | ------------------------------------------- |
+| Subsystem                      | Data Provided to Drone to PC Link                   | Transmission Method to Laptop             |
+| ------------------------------ | --------------------------------------------------- | ----------------------------------------- |
 | Signal Processing Subsystem    | Heart rate, respiratory rate, triage classification | WebSockets **[4]**                        |
 | Vitals Sensor Subsystem        | Radar based vitals measurements                     | WebSockets after processing **[4]**       |
 | Microphone/Speaker Subsystem   | Outgoing and incoming audio                         | WebRTC **[4]**                            |
@@ -200,16 +200,15 @@ All wiring in this schematic focuses on:
 For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **[Power subsystem link here - ASK WYATT]**.
 
 ## Schematic Overview
-# [PUT SCHEMATIC HERE - FROM POWER - PSC1]
 
-# [PUT MANUFACTURER PCB HERE - PCB1]
+![Jetson Nano Labels](https://github.com/user-attachments/assets/3c6912ec-956d-412d-822a-08875b2d18f8)
 
-# [PUT DIAGRAM HERE - FC1]
 
+<p align="center"> <img width="601" height="1051" alt="Connection Diagram" src="https://github.com/user-attachments/assets/3e07892b-6bc6-459c-ae91-a0f173bc4c7b" /> </p>
 
 ## Notes
 
-- **+5V_REG** and **GND** are provided by the Power subsystem and treated as external inputs.  
+- **+5V_REG** and **GND** are provided by the Power subsystem and treated as external inputs.
 - **J1** represents the Jetson Nano module, which is part of the Drone to PC Link + Signal Processing environment.  
 - **U1** is the USB dual band Wi Fi adapter used to establish the IEEE 802.11 link.  
 - Wireless communication is represented as a logical, not physical, connection.  
@@ -263,8 +262,6 @@ These detailed interfaces are defined in each subsystem’s documentation. The s
 
 \* Exact use of Ethernet or UART is defined in the corresponding subsystem detailed designs.
 
----
-
 This schematic provides enough detail for physical assembly of the Drone to PC Link subsystem, assuming the builder follows the Power subsystem schematic and the Jetson Nano documentation for pinout and mounting **[4]**.
 
 ## Flowchart
@@ -278,13 +275,9 @@ The Drone to PC Link subsystem includes software that runs on both the Jetson Na
 
 The flowcharts below describe the high level behavior. They are not tied to a specific language and can be implemented using Python, JavaScript, and HTML as outlined in the Interfacing Detailed Design.
 
-### Jetson Nano Side Flowchart (Onboard)
-# [ADD FLOWCHART HERE - FC2]
-
 All audio, video, and vitals are processed and streamed in memory only. No file writes or persistent storage are performed to comply with privacy constraints **[5]**.
 
-### Laptop Side Flowchart (Ground Interfacing)
-# [ADD FLOWCHART HERE - FC3]
+<p align="center"> <img width="671" height="951" alt="Operational Flowchart" src="https://github.com/user-attachments/assets/703d66f5-0a35-4aae-934d-0cb3f852e2aa" /> </p>
 
 This flow ensures that:
 
@@ -397,7 +390,7 @@ then your specification “The subsystem SHALL support a minimum sustained throu
 
 Short range 802.11ac links under line of sight are typically capable of tens of Mbit/s or more, so 7 Mbit/s is well within realistic capability, with margin.
 
----
+
 
 ## 2. Latency Budget
 
@@ -454,7 +447,7 @@ which is well below 1 second. Even if real world conditions double this estimate
 
 So the latency specification is supported by conservative assumptions.
 
----
+
 
 ## 3. Packet Error Rate and Reliability
 
@@ -484,7 +477,7 @@ Under typical short range, line of sight conditions, raw PER will usually be muc
 
 For telemetry sent via WebSocket over TCP, the effective PER at the application level is essentially zero in normal operation, since TCP will retransmit until success or connection failure.
 
----
+
 
 ## 4. Range Considerations
 
@@ -508,7 +501,7 @@ For `d = 15 m = 0.015 km` and `f = 5000 MHz`:
 
 Typical 802.11ac systems can tolerate path losses significantly higher than 70 dB with standard transmit power and antenna gains, so at 15 m the link margin is comfortable. This supports the assumption that the throughput and latency performance used above is realistic for the 20–50 ft triage range.
 
----
+
 
 ## 5. Power and USB Constraints
 
@@ -528,7 +521,7 @@ Then the power draw:
 
 As long as the Power subsystem has budgeted at least this much extra current on the 5 V rail for the Jetson USB port, the constraint “The subsystem MUST remain within the power and payload limits” is achievable.
 
----
+
 
 ## 6. Summary of Constraint Satisfaction
 
@@ -548,6 +541,8 @@ As long as the Power subsystem has budgeted at least this much extra current on 
   Free space path loss calculations show that this distance is trivial for 5 GHz Wi Fi with the assumed hardware.
 
 Overall, these calculations support the conclusion that the proposed Drone to PC Link design can meet the specified performance and ethical constraints, provided that implementation follows the design assumptions and is verified in field tests.
+
+----
 
 ## References
 
