@@ -2,40 +2,40 @@
 
 ## Introduction
 
-The Drone to PC Link subsystem enables all wireless communication between the triage drone and the operator’s laptop. The triage system uses the **Aurelia X4 Standard** multirotor platform, which supports the payload and power required to carry an onboard computing module such as the **NVIDIA Jetson Nano** **[REF: Aurelia X4 specifications]**. The Jetson Nano processes Doppler radar vitals, microphone audio, and camera video in real time **[REF: Jetson Nano capabilities]**.
+The Drone to PC Link subsystem enables all wireless communication between the triage drone and the operator’s laptop. The triage system uses the **Aurelia X4 Standard** multirotor platform, which supports the payload and power required to carry an onboard computing module such as the **NVIDIA Jetson Nano** **[1]**. The Jetson Nano processes Doppler radar vitals, microphone audio, and camera video in real time **[2]**.
 
-The function of this subsystem is to transmit all processed data from the drone to the operator with high reliability, low latency, and full compliance with medical privacy requirements. Communication is achieved through **IEEE 802.11 based Wi Fi** using a compatible dual band USB adapter, such as a **TP Link Archer T4U Plus** class device that supports **802.11ac** **[REF: adapter specifications]**. Over this link, the subsystem delivers:
+The function of this subsystem is to transmit all processed data from the drone to the operator with high reliability, low latency, and full compliance with medical privacy requirements. Communication is achieved through **IEEE 802.11 based Wi Fi** using a compatible dual band USB adapter, such as a **TP Link Archer T4U Plus** class device that supports **802.11ac** **[3]**. Over this link, the subsystem delivers:
 
 - Live video for visual triage assessment  
 - Two way audio for cognitive testing  
 - Processed heart rate, respiratory rate, and triage classification  
 - Supporting telemetry for the user interface  
 
-At the software level, the subsystem uses **WebRTC** for low latency audio and video streaming **[REF: WebRTC characteristics]** and **WebSockets** for transmitting vitals and telemetry data **[REF]**. These technologies satisfy the requirement for real time, peer to peer communication without storing any patient related information, as required by medical privacy standards **[REF: DHA AI 6000.02]**.
+At the software level, the subsystem uses **WebRTC** for low latency audio and video streaming **[4]** and **WebSockets** for transmitting vitals and telemetry data. These technologies satisfy the requirement for real time, peer to peer communication without storing any patient related information, as required by medical privacy standards **[5]**.
 
 Within the overall triage system, the Drone to PC Link serves as the communication bridge between airborne sensing subsystems and the Interfacing subsystem on the ground laptop. Accurate and timely triage decisions depend on the reliable transmission of this data.
 
 
 ## Function of the Subsystem
 
-The Drone to PC Link subsystem enables all wireless data exchange between the triage drone and the operator’s laptop. Its core function is to ensure that the information generated on the drone by the **Jetson Nano**, including video, audio, vitals data, and telemetry, is delivered to the operator in real time **[REF: Jetson Nano capabilities]**.
+The Drone to PC Link subsystem enables all wireless data exchange between the triage drone and the operator’s laptop. Its core function is to ensure that the information generated on the drone by the **Jetson Nano**, including video, audio, vitals data, and telemetry, is delivered to the operator in real time **[2]**.
 
 The subsystem performs the following roles:
 
 ### Transmit live video
-Sends encoded camera video to the laptop for visual assessment during triage, using low latency streaming protocols **[REF: WebRTC video characteristics]**.
+Sends encoded camera video to the laptop for visual assessment during triage, using low latency streaming protocols **[4]**.
 
 ### Enable two way audio communication
-Carries microphone audio from the drone to the laptop and sends operator audio back to the onboard speaker for cognitive testing **[REF: subsystem cognitive test requirement]**.
+Carries microphone audio from the drone to the laptop and sends operator audio back to the onboard speaker for cognitive testing [7].
 
 ### Deliver vitals and telemetry data
-Transfers processed heart rate, respiratory rate, and triage classification from the signal processing subsystem using reliable data channels such as WebSockets **[REF: WebSocket suitability]**.
+Transfers processed heart rate, respiratory rate, and triage classification from the signal processing subsystem using reliable data channels such as WebSockets [8].
 
 ### Provide a secure and standards compliant communication path
-Uses **IEEE 802.11 Wi Fi** for wireless transport and encryption protocols built into WebRTC and WebSockets to protect transmitted data **[REF: IEEE 802.11]**.
+Uses **IEEE 802.11 Wi Fi** for wireless transport and encryption protocols built into WebRTC and WebSockets to protect transmitted data [9].
 
 ### Ensure real time transmission without data storage
-Supports direct streaming only, complying with medical privacy requirements that prohibit storing patient related video, audio, or telemetry **[REF: DHA AI 6000.02]**.
+Supports direct streaming only, complying with medical privacy requirements that prohibit storing patient related video, audio, or telemetry **[6]**.
 
 By performing these functions, the subsystem acts as the bridge between airborne sensors and the operator, ensuring that all triage critical information reaches the ground station quickly and accurately.
 
@@ -43,62 +43,62 @@ By performing these functions, the subsystem acts as the bridge between airborne
 
 ## Constraints
 
-- The subsystem **MUST** comply with **IEEE 802.11ac** or **IEEE 802.11n** wireless communication standards to ensure sufficient throughput and compatibility with the Jetson Nano and Wi Fi adapter **[REF: IEEE 802.11 specifications]**.
+- The subsystem **MUST** comply with **IEEE 802.11ac** or **IEEE 802.11n** wireless communication standards to ensure sufficient throughput and compatibility with the Jetson Nano and Wi Fi adapter [9].
 
-- The subsystem **MUST** maintain an end to end latency of **less than 1 second** for video, audio, and telemetry transmission **[REF: WebRTC latency characteristics]**.
+- The subsystem **MUST** maintain an end to end latency of **less than 1 second** for video, audio, and telemetry transmission **[4]**.
 
-- The subsystem **MUST** not store any patient related audio, video, or telemetry data on either the drone or the laptop to meet medical privacy requirements **[REF: DHA AI 6000.02]**.
+- The subsystem **MUST** not store any patient related audio, video, or telemetry data on either the drone or the laptop to meet medical privacy requirements **[6]**.
 
-- The subsystem **MUST** maintain a packet error rate of **less than 1 percent** during normal operation to ensure accurate transmission of triage critical data **[REF: WebRTC error correction documentation]**.
+- The subsystem **MUST** maintain a packet error rate of **less than 1 percent** during normal operation to ensure accurate transmission of triage critical data **[4]**.
 
-- The subsystem **MUST** remain within the **power and payload limitations** of the Aurelia X4 Standard platform **[REF: Aurelia X4 payload specifications]**.
+- The subsystem **MUST** remain within the **power and payload limitations** of the Aurelia X4 Standard platform **[1]**.
 
-- The subsystem **MUST** operate reliably within the expected triage scenario distance of **20 to 50 feet** under line of sight **[REF: triage scenario requirement]**.
+- The subsystem **MUST** operate reliably within the expected triage scenario distance of **20 to 50 feet** under line of sight [7].
 
-- The subsystem **MUST** avoid generating **RF interference** that would affect the Cube Orange flight controller or RC link **[REF: Cube Orange integration guidelines]**.
+- The subsystem **MUST** avoid generating **RF interference** that would affect the Cube Orange flight controller or RC link [11].
 
-- The subsystem **MUST** comply with **budget limitations** for the communication hardware **[REF: project budget allocation]**.
+- The subsystem **MUST** comply with **budget limitations** for the communication hardware [7].
 
-- The subsystem **MUST** meet **ethical and socio economic requirements** by preserving victim privacy and transmitting only necessary information **[REF: medical data ethics reference]**.
+- The subsystem **MUST** meet **ethical and socio economic requirements** by preserving victim privacy and transmitting only necessary information **[6]**.
 
 It is important that these constraints are met due to the critical need for timely, accurate, and secure data transmission during emergency triage operations.
 
 
 ## Specifications
 
-- The subsystem **SHALL** maintain **sub second transmission** of audio, video, and telemetry **[REF]**.
+- The subsystem **SHALL** maintain **sub second transmission** of audio, video, and telemetry **[4]**.
 
-- The subsystem **SHALL** support sustained wireless throughput of **at least 5 to 10 Mbps** for real time video and audio transmission **[REF: Wi Fi throughput]**.
+- The subsystem **SHALL** support sustained wireless throughput of **at least 5 to 10 Mbps** for real time video and audio transmission [9].
 
-- The subsystem **SHALL** achieve a packet error rate **lower than 1 percent** **[REF]**.
+- The subsystem **SHALL** achieve a packet error rate **lower than 1 percent** **[4]**.
 
-- The subsystem **SHALL** integrate with the **Jetson Nano USB interface** and support compatible **802.11ac** wireless adapters under Linux **[REF: Jetson Wi Fi adapter documentation]**.
+- The subsystem **SHALL** integrate with the **Jetson Nano USB interface** and support compatible **802.11ac** wireless adapters under Linux **[2]**.
 
-- The subsystem **SHALL** operate strictly on **IEEE 802.11ac or 802.11n** modes **[REF]**.
+- The subsystem **SHALL** operate strictly on **IEEE 802.11ac or 802.11n** modes **[4]**.
 
-- The subsystem **SHALL** transmit all media and telemetry without storing any of the data locally **[REF: DHA 6000.02]**.
+- The subsystem **SHALL** transmit all media and telemetry without storing any of the data locally [9].
 
-- The subsystem **SHALL** encrypt all transmitted data using **WebRTC security protocols** such as **DTLS** and **SRTP**, and secure WebSockets **[REF: WebRTC security documentation]**.
+- The subsystem **SHALL** encrypt all transmitted data using **WebRTC security protocols** such as **DTLS** and **SRTP**, and secure WebSockets **[4]**.
 
-- The subsystem **SHALL** maintain a stable wireless connection throughout the expected operational range described in the triage scenario **[REF]**.
+- The subsystem **SHALL** maintain a stable wireless connection throughout the expected operational range described in the triage scenario [7].
 
 These specifications and constraints are rationalized in the **Overview of Proposed Solution**.
 
 ## Overview of Proposed Solution
 
-The Drone to PC Link subsystem is designed to provide a reliable, low latency, and secure wireless communication pathway between the onboard **Jetson Nano** and the operator’s laptop. The proposed solution uses **IEEE 802.11ac Wi Fi** with a dual band USB adapter installed on the Jetson Nano and a matching adapter on the laptop **[REF: adapter specifications]**. This wireless link provides enough bandwidth to transmit real time video, audio, and vitals data while meeting the latency and throughput requirements defined in the specifications.
+The Drone to PC Link subsystem is designed to provide a reliable, low latency, and secure wireless communication pathway between the onboard **Jetson Nano** and the operator’s laptop. The proposed solution uses **IEEE 802.11ac Wi Fi** with a dual band USB adapter installed on the Jetson Nano and a matching adapter on the laptop **[3]**. This wireless link provides enough bandwidth to transmit real time video, audio, and vitals data while meeting the latency and throughput requirements defined in the specifications.
 
 To support real time triage operations, the subsystem uses two primary communication methods:
 
 ### WebRTC for audio and video streaming
-WebRTC supports peer to peer transmission, hardware accelerated H.264 encoding, encryption, and typical sub second latency, making it suitable for transmitting camera video and microphone audio from the drone to the laptop **[REF: WebRTC characteristics]**.
+WebRTC supports peer to peer transmission, hardware accelerated H.264 encoding, encryption, and typical sub second latency, making it suitable for transmitting camera video and microphone audio from the drone to the laptop **[4]**.
 
 ### WebSockets for vitals and telemetry data
-WebSockets provide a persistent, low overhead data channel that reliably transmits processed heart rate, respiratory rate, and triage status from the Jetson Nano to the laptop interface **[REF: WebSocket functionality]**.
+WebSockets provide a persistent, low overhead data channel that reliably transmits processed heart rate, respiratory rate, and triage status from the Jetson Nano to the laptop interface [8].
 
-These technologies collectively satisfy the requirement for continuous, real time data transfer without storing any transmitted media or telemetry on either device, aligning with medical privacy rules **[REF: DHA AI 6000.02]**.
+These technologies collectively satisfy the requirement for continuous, real time data transfer without storing any transmitted media or telemetry on either device, aligning with medical privacy rules **[5]**.
 
-The subsystem also includes encryption through WebRTC’s **DTLS** and **SRTP** protocols and secure WebSocket connections to prevent unauthorized access or interception **[REF: WebRTC security documentation]**.
+The subsystem also includes encryption through WebRTC’s **DTLS** and **SRTP** protocols and secure WebSocket connections to prevent unauthorized access or interception **[4]**.
 
 By combining **802.11ac wireless capability** with **real time communication protocols**, the proposed solution meets all subsystem specifications. It provides the throughput needed for video, the reliability required for accurate vitals transmission, the security required by medical ethical standards, and the low latency required for timely triage decision making.
 
@@ -117,7 +117,7 @@ The Drone to PC Link subsystem serves as the communication bridge between the on
 - Filtered Doppler radar waveform metrics  
 
 **Transferred Data:**  
-Structured numerical values representing vital signs and triage decisions. These values are encoded and transmitted using **WebSockets** or similar real time data channels **[REF: WebSocket functionality]**.
+Structured numerical values representing vital signs and triage decisions. These values are encoded and transmitted using **WebSockets** or similar real time data channels [8].
 
 **Communication Method:**  
 Digital data exchange on the Jetson Nano (for example, UART, SPI, or direct memory transfer depending on implementation), followed by wireless transport.
@@ -130,7 +130,7 @@ Digital data exchange on the Jetson Nano (for example, UART, SPI, or direct memo
 - Breathing and heartbeat frequency measurements  
 
 **Transferred Data:**  
-Raw or semi processed radar data is forwarded to the Signal Processing subsystem, but final processed values pass through the Drone to PC Link. The subsystem transmits the processed vitals to the laptop **[REF]**.
+Raw or semi processed radar data is forwarded to the Signal Processing subsystem, but final processed values pass through the Drone to PC Link. The subsystem transmits the processed vitals to the laptop **[4]**.
 
 **Communication Method:**  
 Digital serial or SPI communication between sensor hardware and the Jetson Nano, followed by wireless transmission to the laptop.
@@ -143,7 +143,7 @@ Digital serial or SPI communication between sensor hardware and the Jetson Nano,
 - Operator spoken audio returned to the drone speaker  
 
 **Transferred Data:**  
-Outgoing audio is streamed to the laptop for cognitive response checks. Incoming audio from the operator is routed back to the drone’s speaker. **WebRTC** supports both upstream and downstream audio streaming **[REF: WebRTC audio behavior]**.
+Outgoing audio is streamed to the laptop for cognitive response checks. Incoming audio from the operator is routed back to the drone’s speaker. **WebRTC** supports both upstream and downstream audio streaming **[4]**.
 
 **Communication Method:**  
 Local digital audio interface on the Jetson Nano; WebRTC for wireless audio transmission.
@@ -156,7 +156,7 @@ Local digital audio interface on the Jetson Nano; WebRTC for wireless audio tran
 - Optional camera feed if routed through the Jetson Nano  
 
 **Transferred Data:**  
-Telemetry values can be forwarded to the user interface for situational awareness. The subsystem may also receive small data packets such as operator commands or mode selections **[REF: Cube Orange telemetry integration]**.
+Telemetry values can be forwarded to the user interface for situational awareness. The subsystem may also receive small data packets such as operator commands or mode selections [11].
 
 **Communication Method:**  
 MAVLink or similar protocol forwarded to the Jetson Nano; WebSockets or WebRTC data channels for wireless transmission.
@@ -173,18 +173,18 @@ The Interfacing subsystem receives all information transmitted by the Drone to P
 - Telemetry and status data  
 
 **Communication Method:**  
-Data is delivered wirelessly using **IEEE 802.11ac** or **802.11n** Wi Fi with **WebRTC** for video and audio, and **WebSockets** for structured telemetry values **[REF]**.
+Data is delivered wirelessly using **IEEE 802.11ac** or **802.11n** Wi Fi with **WebRTC** for video and audio, and **WebSockets** for structured telemetry values **[4]**.
 
 The Interfacing subsystem then displays all incoming information on the laptop’s graphical interface.
 
 ### Summary of Data Pathways
 | Subsystem                      | Data Provided to Drone to PC Link                   | Transmission Method to Laptop               |
 | ------------------------------ | --------------------------------------------------- | ------------------------------------------- |
-| Signal Processing Subsystem    | Heart rate, respiratory rate, triage classification | WebSockets **[REF]**                        |
-| Vitals Sensor Subsystem        | Radar based vitals measurements                     | WebSockets after processing **[REF]**       |
-| Microphone/Speaker Subsystem   | Outgoing and incoming audio                         | WebRTC **[REF]**                            |
-| Programmable Drone Subsystem   | Telemetry and optional camera routing               | WebRTC or WebSockets **[REF]**              |
-| Interfacing Subsystem (Laptop) | Receives all transmitted data                       | Wi Fi plus WebRTC or WebSockets **[REF]**   |
+| Signal Processing Subsystem    | Heart rate, respiratory rate, triage classification | WebSockets **[4]**                        |
+| Vitals Sensor Subsystem        | Radar based vitals measurements                     | WebSockets after processing **[4]**       |
+| Microphone/Speaker Subsystem   | Outgoing and incoming audio                         | WebRTC **[4]**                            |
+| Programmable Drone Subsystem   | Telemetry and optional camera routing               | WebRTC or WebSockets **[4]**              |
+| Interfacing Subsystem (Laptop) | Receives all transmitted data                       | Wi Fi plus WebRTC or WebSockets **[4]**   |
 
 ## Buildable Schematic
 
@@ -197,7 +197,7 @@ All wiring in this schematic focuses on:
 - Simple wiring to receive regulated 5 V from the Power subsystem.  
 - An optional status LED connected to a Jetson GPIO pin.  
 
-For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **[Power subsystem link here]**.
+For full details on how the 5 V supply is generated and protected, see the Power and Circuitry subsystem schematic **[Power subsystem link here - ASK WYATT]**.
 
 ## Schematic Overview
 # [PUT SCHEMATIC HERE - FROM POWER - PSC1]
@@ -219,8 +219,8 @@ For full details on how the 5 V supply is generated and protected, see the Power
 
 The Jetson Nano is powered directly from the regulated **5 V** output provided by the Power subsystem:
 
-- **+5V_REG → J1 5 V input pin** or barrel connector, according to Jetson Nano carrier documentation **[REF: Jetson Nano power input specification]**.  
-- **GND → J1 ground pin(s)** and chassis ground **[REF]**.
+- **+5V_REG → J1 5 V input pin** or barrel connector, according to Jetson Nano carrier documentation **[2]**.  
+- **GND → J1 ground pin(s)** and chassis ground **[4]**.
 
 All details about how +5V_REG is produced (buck converter, protection circuits, battery interface) are defined in the Power subsystem schematic **Powersubsystemlinkhere**.
 
@@ -232,7 +232,7 @@ The USB Wi Fi adapter is connected to a USB host port on the Jetson Nano:
 - **J1 USB0 (Type A) → U1 USB plug**  
 - Signals: **USB_VBUS**, **USB_D+**, **USB_D−**, **GND**
 
-No additional components are required between J1 and U1 because the Jetson carrier board already includes USB protection and required terminations **[REF: Jetson Nano carrier board documentation]**.
+No additional components are required between J1 and U1 because the Jetson carrier board already includes USB protection and required terminations **[2]**.
 
 
 ## Data Interfaces to Other Subsystems
@@ -240,12 +240,12 @@ No additional components are required between J1 and U1 because the Jetson carri
 ### To Signal Processing Subsystem
 
 - **Interface:** Ethernet, UART, SPI, or other digital bus  
-- **Purpose:** Receive processed vitals and telemetry data for packaging and wireless transmission **[REF]**
+- **Purpose:** Receive processed vitals and telemetry data for packaging and wireless transmission **[4]**
 
 ### To Programmable Drone Subsystem (Cube Orange / FC)
 
 - **Interface:** MAVLink over UART or UDP  
-- **Purpose:** Optionally forward telemetry values to the laptop interface **[REF]**
+- **Purpose:** Optionally forward telemetry values to the laptop interface **[4]**
 
 These detailed interfaces are defined in each subsystem’s documentation. The schematic above shows only the necessary attachment points for wireless transmission.
 
@@ -265,23 +265,23 @@ These detailed interfaces are defined in each subsystem’s documentation. The s
 
 ---
 
-This schematic provides enough detail for physical assembly of the Drone to PC Link subsystem, assuming the builder follows the Power subsystem schematic and the Jetson Nano documentation for pinout and mounting **[REF]**.
+This schematic provides enough detail for physical assembly of the Drone to PC Link subsystem, assuming the builder follows the Power subsystem schematic and the Jetson Nano documentation for pinout and mounting **[4]**.
 
 ## Flowchart
 
 The Drone to PC Link subsystem includes software that runs on both the Jetson Nano (airborne) and the laptop (ground). The goal of this logic is to:
 
 - Establish a secure Wi Fi connection.  
-- Set up WebRTC for audio and video streaming **[REF: WebRTC behavior]**.  
-- Set up WebSockets for vitals and telemetry **[REF: WebSocket behavior]**.  
-- Ensure that no patient related data is stored at any point **[REF: privacy requirement]**.  
+- Set up WebRTC for audio and video streaming **[4]**.  
+- Set up WebSockets for vitals and telemetry **[4]**.  
+- Ensure that no patient related data is stored at any point **[5]**.  
 
 The flowcharts below describe the high level behavior. They are not tied to a specific language and can be implemented using Python, JavaScript, and HTML as outlined in the Interfacing Detailed Design.
 
 ### Jetson Nano Side Flowchart (Onboard)
 # [ADD FLOWCHART HERE - FC2]
 
-All audio, video, and vitals are processed and streamed in memory only. No file writes or persistent storage are performed to comply with privacy constraints **[REF: DHA AI 6000.02]**.
+All audio, video, and vitals are processed and streamed in memory only. No file writes or persistent storage are performed to comply with privacy constraints **[5]**.
 
 ### Laptop Side Flowchart (Ground Interfacing)
 # [ADD FLOWCHART HERE - FC3]
@@ -290,7 +290,7 @@ This flow ensures that:
 
 - All media and vitals data are streamed in real time.  
 - Any disconnection leads to reconnection attempts and visible error reporting.  
-- No received media or telemetry is written to disk, which maintains compliance with medical privacy and data handling requirements **[REF]**.  
+- No received media or telemetry is written to disk, which maintains compliance with medical privacy and data handling requirements **[4]**.  
 
 ## Bill of Materials (BOM)
 
@@ -551,26 +551,24 @@ Overall, these calculations support the conclusion that the proposed Drone to PC
 
 ## References
 
-[1] "Aurelia X4 Standard - Ready To Fly," UAV Systems International, product page, accessed Nov. 24, 2025. https://uavsystemsinternational.com/products/aurelia-x4-standard  
+[1] "Aurelia X4 Standard - Ready To Fly," UAV Systems International, product page, accessed Nov. 24, 2025. [LINK](https://uavsystemsinternational.com/products/aurelia-x4-standard)  
 
-[2] "Jetson Nano Developer Kit," NVIDIA Developer, board overview, documentation, and power requirements, accessed Nov. 24, 2025. https://developer.nvidia.com/embedded/jetson-nano-developer-kit  
+[2] "Jetson Nano Developer Kit," NVIDIA Developer, board overview, documentation, and power requirements, accessed Nov. 24, 2025. [LINK](https://developer.nvidia.com/embedded/jetson-nano-developer-kit)  
 
-[3] "Archer T4U Plus - AC1300 High Gain Dual Band USB Adapter," TP-Link product page, accessed Nov. 24, 2025. https://www.tp-link.com/us/home-networking/usb-adapter/archer-t4u-plus/  
+[3] "Archer T4U Plus - AC1300 High Gain Dual Band USB Adapter," TP-Link product page, accessed Nov. 24, 2025. [LINK](https://www.tp-link.com/us/home-networking/usb-adapter/archer-t4u-plus/)  
 
-[4] IEEE Computer Society, "IEEE Standard for Information Technology - Telecommunications and information exchange between systems - Local and metropolitan area networks - Specific requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," IEEE Std 802.11-2020, Feb. 2021.  
+[4] World Wide Web Consortium (W3C), "WebRTC 1.0: Real-Time Communication Between Browsers," Recommendation, accessed Nov. 24, 2025. [LINK](https://www.w3.org/TR/webrtc/)  
 
-[5] World Wide Web Consortium (W3C), "WebRTC 1.0: Real-Time Communication Between Browsers," Recommendation, accessed Nov. 24, 2025. https://www.w3.org/TR/webrtc/  
+[5] Defense Health Agency, "DHA Administrative Instruction 6000.02: Photography, Videotaping, Filming, Recording, and Imaging of Patients, Visitors, and Staff," policy and fact sheet, accessed Nov. 24, 2025. (Available via the Defense Health Agency publications site.)  
 
-[6] Nanocosmos, "WebRTC Latency: Comparing Low-Latency Streaming Protocols," blog and related materials, accessed Nov. 24, 2025. https://www.nanocosmos.de/blog/webrtc-latency/  
+[6] U.S. Department of Health and Human Services, "Summary of the HIPAA Privacy Rule," and related Privacy Rule resources, accessed Nov. 24, 2025. [LINK](https://www.hhs.gov/hipaa/for-professionals/privacy/index.html)  
 
-[7] I. Fette and A. Melnikov, "The WebSocket Protocol," RFC 6455, Internet Engineering Task Force (IETF), Dec. 2011. https://datatracker.ietf.org/doc/html/rfc6455  
+[7] F24 DARPA Triage Drone Team, "Conceptual Design" and customer specification (scenario description, triage requirements, and internal performance targets), GitHub repository, accessed Nov. 24, 2025.  [LINK](https://github.com/TnTech-ECE/F24_Team5_DARPA_Triage_Drone/blob/main/Reports/Conceputal%20Design%20Final/Conceptual%20Design.md)
 
-[8] Defense Health Agency, "DHA Administrative Instruction 6000.02: Photography, Videotaping, Filming, Recording, and Imaging of Patients, Visitors, and Staff," policy and fact sheet, accessed Nov. 24, 2025. (Available via the Defense Health Agency publications site.)  
+[8] I. Fette and A. Melnikov, "The WebSocket Protocol," RFC 6455, Internet Engineering Task Force (IETF), Dec. 2011. [LINK](https://datatracker.ietf.org/doc/html/rfc6455)  
 
-[9] U.S. Department of Health and Human Services, "Summary of the HIPAA Privacy Rule," and related Privacy Rule resources, accessed Nov. 24, 2025. https://www.hhs.gov/hipaa/for-professionals/privacy/index.html  
+[9] IEEE Computer Society, "IEEE Standard for Information Technology - Telecommunications and information exchange between systems - Local and metropolitan area networks - Specific requirements - Part 11: Wireless LAN Medium Access Control (MAC) and Physical Layer (PHY) Specifications," IEEE Std 802.11-2020, Feb. 2021.  
 
-[10] F24 DARPA Triage Drone Team, "Conceptual Design" and customer specification (scenario description, triage requirements, and internal performance targets), GitHub repository, accessed Nov. 24, 2025.  
+[10] Nanocosmos, "WebRTC Latency: Comparing Low-Latency Streaming Protocols," blog and related materials, accessed Nov. 24, 2025. [LINK](https://www.nanocosmos.de/blog/webrtc-latency/)  
 
-[11] PX4 Autopilot Project, "Companion Computers" and MAVLink telemetry integration guides, accessed Nov. 24, 2025. https://docs.px4.io/  
-
-
+[11] PX4 Autopilot Project, "Companion Computers" and MAVLink telemetry integration guides, accessed Nov. 24, 2025. [LINK](https://docs.px4.io/)  
