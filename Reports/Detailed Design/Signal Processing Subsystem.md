@@ -24,7 +24,7 @@ and the interfacing pathway that transports those vitals \[1\].
     ready to transmit within 500ms of being received \[4\].
     
 4. The subsystem SHALL operate using data samples at 100-200Hz from
-   the Radar Infineon Demo BGT60UTR11AIP.
+   the Radar (Infineon Demo BGT60UTR11AIP).
     
 ## Overview of Proposed Solution
 
@@ -66,7 +66,7 @@ subsystem transmits the processed values to the user.
 
 ## Operational Flow Chart
 
-<img width="1669" height="1350" alt="Screenshot 2025-12-01 111116" src="https://github.com/user-attachments/assets/1bdf0145-a11e-43f5-b662-c71de3132baf" />
+<img width="1687" height="1353" alt="Screenshot 2025-12-01 112741" src="https://github.com/user-attachments/assets/42b90888-8d5d-44eb-8036-9c1016e59e0d" />
 
 ## Bill of Materials (BOM)
 
@@ -85,7 +85,7 @@ the mounted Aurelia X4 drone. The design begins with radar sampling at
 100–200 Hz, which provides sufficient data to capture small chest motion
 and supports Empirical Mode Decomposition (EMD) without aliasing
 \[4\],\[9\]. Initial conditioning, including noise reduction, decimation
-to 10 -20 H, and detrending, which reduces computational load while
+to 10-20 Hz, and detrending, which reduces computational load while
 preserving the low-frequency content where respiration and heart rate
 occur. A high-pass filter with a cutoff between 0.05 and 0.1 Hz is then
 applied to suppress very low-frequency disturbances (such as the drone’s
@@ -107,8 +107,8 @@ signs from disturbances.
 
 After disturbance removal, the reconstructed signal is filtered to
 isolate the low-frequency band associated with respiration and heart
-rate. Respiration is obtained at 0.13-1.0Hz, and heart rate is measured
-at 0.8-3.0Hz.
+rate. Respiration is obtained at 0.13-1.0 Hz, and heart rate is measured
+at 0.8-3.0 Hz.
 
 The NVIDIA Jetson Nano provides computational services to execute
 everything within the 500ms processing window specified by the subsystem
