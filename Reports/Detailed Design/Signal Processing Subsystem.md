@@ -1,6 +1,6 @@
-**Signal Processing Detailed Design**
+# Signal Processing Detailed Design
 
-**Function of the Subsystem**
+## Function of the Subsystem
 
 This subsystem will thoroughly describe the design of the Triage Drone's
 signal processing and interfacing. After reading this detailed design,
@@ -11,7 +11,7 @@ The system encompasses both the digital signal processing pipeline used
 to extract heart and respiratory rate from Doppler radar data (Infineon Demo BGT60UTR11AIP)
 and the interfacing pathway that transports those vitals \[1\].
 
-**Specifications and Constraints**
+## Specifications and Constraints
 
 1.  The signal processing subsystem SHALL use digital signal processing
     techniques to determine respiratory rate (range 0.13 to 1.0 Hz) and
@@ -26,7 +26,7 @@ and the interfacing pathway that transports those vitals \[1\].
 4. The subsystem SHALL operate using data samples at 100-200Hz from
    the Radar Infineon Demo BGT60UTR11AIP.
     
-**Overview of Proposed Solution**
+## Overview of Proposed Solution
 
 Research has demonstrated the reliability of Doppler and mmWave radar
 for contactless readings of breathing and heart motion
@@ -48,7 +48,7 @@ subsystem's requirements by providing accurate data that can be
 transmitted directly from the Jetson Nano to the User interface for
 real-time display.
 
-**Interfacing with other Subsystems**
+## Interfacing with other Subsystems
 
 The signal processing and user interface subsystem functions directly
 with the radar and heartbeat sensor subsystem via a USB connection to
@@ -64,21 +64,20 @@ accurate readings. Finally, after the signal processing subsystem
 completes and the required data are acquired, the drone-to-PC link
 subsystem transmits the processed values to the user.
 
-**Operational Flow Chart**
+## Operational Flow Chart
 
-<img width="1685" height="1350" alt="Screenshot 2025-11-29 163016" src="https://github.com/user-attachments/assets/d05dd615-ab7e-4b7e-97f9-b899e67a3817" />
+<img width="1672" height="1317" alt="Screenshot 2025-12-01 101654" src="https://github.com/user-attachments/assets/fc7559bd-c4d1-4d8f-945e-5b2e3e8c5e93" />
 
-
-**Bill of Materials (BOM)**
+## Bill of Materials (BOM)
 
 | **Part Number** | **Description** | **Manufacturer Name** | **Purpose** | **Quantity** | **Cost Per Item** | **Total Cost of Quantity** |
 |:----------:|:-----------:|:-----------:|:--------:|:--------:|:-----:|:-------:|
-| J1020 V2 | Jetson Nano Developer Kit | Nvidia | Offers computational ability | 1 | $279.00 | $279.00 |
-| ADXL203EB | Dual Axis Accelerometer | Analog Devices | Measure drone movement to remove unwanted data later | 1 | $56.59 | $56.59 |
+| J1020 V2 | [Jetson Nano Developer Kit](https://www.seeedstudio.com/reComputer-J1020-v2-p-5498.html) | Nvidia | Offers computational ability | 1 | $279.00 | $279.00 |
+| ADXL203EB | [Dual Axis Accelerometer](https://www.digikey.ee/en/products/detail/analog-devices-inc/ADXL203EB/665382) | Analog Devices | Measure drone movement to remove unwanted data later | 1 | $56.59 | $56.59 |
 |  |  |  |  |  | **Total Expenses** | $335.59 |
 |  |  |  |  |  | **Total Quantity** | 2 |
 
-**Analysis**
+## Analysis
 
 The proposed signal processing and user interface subsystem meets the
 need for accurate, real-time, non-contact extraction of vital signs from
@@ -118,7 +117,7 @@ enough for real-time operation. Overall, the chosen algorithm, sampling
 rates, filter ranges, and hardware platform are appropriate for the
 Arelia X4 drone and allow the intended functionality.
 
-**Refrences**
+## Refrences
 
 \[1\] Droitcour, Amy & Lubecke, Victor & Lin, Jenshan & Boric-Lubecke,
 O.. (2001). A microwave radio for Doppler radar sensing of vital signs.
