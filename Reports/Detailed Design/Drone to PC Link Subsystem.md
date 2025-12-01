@@ -323,7 +323,7 @@ All numerical values below are **design assumptions** for analysis and must be v
 
 ## 1. Throughput and Data Rate Analysis
 
-We need to confirm that the Wi Fi link can carry:
+Confirm that the Wi Fi link can carry:
 
 - One compressed video stream  
 - One audio stream  
@@ -378,7 +378,7 @@ Total payload rate:
                   = 3.0 + 0.1 + 0.016  
                   = 3.116 Mbit/s`
 
-Even after adding protocol overhead (RTP, SRTP, UDP, IP, MAC headers), you can conservatively scale by a factor of 2:
+Even after adding protocol overhead (RTP, SRTP, UDP, IP, MAC headers), these can conservatively scale by a factor of 2:
 
 `R_total,link ≈ 2 × 3.116 = 6.232 Mbit/s`
 
@@ -386,19 +386,17 @@ So if the wireless link can reliably support at least
 
 `R_required ≈ 7 Mbit/s`
 
-then your specification “The subsystem SHALL support a minimum sustained throughput of 5 to 10 Mbps” is justified.
-
 Short range 802.11ac links under line of sight are typically capable of tens of Mbit/s or more, so 7 Mbit/s is well within realistic capability, with margin.
 
 
 
 ## 2. Latency Budget
 
-The specification requires **end to end latency < 1 second** for video, audio, and data. We can break total latency into:
+The specification requires **end to end latency < 1 second** for video, audio, and data. The total latency can be broken down into:
 
 `T_total = T_capture + T_encode + T_network + T_decode + T_render`
 
-We consider a reasonable design target for each term:
+A reasonable design target for each term:
 
 1. **Capture latency**  
    Camera exposure plus buffering:
@@ -441,7 +439,7 @@ This is about:
 
 `T_total ≈ 0.19 s`
 
-which is well below 1 second. Even if real world conditions double this estimate, you still remain under the 1 second requirement:
+which is well below 1 second. Even if real world conditions double this estimate, the total latency would still remain under the 1 second requirement:
 
 `0.19 s × 2 = 0.38 s < 1 s`
 
@@ -459,7 +457,7 @@ Let:
 - Suppose that at the MAC/PHY level, raw PER is around 5 percent in a conservative case due to collisions or interference.  
 - Higher layers (WebRTC with FEC, NACKs, retransmissions) can reduce effective application level PER.
 
-If we model application level PER as:
+Modeling the application level PER as:
 
 `p_app = p_raw × (1 − recovery_efficiency)`
 
@@ -483,7 +481,7 @@ For telemetry sent via WebSocket over TCP, the effective PER at the application 
 
 The triage scenario specifies a drone distance of about 20–50 ft from the victim and operator. This is a relatively short range compared to typical indoor or outdoor Wi Fi.
 
-If we treat the link as operating in free space for a rough estimate, the free space path loss at 5 GHz can be approximated by:
+Treating the link as operating in free space for a rough estimate, the free space path loss at 5 GHz can be approximated by:
 
 `FSPL (dB) = 20 log10(d) + 20 log10(f) + 32.44`
 
