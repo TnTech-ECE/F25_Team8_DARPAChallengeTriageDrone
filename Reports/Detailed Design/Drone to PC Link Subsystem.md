@@ -355,7 +355,7 @@ Raw bit rate:
 
 `R_audio_raw = 48,000 × 16 = 768,000 bit/s = 0.768 Mbit/s`
 
-With a typical audio codec such as Opus you can compress significantly. To be conservative, assume:
+With a typical audio codec such as Opus, this can be compressed significantly. To be conservative, assume:
 
 `R_audio ≈ 0.1 Mbit/s`
 
