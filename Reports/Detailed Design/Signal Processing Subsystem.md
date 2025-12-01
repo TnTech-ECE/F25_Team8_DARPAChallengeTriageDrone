@@ -66,7 +66,7 @@ subsystem transmits the processed values to the user.
 
 ## Operational Flow Chart
 
-<img width="1672" height="1317" alt="Screenshot 2025-12-01 101654" src="https://github.com/user-attachments/assets/fc7559bd-c4d1-4d8f-945e-5b2e3e8c5e93" />
+<img width="1669" height="1350" alt="Screenshot 2025-12-01 111116" src="https://github.com/user-attachments/assets/1bdf0145-a11e-43f5-b662-c71de3132baf" />
 
 ## Bill of Materials (BOM)
 
