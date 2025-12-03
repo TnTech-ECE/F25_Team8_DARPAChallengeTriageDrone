@@ -475,6 +475,7 @@ The analysis confirms that the selected hardware and communication architecture 
 #### **8.1 Link Budget and Maximum Range**
 
 For a line of sight 5 GHz Wi Fi link, the Free Space Path Loss (FSPL) in decibels as a function of distance and frequency is commonly written as [12]:
+
 `FSPL(dB) = 32.44 + 20 log10(d_km) + 20 log10(f_MHz)`
 
 Where:
@@ -485,21 +486,29 @@ The Archer T4U Plus operates at 5 GHz with a maximum EIRP of about 20 dBm in the
 Receive sensitivity at 802.11ac VHT80 (80 MHz channel) is approximately:
 
 Maximum allowable FSPL is derived as:
+
 `FSPL_max = P_tx,EIRP - P_rx,sens  `
+
 `FSPL_max = 20 dBm - (-60 dBm) = 80 dB`
 
 Solving for maximum range by substituting `f_MHz = 5000 MHz`:
+
 `20 log10(d_km) = 80 - 32.44 - 20 log10(5000) `
+
 `d_km,max = 10^((80 - 32.44 - 20 log10(5000)) / 20)`
 
 Evaluated numerically:
+
 `d_km,max ≈ 0.0478 km ≈ 47.8 m ≈ 48 m`
 
 A sample FSPL evaluation at 40 m:
+
 `FSPL_40m = 32.44 + 20 log10(0.04) + 20 log10(5000) ≈ 78.5 dB`  
+
 `P_rx at 40m ≈ 20 dBm - 78.5 dB ≈ -58.5 dBm`
 
 Since:
+
 `-58.5 dBm > -60 dBm`
 
 The link is sufficient at 40 m with small margin [7][10].
@@ -514,22 +523,29 @@ This link carries:
 - Low rate vitals & telemetry
 
 Representative worst case media allocation:
+
 `R_video ≈ 2.0 Mbps (720p low-medium bitrate) ` 
+
 `R_audio ≈ 64 kbps (two-way Opus audio)`  
+
 `R_data ≈ 10 kbps (telemetry + vitals)`
 
 `R_total,app = 2.0 + 0.064 + 0.01 ≈ 2.074 Mbps`
 
 Accounting for overhead (2× PHY safety factor):
+
 `R_required,PHY ≈ 2 × 2.074 ≈ 4.15 Mbps`
 
 Archer T4U Plus max PHY rate at 5 GHz:
+
 `R_PHY,max = 867 Mbps`
 
 Estimated worst case usable rate at 10% real world efficiency:
+
 `R_usable ≈ 0.1 × 867 ≈ 86.7 Mbps`
 
 Since:
+
  `87 Mbps >> 4.15 Mbps`
  
  802.11ac provides more than enough bandwidth margin [4][10].
@@ -538,17 +554,23 @@ Since:
 #### **8.3 Latency Budget Derivation**
 
 WebRTC glass to glass worst case pipeline model:
+
 `T_total = T_capture + T_encode + T_network + T_jitter + T_decode`
 
 `T_capture ≤ 50 ms (camera and vitals capture @30 fps)  `
+
 `T_encode ≤ 30 ms (H.264 hardware accelerated encode)  `
+
 `T_network ≤ 20 ms (local 802.11ac transport, good RSSI)  `
+
 `T_jitter ≤ 150 ms (WebRTC jitter buffer worst case)  `
+
 `T_decode ≤ 50 ms (decode + render on laptop)`
 
 `T_total,max = 50 + 30 + 20 + 150 + 50 = 300 ms ≈ 0.3 s`
 
 Since:
+
 `0.3 s < 1.0 s constraint`
 
 The subsystem meets the latency requirement of `<1 s` with margin [2][5][6].
