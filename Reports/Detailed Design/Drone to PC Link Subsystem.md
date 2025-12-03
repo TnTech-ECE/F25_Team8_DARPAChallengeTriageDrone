@@ -406,12 +406,12 @@ This flowchart ensures that all critical communication elements are validated be
 
 | Item            | Description                                                                                           | Manufacturer | Part Number     | Distributor | Qty | Cost per Item (USD) | Total Cost (USD) |
 | -------------- | ----------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------- | --- | ------------------ | ------------- |
-| Wi-Fi Adapter  | Dual Band USB 3.0 Wi-Fi Adapter supporting 802.11ac for telemetry, video, audio, and data transmission | TP-Link      | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S?th=1)     | 2   | $19.99              | $39.98              |
+| Wi-Fi Adapter  | Dual Band USB 3.0 Wi-Fi Adapter supporting 802.11ac for telemetry, video, audio, and data transmission | TP-Link      | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S?th=1)     | 2   | $29.99              | $59.98              |
 
 
 **Cost Summary**
 
-- **Total:** $29.99
+- **Total:** $59.98
 
 ### Notes
 
@@ -556,7 +556,9 @@ The subsystem meets the latency requirement of `<1 s` with margin [2][5][6].
 #### **8.4 Error Rate and Packet Loss Compliance**
 
 Constraint:
-`Error Rate < 1%  `
+
+`Error Rate < 1%` 
+
 `Packet delivery ratio ≥ 99% IP layer after MAC retries + WebRTC FEC recovery`
 
 Justified by design components:
