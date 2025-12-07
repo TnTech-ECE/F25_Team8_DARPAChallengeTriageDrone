@@ -4,7 +4,7 @@ Selecting and correctly configuring a radar sensor remains a vital aspect to thi
 
 ## Function of the Subsystem
 
-This subsystem will be how the drone gathers most of the data for it or it's operators to rank victims based on the START Triage method. This method ranks patient priority based on three observations: Respiration, Perfusion, and Mental Status [1]. The first two observations will be acquired through this subsystem. Respiration will be based on respiration rate. Perfusion is how well the patient's body circulates blood. While the triage method asks for radial pulse, which is measured at the patient's wrist, this system will measure the beating of the heart within the chest cavity.
+This subsystem will be how the drone gathers most of the data for it or it's operators to rank victims based on the START Triage method. This method ranks patient priority based on three observations: Respiration, Perfusion, and Mental Status [1]. The first two observations will be acquired through this subsystem. Respiration will be based on respiration rate. Perfusion is how well the patient's body circulates blood, and this will be based on radial pulse, which is the pulse felt on the patient's wrist.
   
 This subsystem will provide access to that information and transmit it to the Signal Processing Subsystem for further evaluation.
 
@@ -56,17 +56,20 @@ The micro-usb to USB connection works as a serial port. The other pins on the bo
 
 
 ## BOM
-Since the majority of the engineering required for this subsystem is operation and not construction, there are only two required pieces of equipment. Note that the Infineon Demo BGT60UTR11AIP is as of Fall 2025 out of stock, so numbers are from the previous team. An available alternative from the same manufacturer is listed, the DEMO BGT60TR13C.
+Since the majority of the engineering required for this subsystem is operation and not construction, there are only two required pieces of equipment. Note that the Infineon Demo BGT60UTR11AIP is as of Fall 2025 out of stock, so numbers are from the previous team. An available alternative from the same manufacturer is listed, the DEMO BGT60TR13C, which is priced higher than the module that the previous team left behind. It is also boasts a richer featureset which may or may not be beneficial to this project. In the spirit of keeping costs down, another option is the MR60FDA1 from Seeed Technology Limited, which is marketed as a "fall detection module," but since it is based on the same underlying technology, mmWave Radar sensing, it should be able to be reconfigured as a respiratory/circulatory sensor.
 
 | PRODUCT NAME            | DESCRIPTION     | MANUFACTURER NAME | QUANTITY | COST PER ITEM | TOTAL COST OF QUANTITY |
 | :---:                  | :---:           | :---:             | :---:    | :---:         | :---:                  |
- BGT60UTR11AIP               | Demo kit with XENSIV™ BGT60UTR11AIP 60 GHz radar sensor | Infineon | 1 | $---.-- | $---.--|
-  (Alternative) BGT60TR13C               | [Demo kit with XENSIV™ BGT60TR13C 60 GHz radar sensor](https://www.infineon.com/evaluation-board/DEMO-BGT60TR13C) | Infineon | 1 | $212.04 | $212.04|
-| 7T9MV4              | [Micro-USB Cable](https://www.digikey.ee/en/products/detail/analog-devices-inc/ADXL203EB/665382](https://www.amazon.com/Amazon-Basics-Charging-Transfer-Gold-Plated/dp/B07232M876/ref=sr_1_1_ffob_sspa?crid=3NYG1TYD80F2E&dib=eyJ2IjoiMSJ9.BTH-JaqRBvQbWEP_82nsg3yEMXYNI64nU1zKdoVJWozaRJLjffc2AxH49bpUSKMxRmhycVZ-cl4f3JYFXJR7O-3Ep6gIb74Q28Zai-27w_6wIuGL0XXqfFrfD50MVW2j8NuEYlM7A9VtHiTLiQdeKxmE8xwIcwvhPZrYZnz8vqIc6Mny7I9Ial4L6WIZNb2fiShtVv-b9LdoFAx3AEaVMsWlQ0dKs3R5FriiQQhb82U.-ba0OBlMVvDP-XYOVvnkis2BssC956V1D6XXpyLtQnw&dib_tag=se&keywords=microusb%2Busb%2Bcable&qid=1732739767&sprefix=microusb%2Caps%2C107&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1)) | Amazon | 1 | $7.59 | $7.59 |
+ BGT60UTR11AIP               | Demo kit with XENSIV™ BGT60UTR11AIP 60 GHz radar sensor | Infineon | 1 | $177.37 | $177.37 |
+  BGT60TR13C*               | [Demo kit with XENSIV™ BGT60TR13C 60 GHz radar sensor](https://www.infineon.com/evaluation-board/DEMO-BGT60TR13C) | Infineon | 1 | $212.04 | $212.04|
+  MR60FDA1*               | [MR60FDA1 Radar Sensor Development Board](https://www.arrow.com/en/products/101990981/seeed-technology-limited) | Seeed Technology | 1 | $51.06 | $51.06|
+| 7T9MV4              | [Micro-USB Cable](https://a.co/d/gDfOkrQ) | Amazon | 1 | $8.29 | $8.29 |
+
+\* denotes alternative options
+
+As this sensor kit, the Demo BGT60UTR11AIP, is already in the team's possession, it remains the radar sensor for the Fall 2025 iteration of the drone payload.
 
 ## Analysis
-Equations used may not be visible if dark mode is used to view this file.
-
 There are multiple ways to read the heart rate and respiration rate of a patient using radar. IEEE Xplore has reported at least 2200 papers on this topic [6], and the interest in this challenge has continued to this day. Researching what to use to fulfill the roles of this subsystem was challenging as there are truly many options to choose from. However, the Infineon BGT60UTR11AIP and the MCU7 Plus are feature rich and are capable of abiding by the previously mentioned constraints and fulfilling the previously mentioned specifications.  
 
 Many projects have utilized continuous wave radars for vitals sesing; however, this introduces a limitation in that CW radars can only detect phase differences in its readings. The Infineon radar sensor is a Frequency Modulated Continuous Wave radar, which means that on top of detecting phase changes it can detect frequency changes as well [7]. This gives the signal processor more data to work with which can lead to greater precision.
