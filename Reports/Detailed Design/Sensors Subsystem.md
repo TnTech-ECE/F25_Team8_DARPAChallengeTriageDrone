@@ -16,7 +16,7 @@ These constraints are derived from the project's Conceptual Design and from the 
     - A light-weight subsystem reduces the complexity of the problem of payload weight distribution for increased stability in flight.
   - The system MUST not consume so much power as to seriously impact the drone's flight-time.
     - A low-power subsystem ensures that the drone can stay out and search for victims for a longer duration.
-  - The system MUST not exceed a Effective Isotropic Radiated Power (EIRP) of 10 dBm as per the standard the Federal Communications Commission (FCC) has dictated [2].
+  - The system MUST not exceed an Effective Isotropic Radiated Power (EIRP) of 40 dBm as per the standard the Federal Communications Commission (FCC) has dictated for devices operating in the 57-71 GHz band [2].
     - This is to ensure that the subsystem is not itself a danger to patients.
 
 ## Specifications
@@ -81,9 +81,9 @@ The solution is low-cost and small enough, both in volume and in mass, to fit th
 </p>
 
 
-The device has a range of 15m, which is more than enough to meet the proposed specification. In addition, because the radar sensor operates in the 60 GHz band, namely 57.4 GHz minimum to 63.0 GHz maximum, it is considered a mm-Wave radar device. This means that it can detect changes within a few millimeters, which is ideal for heart rate detection as a heartbeat causes displacement in this scale.  
+The device has a range of 15 m, which is more than enough to meet the proposed specification. In addition, because the radar sensor operates in the 60 GHz band, namely 57.4 GHz minimum to 63.0 GHz maximum, it is considered a mm-Wave radar device. This means that it can detect changes within a few millimeters, which is ideal for heart rate detection as a heartbeat causes displacement in this scale.  
 
-The Infineon radar is also a safe solution for patients. Using the relationship in (2), numbers from the sensor datasheet [8], and assuming negilgible losses, effective isotropic radiated power (EIRP) is found to be $EIRP (dBm) = P_{\text{TX}} + G_{\text{TX}} - L = 5.0\,\text{dBm} + 3.0\,\text{dBi}- 0 = 8.0\,\text{dBm}$. Given that the FCC sets the power limit for this band at 10 dBm, the BGT60UTR11AIP meets the FCC's EIRP standard for sensors operating in the 60 GHz band. Plainly, the power output of the radar is low, and patients subjected to the sensor will not be hit with harmful levels of radiation.  
+The Infineon radar is also a safe solution for patients. Using the relationship in (2), numbers from the sensor datasheet [8], and assuming negilgible losses, effective isotropic radiated power (EIRP) is found to be $EIRP (dBm) = P_{\text{TX}} + G_{\text{TX}} - L = 5.0\,\text{dBm} + 3.0\,\text{dBi}- 0 = 8.0\,\text{dBm}$. Given that the FCC sets the power limit for this band at 40 dBm, the BGT60UTR11AIP meets the FCC's EIRP standard for sensors operating in the 60 GHz band [2]. Plainly, the power output of the radar is low, and patients subjected to the sensor will not be hit with harmful levels of radiation.  
 
 
 <p align="center">
@@ -98,7 +98,7 @@ As a side note, this is a single-input single-output sensor, meaning it has only
 ## References
 [1]https://www.cert-la.com/downloads/education/english/start.pdf
 
-[2]https://www.federalregister.gov/documents/2023/07/24/2023-15367/fcc-empowers-short-range-radars-in-the-60-ghz-band  
+[2]https://www.law.cornell.edu/cfr/text/47/15.255
   
 [3]https://www.infineon.com/cms/en/product/evaluation-boards/demo-bgt60utr11aip/  
   
