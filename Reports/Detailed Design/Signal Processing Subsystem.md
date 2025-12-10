@@ -59,7 +59,8 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
 
   The peak frequency will then be converted to breaths per minute (BPM) or beats per minute (BPM) \[7\].
 
-  $$\text{BPM} = 60 * f_{peak}$$
+  $$\text{BPM} = 60 \times f_{\text{peak}}$$
+
 
 This solution is lightweight and efficient, and it incorporates only the radar and Jetson Nano. Using these DSP techniques, this subsystem will be able to meet the requirements in practice.
 
@@ -173,13 +174,15 @@ This section describes the mathematical and physical justification for the DSP p
 
 The radar measures chest motion, which can be modeled as:
 
-$$x(t) = A_{resp} \sin(2\pi f_{resp} t) + A_{heart} \sin(2\pi f_{heart} t) + n(t)$$
+$$x(t) = A_{\text{resp}} \sin(2\pi f_{\text{resp}} t) + A_{\text{heart}} \sin(2\pi f_{\text{heart}} t) + n(t)$$
+
 
 As seen in the simulations, respiration produces large but slow oscillations, and heart rate produces small and rapid oscillations \[3\].
 
 1.  **Sampling**
 
-The radar is sampled at $$f_s = 100-200 \text{ Hz}$$, the content of interest lies below about 3 Hz therefore, the radar's sampling is higher than what is necessary \[5\].
+The radar is sampled $$f_s = 100\text{--}200 \text{ Hz}$$
+, the content of interest lies below about 3 Hz therefore, the radar's sampling is higher than what is necessary \[5\].
 
 1.  **Low Pass Filter**
 
@@ -205,21 +208,26 @@ After the data is filtered with a bandpass, an FFT will be applied to identify d
 
 $$Y[k] = \sum_{n=0}^{N-1} y[n]e^{-j\frac{2\pi}{N}kn}$$
 
+
 Each FFT bin corresponds to a frequency.
 
-$$f_k = \frac{k}{N} 20 \text{ Hz}$$
+$$f_k = \frac{k}{N} \times 20 \text{ Hz}$$
+
 
 20 Hz comes after decimations. Then the subsystem will search for the largest peak within each physiological band, respiration (0.13-1.0 Hz) and heart rate (0.8-3.0 Hz). Since chest motion is sinusoidal, the FFT peaks are directly linked to respiratory and heart rates.
 
 1.  **BPM Conversion**
 
-$$\text{BPM} = 60 * f_{peak}$$
+$$\text{BPM} = 60 \times f_{\text{peak}}$$
+
 
 1.  **SNR Threshold**
 
-$$\text{SNR}_{dB} = 20 \log_{10} \left( \frac{|Y[peak]|}{\text{Noise Floor}} \right)$$
+$$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noise Floor}} \right)$$
 
-This formula functions as a peak reliability test, and finally, $$\text{SNR}_{\text{dB}}$$ has to be greater than 6dB, which is about twice as large as the noise floors, for peak values to be reliable \[7\].
+
+This formula functions as a peak reliability test, and finally, \text{SNR}_{\text{dB}}
+ has to be greater than 6dB, which is about twice as large as the noise floors, for peak values to be reliable \[7\].
 
 **Summary**
 
