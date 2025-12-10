@@ -226,7 +226,7 @@ $$\text{BPM} = 60 \times f_{\text{peak}}$$
 $$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noise Floor}} \right)$$
 
 
-This formula functions as a peak reliability test, and finally, \text{SNR}_{\text{dB}}
+This formula functions as a peak reliability test, and finally, SNR<sub>dB</sub>
  has to be greater than 6dB, which is about twice as large as the noise floors, for peak values to be reliable \[7\].
 
 **Summary**
