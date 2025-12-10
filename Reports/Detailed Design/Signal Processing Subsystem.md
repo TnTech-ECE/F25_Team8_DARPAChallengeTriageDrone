@@ -86,7 +86,7 @@ This solution is lightweight and efficient, and it incorporates only the radar a
 
    This subsystem will transmit vital signs and other information, such as camera feed and audio, to the PC ground station.
 
-## Operational Flow Chart
+## Operational Flow Chart ##
 
 <img width="531" height="1287" alt="Screenshot 2025-12-09 205129" src="https://github.com/user-attachments/assets/b5ab1b18-1a78-48fe-aad8-976dee7edeb0" />
 
@@ -153,7 +153,7 @@ A MATLAB simulation was performed to illustrate the DSP pipeline using ideal phy
 | Respiration | 0.25 Hz | 0.23 Hz | 14 BPM | Reliable |
 | Heart Rate | 1.20 Hz | 1.20 Hz | 72 BPM | Reliable |
 
-**Summary**
+### Summary ###
 
 The MATLAB simulations illustrate the ideal case for the pipeline. While in practice the graphs were separated, showing respiration and heart rate, the difference won't be known until peak detection during FFT and conversion of peak frequencies to BPM.
 
@@ -166,11 +166,11 @@ The MATLAB simulations illustrate the ideal case for the pipeline. While in prac
 |  |  |  |  |  | Total Expenses | $279.00 |
 |  |  |  |  |  | Total Quantity | 1 |
 
-**Analysis**
+## Analysis ##
 
 This section describes the mathematical and physical justification for the DSP pipeline of this subsystem.
 
-1.  **Chest Motion**
+### 1. Chest Motion ###
 
 The radar measures chest motion, which can be modeled as:
 
@@ -179,20 +179,20 @@ $$x(t) = A_{\text{resp}} \sin(2\pi f_{\text{resp}} t) + A_{\text{heart}} \sin(2\
 
 As seen in the simulations, respiration produces large but slow oscillations, and heart rate produces small and rapid oscillations \[3\].
 
-1.  **Sampling**
+### 2. Sampling ###
 
 The radar is sampled $$f_s = 100\text{--}200 \text{ Hz}$$
 , the content of interest lies below about 3 Hz therefore, the radar's sampling is higher than what is necessary \[5\].
 
-1.  **Low Pass Filter**
+### 3. Low Pass Filter ###
 
 Before decimation, a lowpass filter (0-5 Hz) is applied to retain the required frequency bands. Respiration goes up to about 1 Hz, and Heart rate up to about 3 Hz therefore, to prevent aliasing and anything irrelevant \[2\].
 
-1.  **Decimation**
+### 4. Decimation ###
 
 The subsystem requirement allows reducing the sampling rate to 10-20 Hz \[6\]. A decimation factor of 5 will be used, so 100 Hz will be downsampled to 20 Hz. Nyquist sampling will then be 10 Hz, which is well above the 3 Hz upper bound.
 
-1.  **Bandpass Filtering**
+### 5. Bandpass Filtering ###
 
 Two bandpass filters will be applied to isolate the respiration and heart rate components \[2\].
 
@@ -202,7 +202,7 @@ Heart Rate: 0.8-3.0 Hz
 
 A bandpass filter will improve overall clarity and clean the signal before applying an FFT.
 
-1.  **FFT**
+### 6. FFT ###
 
 After the data is filtered with a bandpass, an FFT will be applied to identify dominant frequency peaks in each signal. The FFT will convert the waveform y\[n\] to a frequency spectrum \[1\].
 
@@ -216,12 +216,12 @@ $$f_k = \frac{k}{N} \times 20 \text{ Hz}$$
 
 20 Hz comes after decimations. Then the subsystem will search for the largest peak within each physiological band, respiration (0.13-1.0 Hz) and heart rate (0.8-3.0 Hz). Since chest motion is sinusoidal, the FFT peaks are directly linked to respiratory and heart rates.
 
-1.  **BPM Conversion**
+### 7. BPM Conversion ###
 
 $$\text{BPM} = 60 \times f_{\text{peak}}$$
 
 
-1.  **SNR Threshold**
+### 8. SNR Threshold ###
 
 $$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noise Floor}} \right)$$
 
@@ -229,11 +229,11 @@ $$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noi
 This formula functions as a peak reliability test, and finally, SNR<sub>dB</sub>
  has to be greater than 6dB, which is about twice as large as the noise floors, for peak values to be reliable \[7\].
 
-**Summary**
+### Summary ###
 
 This analysis supports the subsystem's proposed solution for DSP. When measured data fall below 3 Hz, a 0-5 Hz lowpass filter ensures anti-aliasing. Then, decimation by 5, reducing sampling from 100 Hz to 20 Hz, satisfies requirements and efficiency. Bandpass filters isolate respiration and heart rates, followed by an FFT to detect frequency peaks. Finally, the peaks are converted to BPM and will be prepared to be sent out.
 
-**References**
+## References ##
 
 \[1\] Kebe, M., Gadhafi, R., Mohammad, B., Sanduleanu, M., Saleh, H., & Al-Qutayri, M. (2020). Human Vital Signs Detection Methods and Potential Using Radars: A Review. Sensors, 20(5), 1454. [https://doi.org/10.3390/s20051454](https://doi.org/10.3390/s20051454)
 
