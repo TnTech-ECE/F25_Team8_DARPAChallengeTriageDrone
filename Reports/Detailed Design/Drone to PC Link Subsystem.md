@@ -3,9 +3,11 @@
 
 ## Introduction
 
-The Drone to PC Link subsystem is responsible for establishing and maintaining a reliable wireless communication pathway between the Aurelia X4 Standard drone [1] and the operator’s laptop. This subsystem enables the transmission of all mission critical data generated onboard, including live video, real time audio, telemetry, and processed triage data such as heart rate, respiratory rate, and cognition results. The subsystem integrates the Jetson Nano onboard computer, the Cube Orange autopilot, and the Aurelia communication hardware to ensure accurate, low latency, and securely delivered information.
+The Drone to PC Link subsystem is responsible for establishing and maintaining a reliable wireless communication pathway between the Aurelia X4 Standard drone [1] and the operator’s laptop running Windows 10 or higher. This subsystem enables the transmission of all mission-critical data generated onboard, including live video, real-time audio, telemetry, and processed triage results. To ensure stable performance and avoid interference with the drone's 2.4 GHz Herelink flight system, this link is explicitly designed to operate on the 5 GHz Wi-Fi band.
 
-This document provides a complete design description of the Drone to PC Link subsystem. It explains how the subsystem fits within the overall triage drone system, presents all constraints and specifications that govern the design, and justifies every major design choice using verifiable information from vendor documentation and established networking standards. Additionally, the document contains a system overview, subsystem interfaces, a buildable communication schematic, a complete Bill of Materials, an operational flowchart, and a full analysis demonstrating that the subsystem satisfies all required performance criteria for safe and accurate triage communication.
+The system integrates a Jetson Nano onboard computer and uses shielded USB 3.0 cabling to mitigate electromagnetic noise that can impact 2.4 GHz RC sensitivity. For maximum bandwidth headroom and link reliability, the video stream is capped at 720p with a reduced frame rate.
+
+This document provides a complete design description, explaining how the subsystem fits within the overall triage drone system and presenting all constraints and specifications that govern the design. It justifies major design choices using verifiable vendor documentation and established networking standards to ensure safe and accurate triage communication.
 
 ## Function of the Subsystem
 
@@ -45,8 +47,9 @@ Within the overall system, this subsystem is therefore the communications backbo
 1.  **The subsystem SHALL transmit telemetry, vitals data, video, and audio from the drone to the operator laptop with stable wireless connectivity [4].**  
 2.  **The subsystem SHALL support wireless transmission using IEEE 802.11 compliant hardware [4].**      
 3.  **The subsystem SHALL wirelessly deliver triage signal processing data from the Jetson Nano to the laptop [5].**  
-4.  **The subsystem SHALL wirelessly stream live video and audio between the drone and the laptop [6].**  
-5.  **The subsystem SHALL support two way audio transmission to allow cognitive assessment commands from the operator [5].** 
+4.  **The subsystem SHALL wirelessly stream live video (capped at 720p resolution and ≤30 fps) and audio between the drone and the laptop to ensure maximum bandwidth headroom and low-latency delivery [6].**  
+5.  **The subsystem SHALL support two way audio transmission to allow cognitive assessment commands from the operator [5].**
+6.  **The subsystem SHALL be compatible with an operator laptop running Windows 10 or higher to ensure full driver support and stable operation of the IEEE 802.11ac wireless hardware.**
 
 These specifications are essential to ensure that all mission critical triage information is delivered accurately and without interruption, allowing the operator to make informed medical decisions in real time.
 
@@ -57,7 +60,8 @@ These specifications are essential to ensure that all mission critical triage in
 3.  **The subsystem MUST not store any transmitted data, including video, audio, telemetry, or vitals [8].**  
 4.  **The subsystem MUST encrypt all transmitted data [2].**  
 5.  **The subsystem MUST operate within the RF limits and coexistence requirements of the Aurelia X4 wireless environment [9].**  
-6.  **The subsystem MUST remain within the power budget provided by the Aurelia X4 payload system [10].**  	
+6.  **The subsystem MUST remain within the power budget provided by the Aurelia X4 payload system [10].**
+7.  **The subsystem MUST use high-quality shielded USB 3.0 cabling for all peripheral connections to the Jetson Nano to mitigate electromagnetic interference (EMI) with the 2.4 GHz RC and telemetry links [11].**
 
 It is important that these constraints are met due to the critical requirement for reliable, real time triage communication during life saving medical operations.
 
@@ -126,7 +130,7 @@ The Drone to PC Link subsystem serves as the central communication pathway that 
 
 -   **Vehicle telemetry data** from the Cube Orange autopilot including GPS coordinates, altitude, attitude, battery status, and system health
     
-    -   Provided as **MAVLink** telemetry messages [11]
+    -   Provided as **MAVLink** telemetry messages [12]
     -   Routed through Herelink for flight safety
 
 #### **Outputs from Drone to PC Link**
@@ -379,7 +383,7 @@ This is electrically even simpler and can be captured with two USB connections.
 1.  **Cable Management and EMI**
     
     -   USB cables should be kept as short as practical to reduce EMI and latency issues.
-    -   Wi Fi adapter antennas should be placed away from high current power wiring to reduce interference. 802.11ac at 5 GHz is sensitive to obstruction and metal structures [4].
+    -   USB 3.0 is known to generate significant noise in the 2.4 GHz spectrum, which can desensitize the drone’s RC receiver and Herelink air unit. To prevent this, all USB 3.0 cables (including the Wi-Fi adapter extension) must be double-shielded. Additionally, the cables should be kept as short as practical and routed away from the drone's antennas [4].
         
 2.  **Mounting Constraints**
     
@@ -388,6 +392,10 @@ This is electrically even simpler and can be captured with two USB connections.
 3.  **Thermal Considerations**
     
     -   Jetson Nano can reach high temperatures under sustained GPU load, so airflow or heatsinking must be provided according to NVIDIA guidelines [3].
+  
+4. **Video Configuration**
+
+    - The Jetson Nano software (GStreamer or OpenCV pipeline) must be configured to downscale the raw camera input to 1280x720 before encoding to H.264. This ensures that the Wi-Fi link is never saturated by high-resolution raw data [13].
 
 ## **Flowchart**
 
@@ -408,7 +416,6 @@ This flowchart ensures that all critical communication elements are validated be
 | -------------- | ----------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------- | --- | ------------------ | ------------- |
 | Wi-Fi Adapter  | Dual Band USB 3.0 Wi-Fi Adapter supporting 802.11ac for telemetry, video, audio, and data transmission | TP-Link      | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S?th=1)     | 2   | $29.99              | $59.98              |
 
-
 **Cost Summary**
 
 - **Total:** $59.98
@@ -418,6 +425,7 @@ This flowchart ensures that all critical communication elements are validated be
 - No PCB fabrication is required unless the project team chooses to add a small breakout board.
 - No additional USB protection components are listed because the Jetson Nano carrier board already includes USB protection circuitry.
 - Only one Archer T4U Plus is strictly required for the drone; the laptop may use built in Wi Fi.
+- Laptop hardware must support Windows 10+ for compatibility with the Archer T4U Plus Wi-Fi adapter
 This BOM represents the **minimum required hardware** for the Drone to PC Link subsystem.
 
 ## **Analysis**
@@ -516,6 +524,8 @@ The link is sufficient at 40 m with small margin [7][10].
 
 #### **8.2 Bandwidth Requirement vs 802.11ac Capacity**
 
+By capping the video at 720p, the required application bitrate (`R_video`) is stabilized at approximately 1.5 to 2.0 Mbps. This is a reduction from the 5–8 Mbps typically required for 1080p, providing a significant "buffer" that prevents packet congestion during rapid drone maneuvers or when the signal encounters physical obstructions.
+
 This link carries:
 
 - Compressed H.264 video
@@ -524,7 +534,7 @@ This link carries:
 
 Representative worst case media allocation:
 
-`R_video ≈ 2.0 Mbps (720p low-medium bitrate) ` 
+`R_video ≈ 2.0 Mbps (720p low-medium bitrate)` 
 
 `R_audio ≈ 64 kbps (two-way Opus audio)`  
 
@@ -557,13 +567,13 @@ WebRTC glass to glass worst case pipeline model:
 
 `T_total = T_capture + T_encode + T_network + T_jitter + T_decode`
 
-`T_capture ≤ 50 ms (camera and vitals capture @30 fps)  `
+`T_capture ≤ 50 ms (camera and vitals capture @30 fps)`
 
-`T_encode ≤ 30 ms (H.264 hardware accelerated encode)  `
+`T_encode ≤ 30 ms (H.264 hardware accelerated encode)`
 
-`T_network ≤ 20 ms (local 802.11ac transport, good RSSI)  `
+`T_network ≤ 20 ms (local 802.11ac transport, good RSSI)`
 
-`T_jitter ≤ 150 ms (WebRTC jitter buffer worst case)  `
+`T_jitter ≤ 150 ms (WebRTC jitter buffer worst case)`
 
 `T_decode ≤ 50 ms (decode + render on laptop)`
 
@@ -614,4 +624,8 @@ If IP packet delivery ratio is 99%+ (expected under 40m design range as shown ab
 
 [10] Federal Communications Commission, “FCC Test Report: TP Link Archer T4U Plus,” FCC Filing Database, Accessed Dec. 2, 2025. Available: [LINK](https://fccid.io/)
 
-[11] ArduPilot Development Team, “MAVLink Telemetry Streams,” ArduPilot Documentation, Accessed Dec. 2, 2025.  Available: [LINK](https://ardupilot.org/)
+[11] Intel Corp., "USB 3.0* Radio Frequency Interference Impact on 2.4 GHz Wireless Devices," White Paper, Apr. 2012. [Online]. Available: [LINK](https://www.usb.org/sites/default/files/327216.pdf)
+
+[12] ArduPilot Development Team, “MAVLink Telemetry Streams,” ArduPilot Documentation, Accessed Dec. 2, 2025.  Available: [LINK](https://ardupilot.org/)
+
+[13] OpenCV Team, "Getting Started with Video," OpenCV 4.x Documentation, 2024. [Online]. Available: [LINK](https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html)
