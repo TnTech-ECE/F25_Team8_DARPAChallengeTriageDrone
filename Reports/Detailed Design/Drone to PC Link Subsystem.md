@@ -93,7 +93,7 @@ It cannot support:
 -   Companion computer video streams
 -   Real time WebRTC based communication
 
-To provide these features, the subsystem introduces a **Jetson Nano Wi-Fi communication pathway**. A dual band IEEE 802.11ac adapter such as the TP Link Archer T4U Plus creates a high throughput short range wireless link to the operator’s laptop. IEEE 802.11ac supports PHY rates in the hundreds of megabits per second at distances of 20 to 50 ft, enabling low latency, low packet loss delivery of triage data [4, 7].
+To provide these features, the subsystem introduces a **Jetson Nano Wi-Fi communication pathway**. A dual band IEEE 802.11ac adapter such as the TP Link Archer T4U Plus creates a high throughput short range wireless link to the operator’s laptop. IEEE 802.11ac supports PHY rates in the hundreds of megabits per second at distances of 20 to 50 ft, enabling low latency, low packet loss delivery of triage data [4][7].
 
 On top of this Wi-Fi channel, the system uses **WebRTC and WebSockets**, which provide:
 
@@ -119,6 +119,8 @@ Together, this architecture satisfies all specifications and constraints by:
 -   Respecting medical privacy standards [8]
 
 This dual link system is not optional but necessary due to the documented limitations of Herelink and the high throughput, low latency requirements of the triage mission.
+
+To ensure mechanical flexibility, the design supports two hardware configurations: The TP-Link Archer T4U Plus is the primary choice due to its high-gain external antennas. However, the system is also compatible with an Intel 8265 M.2 Wireless Card. The M.2 variant serves as a weight-saving alternative if the payload's center of gravity or total mass exceeds the Aurelia X4's stability margins.
 
 ## **Interface with Other Subsystems**
 
@@ -152,7 +154,10 @@ The Drone to PC Link subsystem serves as the central communication pathway that 
 -   **Power availability** to the Jetson Nano and Wi-Fi module
     -   The Jetson Nano requires approximately 5 to 10 W depending on workload [3]
     -   The Archer T4U Plus requires approximately 2.5 W peak [10]
-        
+
+Note:
+
+If the M.2 card is used instead of the USB adapter, power is drawn directly from the Jetson Nano’s 3.3V rail via the M.2 slot, reducing the load on the USB 3.0 bus.       
 
 #### **Outputs from Drone to PC Link**
 
@@ -396,6 +401,9 @@ This is electrically even simpler and can be captured with two USB connections.
 4. **Video Configuration**
 
     - The Jetson Nano software (GStreamer or OpenCV pipeline) must be configured to downscale the raw camera input to 1280x720 before encoding to H.264. This ensures that the Wi-Fi link is never saturated by high-resolution raw data [13].
+  
+5. **Alternative M.2 Mounting**
+    - In the M.2 configuration, the Archer T4U Plus is replaced by an Intel 8265 card installed in the J11 slot under the Jetson module. This requires the addition of two U.FL-to-SMA pigtail cables and two lightweight 5GHz dipole antennas mounted to the drone frame.
 
 ## **Flowchart**
 
@@ -412,21 +420,26 @@ This flowchart ensures that all critical communication elements are validated be
 
 ## Bill of Materials (BOM)
 
-| Item            | Description                                                                                           | Manufacturer | Part Number     | Distributor | Qty | Cost per Item (USD) | Total Cost (USD) |
-| -------------- | ----------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------- | --- | ------------------ | ------------- |
-| Wi-Fi Adapter  | Dual Band USB 3.0 Wi-Fi Adapter supporting 802.11ac for telemetry, video, audio, and data transmission | TP-Link      | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S?th=1)     | 2   | $29.99              | $59.98              |
 
-**Cost Summary**
+### **Bill of Materials (BOM)**
 
-- **Total:** $59.98
+| Item | Description | Manufacturer | Part Number | Distributor | Qty | Unit Cost | Total Cost |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Wi-Fi Adapter (Primary)** | Dual Band USB 3.0 Wi-Fi Adapter (802.11ac) with high-gain antennas | TP-Link | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S) | 1 | $29.99 | $29.99 |
+| **USB 3.0 Cable (Primary)** | Double-shielded USB 3.0 extension (to mitigate 2.4GHz EMI) | Cable Matters | 202001-BLK-1m | [Amazon](https://www.amazon.com/dp/B00C7S2FRE) | 1 | $8.99 | $8.99 |
+| **Wi-Fi Card (Contingency)** | Intel Dual Band Wireless-AC 8265, M.2 2230, Key E (Weight-saving alternative) | Intel | 9260.NGWG.NV | [Amazon](https://www.amazon.com/dp/B0721MLM8B) | (1)* | $17.09 | $17.09 |
+| **RF Pigtail Cables (Contingency)** | U.FL to RP-SMA Female Bulkhead (Required for M.2 variant) | Highfine | HF-KIT-9260 | [Amazon](https://www.amazon.com/dp/B0CS6KBDJJ/) | (2)* | $7.99 | $7.99 |
+| **Antennas (Contingency)** | 2.4GHz/5GHz Dual Band Antennas (Required for M.2 variant) | TREADALT-TEC | DB-ANT-SMA | [Amazon](https://www.amazon.com/dp/B08X45Q44Z) | (2)* | $6.99 | $6.99 |
+| **Plan A Cost** | | | | | | | **$38.98** |
+| **Plan B Cost** | | | | | | | **$32.07** |
+| **Plan A+B Cost** | | | | | | | **$71.05** |
 
-### Notes
-
+**BOM Notes:**
+- **(*) Contingency Items:** These components are listed for design flexibility. They will only be procured if weight/size constraints require a transition from the USB adapter to the internal M.2 slot.
+- **EMI Mitigation:** All USB cabling must be double-shielded per Design Constraint 7 to protect the 2.4 GHz Herelink sensitivity.
 - No PCB fabrication is required unless the project team chooses to add a small breakout board.
-- No additional USB protection components are listed because the Jetson Nano carrier board already includes USB protection circuitry.
-- Only one Archer T4U Plus is strictly required for the drone; the laptop may use built in Wi Fi.
 - Laptop hardware must support Windows 10+ for compatibility with the Archer T4U Plus Wi-Fi adapter
-This BOM represents the **minimum required hardware** for the Drone to PC Link subsystem.
+
 
 ## **Analysis**
 
@@ -601,6 +614,13 @@ Justified by design components:
 - AES–128 secure RF transport [2][9]
 
 If IP packet delivery ratio is 99%+ (expected under 40m design range as shown above), then recovered media streams remain within the `<1% error rate constraint` after MAC retries and WebRTC recovery [5][6].  
+
+#### **8.5 Weight and Payload Sensitivity Analysis**
+To ensure the subsystem remains within the Aurelia X4's payload limits while maintaining maximum performance, a weight-reduction trade-off was performed between the primary and contingency hardware configurations:
+- Primary (USB): The TP-Link Archer T4U Plus weighs approximately 170g (including integrated cables and high-gain antennas). This configuration is prioritized for its superior link margin and 5dBi signal gain.
+- Contingency (M.2): The Intel 8265 M.2 alternative weighs <30g (including U.FL pigtails and lightweight dipole antennas).
+
+While the USB adapter provides the best communication stability, the M.2 card offers a 140g weight saving. This contingency path is maintained to ensure the subsystem can be optimized if the overall drone flight time or center of gravity is significantly compromised during final assembly.
 
 
 ## References
