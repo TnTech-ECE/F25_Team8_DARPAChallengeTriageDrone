@@ -27,7 +27,7 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
 
 ### Radar Data ### 
 
-  The Infineon BGT60UTR11AIP radar provides raw data at 100-200 Hz, capturing chest motions associated with respiratory and heart rates \[5\].
+  The Infineon BGT60UTR11AIP radar provides complex I/Q( In-phase and Quadrature) data at 100-200 Hz samples, and phase information is extracted. Small periodic chest displacements from respiration and cardiac activity cause small variations in the radar signal, resulting in time-varying phase changes. By tracking phase variations over time, the subsystem recovers a signal proportional to chest motion, and respiratory and cardiac motion appear as low-frequency components within it. \[1\],\[2\],\[5\].
 
 ### Low Pass Filtering ### 
 
@@ -35,7 +35,7 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
 
 ### Decimation ###
 
-   After filtering, the signal will then be down sampled to 10-20 Hz to reduce computational load while retaining all relevant physiological information \[6\]. This allows the Jetson Nano to meet the 500ms         update cycle processing requirements \[4\].
+   After filtering, the signal will then be down-sampled to 10-20 Hz to reduce computational load while retaining all relevant physiological information \[6\]. This allows the Jetson Nano to meet the 500ms         update cycle processing requirements \[4\].
 
 ### Heart and Respiration Rate Bandpass Filtering ###
 
@@ -53,8 +53,10 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
    The subsystem validates peaks using these criteria \[7\]:
 
    -   The peak must lie within the physiological band.
-   -   The peak must exceed a noise floor threshold, and if no peak can be detected, the system will report the vital sign as unreliable and therefore unable to be detected.
-
+   -   The peak must exceed a noise floor threshold, and if no peak can be detected, the system will report the vital sign as unreliable and therefore unable to be detected. h
+   
+   Failure may occur due to a person's orientation (such as lying on their stomach), excessive signal attenuation (covered by debris, thick clothing, etc.), subject motion (rolling, moving an arm, etc.), or platform interference. In these cases, physiological components may fall below the noise floor or outside expected frequency ranges.
+   
 ### Vitals Extraction ### 
 
   The peak frequency will then be converted to breaths per minute (BPM) or beats per minute (BPM) \[7\].
@@ -93,6 +95,8 @@ This solution is lightweight and efficient, and it incorporates only the radar a
 ## MATLAB DSP Validation ##
 
 A MATLAB simulation was performed to illustrate the DSP pipeline using ideal physiological signals.
+
+Note: The amplitudes used in the MATLAB simulation are for demonstration purposes and do not represent exact physical chest displacement. The simulated signals are intended to illustrate ideal frequency content rather than calibrated motion magnitude. The DSP pipeline is designed to detect dominant frequency peaks associated with respiration and heart rate \[1\], \[3\].
 
 **Table 1. Simulation Parameters:** A sample chest motion signal was generated to demonstrate how the DSP pipeline performs ideally. The radar is modeled from a respiration and heart rate sinusoid at 100 Hz
 
@@ -227,7 +231,11 @@ $$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noi
 
 
 This formula functions as a peak reliability test, and finally, SNR<sub>dB</sub>
- has to be greater than 6dB, which is about twice as large as the noise floors, for peak values to be reliable \[7\].
+ has to be greater than 6dB, which is about twice the noise floor, for peak values to be reliable \[7\].
+
+ ### Motion Related Artifacts ###
+
+Despite the Aurelia X4's ability to maintain a stable hover, small platform motions may introduce low-frequency Doppler components into the radar data. These artifacts primarily appear outside the known physiological frequency ranges. The DSP pipeline mitigates these artifacts through frequency isolation. The low-pass filter in the DSP pipeline removes any high-frequency components, while the bandpass filter restricts analysis to respiration (0.13-1.0 Hz) and heart rate (0.8-3.0 Hz). As a result, any Doppler effects outside of these ranges are rejected. Finally, in the DSP pipeline, peak validation using an SNR threshold ensures that only dominant periodic components are selected. If Doppler motion dominates and peak detection is not possible, the DSP pipeline will report as such rather than producing an incorrect estimate \[4\],\[6\].
 
 ### Summary ###
 
