@@ -27,7 +27,7 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
 
 ### Radar Data ### 
 
-  The Infineon BGT60UTR11AIP radar provides complex I/Q( In-phase and Quadrature) data at 100-200 Hz samples, and phase information is extracted. Small periodic chest displacements from respiration and cardiac activity cause small variations in the radar signal, resulting in time-varying phase changes. By tracking phase variations over time, the subsystem recovers a signal proportional to chest motion, and respiratory and cardiac motion appear as low-frequency components within it. \[1\],\[2\],\[5\].
+  The Infineon BGT60UTR11AIP radar provides complex I/Q (in-phase and quadrature) data sampled at 100–200 Hz, from which phase information is extracted. Small periodic chest displacements caused by respiration and cardiac activity introduce small variations in the effective radar signal path length, resulting in time-varying phase changes. By tracking phase variations over time, the subsystem recovers a signal proportional to chest motion, within which respiratory and cardiac activity appear as low-frequency components \[1\],\[2\],\[5\].
 
 ### Low Pass Filtering ### 
 
