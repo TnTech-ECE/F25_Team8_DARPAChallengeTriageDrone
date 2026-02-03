@@ -53,7 +53,7 @@ Radar-based vitals detection research has shown that respiration and cardiac mot
    The subsystem validates peaks using these criteria \[7\]:
 
    -   The peak must lie within the physiological band.
-   -   The peak must exceed a noise floor threshold, and if no peak can be detected, the system will report the vital sign as unreliable and therefore unable to be detected. h
+   -   The peak must exceed a noise floor threshold, and if no peak can be detected, the system will report the vital sign as unreliable and therefore unable to be detected. 
    
    Failure may occur due to a person's orientation (such as lying on their stomach), excessive signal attenuation (covered by debris, thick clothing, etc.), subject motion (rolling, moving an arm, etc.), or platform interference. In these cases, physiological components may fall below the noise floor or outside expected frequency ranges.
    
