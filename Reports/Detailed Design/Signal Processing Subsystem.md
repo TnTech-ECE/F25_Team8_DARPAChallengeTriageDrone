@@ -186,11 +186,11 @@ As seen in the simulations, respiration produces large but slow oscillations, an
 ### 2. Sampling ###
 
 The radar is sampled $$f_s = 100\text{--}200 \text{ Hz}$$
-, the content of interest lies below about 3 Hz therefore, the radar's sampling is higher than what is necessary \[5\].
+The content of interest lies below about 3 Hz; therefore, the radar's sampling is higher than what is necessary \[5\].
 
 ### 3. Low Pass Filter ###
 
-Before decimation, a lowpass filter (0-5 Hz) is applied to retain the required frequency bands. Respiration goes up to about 1 Hz, and Heart rate up to about 3 Hz therefore, to prevent aliasing and anything irrelevant \[2\].
+Before decimation, a lowpass filter (0-5 Hz) is applied to retain the required frequency bands. Respiration goes up to about 1 Hz, and Heart rate up to about 3 Hz; therefore, to prevent aliasing and anything irrelevant \[2\].
 
 ### 4. Decimation ###
 
@@ -208,7 +208,7 @@ A bandpass filter will improve overall clarity and clean the signal before apply
 
 ### 6. FFT ###
 
-After the data is filtered with a bandpass, an FFT will be applied to identify dominant frequency peaks in each signal. The FFT will convert the waveform y\[n\] to a frequency spectrum \[1\].
+After filtering with a bandpass, an FFT will be applied to identify dominant frequency peaks in each signal. The FFT will convert the waveform y\[n\] to a frequency spectrum \[1\].
 
 $$Y[k] = \sum_{n=0}^{N-1} y[n]e^{-j\frac{2\pi}{N}kn}$$
 
@@ -225,7 +225,7 @@ $$f_k = \frac{k}{N} \times 20 \text{ Hz}$$
 $$\text{BPM} = 60 \times f_{\text{peak}}$$
 
 
-### 8. SNR Threshold ###
+### 8. SNR (Signal to Noise Ratio) Threshold ###
 
 $$\text{SNR}_{\text{dB}} = 20 \log_{10} \left( \frac{|Y[\text{peak}]|}{\text{Noise Floor}} \right)$$
 
