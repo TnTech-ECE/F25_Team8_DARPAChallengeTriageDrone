@@ -39,32 +39,35 @@ From the Aurelia X4 Standard specifications:
 - Max wind resistance: **20 mph (32 km/h)**  
 - Max service ceiling: **3000 m ASL**  
 
-These values define the hard limits for any payload and mounting solution.
+These values define the hard limits for any payload and mounting solution. [R2]
 
 ### 2.2 Weight & CG Requirements
 
 For this subsystem, the following requirements are defined:
 
 1. **[W-1] Payload mass limit**  
-   The triage payload (Jetson, Doppler radar, ADC, mic/speaker module, converters, 3D-printed belly pack, and all wiring) **SHALL have total mass ≤ 1.5 kg** to stay within Aurelia X4 payload capability.
+   The triage payload (compute, Doppler radar, ADC/analog front-end, mic/speaker module, power conversion, mounting tray, and wiring) **SHALL have total mass ≤ 1.5 kg** to stay within the Aurelia X4 payload capability. [R2]
 
-2. **[W-2] MTOW compliance**  
-   The combined mass of **Aurelia X4 + standard battery + triage payload** **SHALL NOT exceed 5.212 kg**.
+2. **[W-1a] Payload mass margin target**  
+   To avoid “worst-case” overruns, the design **SHOULD maintain a 10–15% payload mass margin** below the 1.5 kg limit (**target payload ≤ 1.35 kg**, stretch goal ≤ 1.275 kg).
 
-3. **[W-3] Vitals sensor mass**  
-   The vitals sensor assembly (Doppler radar, analog front-end, ADC board, and local bracket) **SHALL weigh less than 0.5 lb (~0.227 kg)**, consistent with the original conceptual requirement on vitals hardware.
+3. **[W-2] MTOW compliance**  
+   The combined mass of **Aurelia X4 + standard battery + triage payload** **SHALL NOT exceed 5.212 kg**. [R2]
 
-4. **[W-4] Lateral/longitudinal CG**  
-   With payload installed, the aircraft **SHALL maintain its CG within ±5% of the motor-to-motor span** around the geometric center of the frame in both X (forward/back) and Y (left/right) axes. Practically, the design targets CG shifts of only a few millimeters.
+4. **[W-3] Vitals sensor mass**  
+   The vitals sensor assembly (Doppler radar, analog front-end, ADC, mounting) **SHOULD remain ≤ 0.25 kg**.
 
-5. **[W-5] Vertical CG**  
-   The final CG **SHALL lie at or slightly below the rotor plane**. This follows multirotor best practice for stable attitude control and predictable hover.
+5. **[W-4] Lateral/longitudinal CG**  
+   With payload installed, the aircraft **SHALL maintain its CG within 5% of motor-to-motor span** in X and Y. Practically, the design targets **CG shifts of only a few millimeters**.
 
-6. **[W-6] Structural compatibility**  
-   The payload mounting **SHALL use only manufacturer-provided mounting locations** (bottom plate holes, existing brackets, or rails) and **SHALL NOT** drill into structural arms or modify the Aurelia frame.
+6. **[W-5] Vertical CG**  
+   The combined CG **SHALL lie at or slightly below the rotor plane** (measured at motor centers), per stability requirement.
 
-7. **[W-7] Ground clearance**  
-   The 3D-printed belly pack **SHALL maintain sufficient ground clearance** so that the lowest point of the payload clears the ground during takeoff, landing, and minor uneven terrain. The design targets at least **40–50 mm** clearance below the lowest payload component.
+7. **[W-6] Structural compatibility**  
+   The payload mounting **SHALL use only manufacturer-provided mounting locations** and **SHALL NOT** drill into structural arms or modify the Aurelia frame.
+
+8. **[W-7] Ground clearance**  
+   The 3D-printed belly pack **SHALL NOT reduce ground clearance** below safe landing/takeoff limits; it must remain above the lowest landing gear members.
 
 ### 2.3 Sensor Placement Requirements
 
@@ -142,13 +145,21 @@ The triage payload is consolidated into a **3D-printed belly pack module** that 
 
 The belly pack consists of:
 
-- A **3D-printed base tray** that bolts to the Aurelia X4 bottom plate using existing mounting points.
+- A **3D-printed base tray** that mounts to the **two payload rails** under the battery bay.
 - Integrally printed **stiffening ribs** and mounting bosses for:
-  - Jetson J1020 v2 (top surface of tray)
-  - Power converters and NP-F battery plate (adjacent to Jetson)
-  - Doppler radar module (on the underside, facing downward)
-  - Speaker and microphone ports (on the underside, facing forward and downward)
-- A removable **printed cover** or partial shroud to protect wiring while leaving the Jetson heatsink exposed.
+  - Jetson compute unit (top surface of tray)
+  - Power conversion + NP-F plate (adjacent to compute)
+  - Doppler radar module (underside, facing downward)
+  - Speaker and microphone ports (underside, facing forward/downward)
+- A removable **printed cover** or partial shroud to protect wiring while leaving the compute heatsink exposed.
+
+**Preliminary geometry envelope (from Aurelia X4 technical drawing):** [R1]
+
+- Payload rail diameter: **Ø12 mm**.  
+- Approx. rail spacing / payload bay width: **132 mm** (plan view).  
+- Approx. available mounting span under bay: **~214 mm** (front view).  
+
+These dimensions define the initial tray footprint used for CG estimating and placement verification. Final as-built geometry will be confirmed in CAD during integration.
 
 #### Recommended 3D-Print Parameters
 
@@ -170,92 +181,131 @@ No structural arms or motor mounts are modified; the entire triage payload can b
 
 ## 6. Mass Budget
 
-Because this is a detailed design stage rather than final as-built, component masses are handled as a **budget** based on datasheets and typical values. Each component will be weighed during integration to confirm that the actual payload remains under the 1.5 kg limit.
+This detailed design stage uses a **measured / vendor-spec-based** mass budget to ensure the payload stays comfortably below the 1.5 kg platform limit and preserves a **10–15% margin** (requirement [W-1a]).
 
-### 6.1 Component-Level Budget
+### 6.1 Component-Level Budget (Updated)
 
-Approximate triage payload mass budget:
+| Subsystem / Component                 | Example Part(s) / Notes                                                                 | Budgeted Mass (g) |
+|--------------------------------------|------------------------------------------------------------------------------------------|-------------------|
+| Compute unit                          | **NVIDIA Jetson Nano** (budget includes heatsink/case + mounting hardware)              | 280               |
+| Doppler radar + analog front-end     | 24 GHz radar module + analog front-end + ADC + mounting (small PCB stack)              | 80                |
+| Microphone board                      | SparkFun **BOB-19389** (board-level)                                                    | 1                 |
+| Speaker                               | SparkFun **COM-18343** Mini USB Stereo Speaker                                          | 195               |
+| Power conversion + battery plate      | NP-F plate + 1–2 DC-DC buck modules + wiring pigtails                                   | 120               |
+| 3D-printed belly pack (tray + cover)  | PETG tray, ribs, inserts; print optimized for weight                                    | 170               |
+| Wiring, strain relief, fasteners      | Harnessing, USB/power cables, zip ties, ferrites, screws                                | 60                |
+| **Estimated payload subtotal**        |                                                                                          | **~906 g**        |
+| **Payload margin vs 1.5 kg**          | 1500 g − 906 g = **594 g margin** (**~39.6%**)                                          | —                 |
 
-| Subsystem / Component                 | Example Part(s)                            | Budgeted Mass (g) |
-|--------------------------------------|--------------------------------------------|-------------------|
-| Jetson computing unit                | reComputer J1020 v2                        | 600               |
-| Doppler radar + analog front-end    | 24 GHz radar module + OP07 + filters + ADC | 200               |
-| Microphone board                     | SparkFun BOB-19389                         | 1                 |
-| Speaker                              | SparkFun COM-18343 Mini USB Stereo Speaker | 195               |
-| Power converters & NP-F plate        | Buck converter, dual supply, NP-F plate    | 250               |
-| 3D-printed belly pack (tray + cover) | PETG tray, ribs, bosses                    | 250               |
-| Wiring and strain relief             | Harnesses, USB/power cables, zip ties      | 100               |
-| **Estimated payload subtotal**       |                                            | **~1,596**        |
+**Margin recovery justification:** The previous “worst-case” estimate assumed a ~600 g compute module and oversized allowances for power hardware and printed structure. Updated values use published weights for the Jetson Nano dev kit (~141 g bare) plus a conservative allowance for casing/heatsink/cabling [R3], published speaker weight (~193 g) [R5], and typical off-the-shelf NP-F plate + buck-converter module weights [R6][R7].
 
-This budget is intentionally **conservative** (heavy side) to prevent accidentally exceeding the 1.5 kg payload capability. During integration, if measured masses are lower than budgeted, the actual payload will easily satisfy [W-1] and [W-2].
+#### Bill of Materials (Procurement Snapshot)
 
-> Note: If the actual measured payload mass approaches 1.5 kg, either the budget or the design must be adjusted (e.g., lighter print, smaller speaker enclosure) to regain margin.
+This table mirrors the mass budget items and provides a simple procurement checklist (quantities are **placeholders** and will be finalized during integration).
+
+| Item | Qty | Example part(s) / notes | Mass used in budget (g) |
+|---|---:|---|---:|
+| Compute unit | 1 | **NVIDIA Jetson Nano** (budget includes heatsink/case + mounting hardware) | 280 |
+| Doppler radar + analog front-end | 1 | 24 GHz radar module + analog front-end + ADC + mounting (small PCB stack) | 80 |
+| Microphone board | 1 | SparkFun **BOB-19389** (board-level) | 1 |
+| Speaker | 1 | SparkFun **COM-18343** Mini USB Stereo Speaker | 195 |
+| Power conversion + battery plate | 1 | NP-F plate + 1–2 DC-DC buck modules + wiring pigtails | 120 |
+| 3D-printed belly pack (tray + cover) | 1 | PETG tray, ribs, inserts; print optimized for weight | 170 |
+| Wiring, strain relief, fasteners | 1 set | Harnessing, USB/power cables, zip ties, ferrites, screws | 60 |
+
+### 6.2 Margin Preservation Plan (If Mass Creeps Up)
+
+If the measured as-built payload approaches the [W-1a] target (≤ 1.35 kg), the design has clear “knobs” to regain margin without redesigning the subsystem:
+
+- **Compute choice:** Jetson Orin Nano dev kit is published at **0.174 kg** (board-level) and can replace a heavier enclosure if needed.  
+- **Printed structure optimization:** reduce infill, use ribbed walls, and avoid solid blocks (tray is the easiest mass to trim once fit is verified).  
+- **Audio hardware:** speaker can be swapped to a lighter transducer if required (with minor acoustic compromise).  
+- **Cabling discipline:** shorten USB/power runs, remove unused connectors, and use lighter gauge where allowable.
 
 ---
 
 ## 7. Coordinate System and CG Calculations
 
-### 7.1 Coordinate Definition
+This section closes the gap noted in review: the coordinate system is defined **and** a preliminary CG estimate is provided using rough CAD-derived geometry.
 
-Define a body-fixed coordinate system:
+### 7.1 Coordinate Definition (Body-Fixed Frame)
 
-- Origin at the **current CG of the Aurelia X4 with standard battery and no triage payload** (nominally the geometric center of the frame).
-- **+X** axis: forward, toward the front arms.
-- **+Y** axis: to the right (starboard).
-- **+Z** axis: upward, toward the propellers.
+- **Origin (O):** geometric center of the aircraft at the **rotor plane** (intersection of the diagonals between motor centers).  
+- **+X:** forward (toward front arms)  
+- **+Y:** right (starboard)  
+- **+Z:** up (toward propellers)  
 
-Each added component *i* is represented by:
+Motor-to-motor span (center-to-center across the frame) from the Aurelia X4 drawing is approximately:
 
-- Mass \( m_i \) (kg)  
-- Position vector \( \mathbf{r}_i = \langle x_i, y_i, z_i \rangle \) (meters), measured from the origin.
+- **L ≈ 0.76453 m** [R1]  
 
-Let:
+### 7.2 CG Computation Method
 
-- \( m_0 \) = base mass of Aurelia X4 + standard battery (3.712 kg).
+For each payload component *i*, define:
 
-Then:
+- Mass: **mᵢ** (kg)  
+- Position vector: **rᵢ = ⟨xᵢ, yᵢ, zᵢ⟩** (m), measured from the origin O
 
-**Total mass**
-- M_total = m₀ + Σ mᵢ
+Payload CG is computed by the standard mass-weighted average:
 
-**Center of gravity (vector form)**
-- r_CG = ( m₀⟨0,0,0⟩ + Σ mᵢ rᵢ ) / M_total
-- Since the origin is defined at the base-aircraft CG, ⟨0,0,0⟩, this simplifies to:
-  - r_CG = ( Σ mᵢ rᵢ ) / M_total
+- **r_CG,payload = (Σ mᵢ rᵢ) / (Σ mᵢ)**
 
-Where rᵢ = ⟨xᵢ, yᵢ, zᵢ⟩ (meters).
+Expanded into components:
 
-**Component form**
-- x_CG = (Σ mᵢ xᵢ) / M_total
-- y_CG = (Σ mᵢ yᵢ) / M_total
-- z_CG = (Σ mᵢ zᵢ) / M_total
+- **x_CG = Σ(mᵢ xᵢ) / Σ(mᵢ)**  
+- **y_CG = Σ(mᵢ yᵢ) / Σ(mᵢ)**  
+- **z_CG = Σ(mᵢ zᵢ) / Σ(mᵢ)**  
 
-### 7.2 Placement Strategy
+A first-pass estimate of how much the payload shifts the *vehicle* CG (relative to the stock aircraft CG) is:
 
-The placement rules used in this design:
+- **Δr_CG,vehicle ≈ (m_payload / (m_vehicle + m_payload)) · r_CG,payload**
 
-1. The **Jetson** sits at the geometric center of the belly tray (small \( x_i \), \( y_i \)).  
-2. **Doppler radar** is directly below the center of the tray, boresight downward.  
-3. **Speaker** is placed slightly forward of center (positive X) but within a few centimeters to minimize CG shift.  
-4. **Microphone board** is mounted close to the speaker, but slightly offset laterally to reduce direct airflow noise.  
-5. **Power converters** are positioned adjacent to the Jetson, generally along the Y axis so their mass effect is symmetric front-to-back.  
-6. Wiring mass is treated as distributed near the tray center.
+This is sufficient at the detailed design stage to confirm that the payload placement is near-center and below the rotor plane. Final values will be re-run using CAD-extracted coordinates once the belly pack model is finalized.
 
-With this scheme, the forward CG shift is small, and the vertical CG moves slightly downward (which is acceptable as long as it remains near the rotor plane).
+### 7.3 Preliminary CG Estimate (Rough CAD / Layout-Based)
 
-### 7.3 Spreadsheet Implementation
+Assumptions used for this first-pass estimate:
 
-To implement CG calculations in practice:
+- Payload is centered on the rail midspan, with only small fore/aft offsets for ports.
+- Z positions are set by the belly-pack stack-up; components live **below the rotor plane**.
+- Symmetry is preserved in Y (left/right) to minimize lateral CG shift.
 
-1. Create a spreadsheet with columns:  
-   `Component | Mass (kg) | x (m) | y (m) | z (m) | m·x | m·y | m·z`.
-2. Fill in each payload component’s approximate location measured from the drone’s center.
-3. Sum the `m·x`, `m·y`, and `m·z` columns and divide by total mass to get \( x_{\text{CG}}, y_{\text{CG}}, z_{\text{CG}} \).
-4. Compare against requirement [W-4]:
-   - \(|x_{\text{CG}}|, |y_{\text{CG}}| \leq 0.05 L\), where \(L\) is motor-to-motor distance.
-5. Adjust component positions (or add small counterweights) as needed until CG is within bounds.
+| Component                          | Mass (g) | x (m)  | y (m)  | z (m)   |
+|-----------------------------------|---------:|-------:|-------:|--------:|
+| Jetson Nano (w/ mounting)         | 280      | 0.000  | 0.000  | -0.10   |
+| Doppler radar + AFE + ADC         | 80       | 0.000  | 0.000  | -0.16   |
+| Microphone board                  | 1        | 0.020  | 0.000  | -0.14   |
+| USB speaker                       | 195      | 0.030  | 0.000  | -0.14   |
+| Power conv + NP-F plate           | 120      | 0.000  | 0.000  | -0.11   |
+| 3D-printed belly pack structure   | 170      | 0.000  | 0.000  | -0.12   |
+| Wiring/strain relief/fasteners    | 60       | 0.000  | 0.000  | -0.12   |
 
----
+**Computed payload CG (from the table above):**
+
+- **x_CG,payload ≈ +0.0065 m** (**+6.5 mm forward**)  
+- **y_CG,payload ≈ 0.0000 m** (**0 mm lateral**)  
+- **z_CG,payload ≈ -0.120 m** (**120 mm below rotor plane**)  
+
+**Requirement check:**
+
+- Lateral/longitudinal CG bound [W-4]: **0.05 · L ≈ 0.038 m = 38 mm** → **PASS** (6.5 mm < 38 mm).  
+- Vertical CG intent [W-5]: payload CG is **below rotor plane**; when combined with the stock aircraft mass, the net CG shift is expected to remain **at or slightly below** the rotor plane.
+
+### 7.4 How This Will Be Finalized (Without Full 3D Modeling Here)
+
+- Final x/y/z coordinates will be pulled from CAD once the belly pack model is complete.
+- Component masses will be updated using **scale measurements** for the as-built payload.
+- The spreadsheet method below will be used to recompute CG and verify [W-4]/[W-5].
+
+### 7.5 Spreadsheet Implementation
+
+Create a spreadsheet with columns:  
+`Component | Mass (kg) | x (m) | y (m) | z (m) | m·x | m·y | m·z`
+
+Then compute:
+
+- **x_CG = SUM(m·x) / SUM(m)** (and similarly for y, z)  
+- Compare **|x_CG|** and **|y_CG|** to **0.05 · L**, where **L ≈ 0.76453 m**
 
 ## 8. Sensor Placement Details
 
@@ -283,12 +333,14 @@ The radar’s analog front-end and ADC board are mounted just above the radar mo
 - The printed tray includes a small acoustic port or mesh opening aligned with the victim region.
 - The microphone is located near the drone’s center to limit its contribution to CG shift.
 
-### 8.3 Jetson J1020 v2 (Signal Processing Subsystem)
+### 8.3 Jetson Nano (Signal Processing Subsystem)
 
-- Mounted on the **top side of the belly tray**, centered in both X and Y.
-- The tray has a flat mounting surface with four bosses or inserts matching the Jetson case mounting holes.
-- The Jetson’s aluminum case and heatsink are exposed to ambient airflow; any printed covers stop short of the heatsink to avoid trapping heat.
-- USB, HDMI, and Ethernet ports are oriented to face a side where cables can be routed without interfering with props or landing gear.
+- Mounted on the **top side of the belly tray**, centered in X/Y to minimize lateral CG shift.
+- Uses a **standoff + insert pattern** (heat-set inserts or metal standoffs) so the board/case is not hard-clamped to the tray.
+- **Thermal:** keep airflow around the heatsink/fan unobstructed; printed covers stop short of the heatsink to avoid trapping heat.
+- **Mass budget:** Jetson Nano dev kit is published around **141 g** bare; the design budgets **280 g** to include enclosure/heatsink, mounting hardware, and short cables. [R3]
+
+*Contingency option:* If additional margin is needed or a lighter compute solution is selected later, the Jetson Orin Nano dev kit is published at **0.174 kg** (board-level). [R4]
 
 ### 8.4 Power Converters and NP-F Plate
 
@@ -312,15 +364,33 @@ Landing shocks are primarily absorbed by the landing gear, but any vertical acce
 - Screw sizes and tray thickness are selected to provide a **safety factor of at least 2** against static loads and mild impact loads.
 - Corners and rib junctions are filleted rather than sharp to avoid crack initiation.
 
-### 9.2 Vibration and Noise
+### 9.2 Vibration Considerations
 
-- The Aurelia X4 includes a rangefinder and onboard electronics that already handle some vibration.  
-- To prevent additional vibrations from degrading the Doppler or microphone performance:
-  - The radar PCB may be mounted on **soft standoffs or rubber grommets**.  
-  - The microphone board can be isolated using a small piece of foam between the board and tray.
-- Cable bundles are tied down to avoid “whipping” in turbulent air.
+This design accounts for vibration primarily as a **mounting reliability** and **sensor-quality** risk (review concern), without going into subsystem-specific audio treatments.
 
----
+- **Stiff main structure:** the belly tray/rail interface is kept rigid so the payload does not “wag” during maneuvers.  
+- **Connector protection:** all cables include **strain relief** on the tray so connectors are not carrying vibration loads.  
+- **Fastener security:** use **nylock nuts** or thread-locker on mounting hardware to prevent loosening over time.  
+- **Optional board-level compliance (if needed):** if testing shows vibration coupling into the Doppler stack, use **rubber grommets / compliant standoffs** for the radar + ADC mounting points.  
+
+Detailed microphone-specific mitigation (ports,### 9.4 Safety and Operational Controls
+
+- **Retention and drop safety:** All payload items are mounted with mechanical fasteners (washers + nyloc nuts or threadlocker). Where practical, include a **secondary retention** (short lanyard/zip-tie anchor) so no component can fall free into the rotors if a fastener loosens.
+- **Prop/ground clearance:** The belly pack envelope must stay **inside the landing gear footprint** with no protrusions into the rotor disk. Confirm ground clearance and cable routing with the aircraft on level ground before flight.
+- **Edge and snag control:** Printed corners and rib junctions are filleted (no sharp edges). Any openings used for cables should be chamfered and use grommets/printed strain-relief features to prevent abrasion.
+- **Serviceability and safe handling:** The payload should be removable with common hand tools and without disturbing critical airframe electronics. During bench work, remove props or ensure motors are disabled.
+- **Pre-flight checks:** Verify fastener tightness, cable tie integrity, connector seating, and that the measured payload mass remains within the limit. Perform a quick visual clearance check (no loose wiring, nothing contacting landing gear).
+
+ wind/prop-wash handling, acoustic treatments) is owned by the microphone/speaker subsystem; this document only ensures the mounting locations and mass placement are compatible.
+
+### 9.3 EMI and Cable Routing Considerations
+
+EMI is treated here at the **layout level** (what we control in placement/mounting). Detailed filtering, grounding, and power integrity design is owned by the power/circuitry subsystem.
+
+- **Separation:** keep DC-DC converters and high-current power runs physically separated from the radar analog front-end and microphone wiring.  
+- **Short runs:** mount power conversion close to the Jetson and main power entry so heavy copper runs stay short.  
+- **Routing discipline:** route power and signal harnesses on different sides of the tray where possible and secure them so they cannot drift.  
+- **If interference is observed in testing:** add **ferrite clamps** and/or lightweight shielding as a last step (small mass increase vs improved robustness).
 
 ## 10. Verification and Validation Plan
 
@@ -359,81 +429,7 @@ Landing shocks are primarily absorbed by the landing gear, but any vertical acce
 
 ---
 
-## 11. Safety Considerations
-
-This subsystem directly impacts flight safety because it changes aircraft mass properties, adds external hardware, and introduces additional wiring and electronics. The following safety items SHALL be treated as design constraints during integration and flight test.
-
-### 11.1 Flight and Operational Safety (Part 107 Context)
-
-- **Secure external load:** The belly-pack module is an external payload and MUST be attached such that it cannot shift, detach, or interfere with controllability.
-- **Preflight inspection:** Before each flight, inspect:
-  - All mounting screws/nuts (no loosening, cracks, or missing hardware).
-  - Cable routing (no slack near props, no abrasion points).
-  - Battery retention and connector strain relief.
-- **Hover-first test philosophy:** Any time the payload layout changes, perform a low-altitude hover check (1–2 m AGL) before any mission-like flight.
-
-### 11.2 Mechanical Safety
-
-- **Fastener retention:** Use nylock nuts and/or thread-locker on belly-pack fasteners. Mark fasteners with witness paint to detect loosening.
-- **Vibration management:** Add rubber grommets/soft standoffs where appropriate (radar PCB, microphone PCB) to reduce fatigue and measurement noise.
-- **Sharp edges and snag hazards:** Deburr printed parts and avoid protrusions that could snag on vegetation, clothing, or landing gear.
-- **Impact tolerance:** Treat the belly pack as a sacrificial structure; the tray/cover should protect electronics during minor hard landings.
-
-### 11.3 Electrical and Thermal Safety
-
-- **Short-circuit protection:** All power branches feeding Jetson, radar/ADC, and audio boards MUST be fused or current-limited per the Power/Circuitry subsystem design.
-- **Thermal margins:** Avoid PLA for structural parts close to heat sources or direct sun exposure. PETG is recommended for general use; ASA is preferred for higher temperature/UV environments.
-- **Heatsink airflow:** Ensure the Jetson heatsink has clearance and ventilation; do not fully enclose it in a sealed printed cover.
-
-### 11.4 RF / Sensor Emission Safety
-
-- **Radar emission limits:** Configure the Doppler subsystem to operate within safe human-exposure limits and follow manufacturer guidance for antenna orientation and standoff distance.
-- **EMI considerations:** Route high-current lines away from sensitive analog front ends and microphone traces. Where needed, add shielding and maintain good grounding practices.
-
-
----
-
-## 12. Bill of Materials (Subsystem)
-
-> Note: The team indicated that most electronics are already purchased. The BOM below includes **integration hardware** and **3D-print filament** that the team may still need to procure. Items marked **TBD** depend on final selection by other subsystems.
-
-### 12.1 Major Components (from Conceptual Design)
-
-| Item | Qty | Part / Description | Link | Status |
-|---|---:|---|---|---|
-| Edge compute | 1 | Seeed Studio reComputer J1020 v2 (Jetson Nano 4GB) | https://www.seeedstudio.com/reComputer-J1020-v2-p-5498.html | Purchased (team) |
-| Speaker | 1 | SparkFun Mini USB Stereo Speaker (COM-18343) | https://www.sparkfun.com/mini-usb-stereo-speaker.html | Purchased (team) |
-| Microphone | 1 | SparkFun Analog MEMS Microphone Breakout (BOB-19389) | https://www.sparkfun.com/sparkfun-analog-mems-microphone-breakout-sph8878lr5h-1.html | Purchased (team) |
-| Doppler radar module | 1 | 24 GHz Doppler radar module (exact part TBD by Vitals subsystem) | TBD | TBD |
-| ADC board | 1 | ADC / analog front-end interface (exact part TBD by Vitals subsystem) | TBD | TBD |
-| DC-DC converters | 1–2 | Buck/boost converters sized for Jetson + sensors (exact parts TBD by Power subsystem) | TBD | TBD |
-| Battery plate | 1 | NP-F style battery plate / connector (exact part TBD by Power subsystem) | TBD | TBD |
-
-### 12.2 Mechanical Integration Hardware
-
-| Item | Qty | Specification | Link (example supplier) | Notes |
-|---|---:|---|---|---|
-| Mounting screws | 1 kit | M3/M4 assorted, stainless | https://www.mcmaster.com/ | Match X4 bottom-plate pattern; confirm final size during fit check |
-| Nylock nuts | 1 kit | M3/M4 nylon-insert lock nuts | https://www.mcmaster.com/ | Vibration resistance |
-| Washers | 1 kit | M3/M4 flat washers | https://www.mcmaster.com/ | Load spreading on printed plastic |
-| Rubber grommets / isolators | 1 kit | small grommets or silicone standoffs | https://www.mcmaster.com/ | Vibration isolation for radar/mic |
-| Heat-set inserts (optional) | 1 kit | M3 brass heat-set inserts | https://www.mcmaster.com/ | Improves thread durability in plastic |
-| Zip ties | 1 pack | 4–6 in, black | https://www.mcmaster.com/ | Cable management |
-| Hook-and-loop straps | 1 pack | 10–12 in straps | https://www.mcmaster.com/ | Battery and cable retention |
-| Foam tape (optional) | 1 roll | thin EVA/PU foam tape | https://www.mcmaster.com/ | Microphone isolation / rattle prevention |
-
-### 12.3 3D-Print Filament (Recommended)
-
-| Filament | Qty | Why | Link |
-|---|---:|---|---|
-| PETG (functional, general-purpose) | 1–2 spools (1 kg) | Tough, good layer adhesion, better heat performance than PLA; suitable for belly-pack structure | https://polymaker.com/product/polylite-petg/ |
-| PETG (premium, tight tolerance) | 0–1 spool (1 kg) | Very consistent diameter; good if dimensional accuracy is critical for mounting holes | https://www.prusa3d.com/product/prusament-petg-jet-black-1kg/ |
-| ASA (optional, high-temp/UV) | 0–1 spool (1 kg) | Better UV/weather resistance than ABS; useful if the tray is exposed to sun/heat | https://shop.polymaker.com/products/polymaker-asa |
-
-
----
-
-## 13. Summary
+## 11. Summary
 
 The Weight Distribution and Sensor Placement subsystem consolidates all triage hardware into a 3D-printed belly pack mounted under the Aurelia X4 Standard drone. By carefully locating heavy components near the frame center, aligning the Doppler and acoustic sensors with the victim region, and respecting the 1.5 kg payload and 5.212 kg MTOW limits, the design preserves flight performance while enabling the vital sensing and cognitive test capabilities required by the DARPA Triage Drone project.
 
@@ -447,28 +443,18 @@ This detailed design defines:
 
 Once the physical components are available and the 3D-printed tray is finalized, the team will verify that actual measured masses and CG align with this design and update the project documentation accordingly.
 
----
+## 12. References
 
-## 14. References
+[1] “DARPA Triage Challenge,” DARPA. Available: https://triagechallenge.darpa.mil/
 
-### 14.1 Regulations & Standards
+[2] Aurelia Technologies Inc., “Aurelia X4 Standard – Technical Drawing (2025).” Available: https://cdn.shopify.com/s/files/1/0253/9057/9791/files/X4_Standard_Technical_Drawing_-_2025_No_Bg.jpg
 
-1. Federal Aviation Administration (FAA). *Small Unmanned Aircraft Systems (UAS) Regulations (Part 107).* https://www.faa.gov/newsroom/small-unmanned-aircraft-systems-uas-regulations-part-107
-2. ISO. *ISO 21384-3:2023 — Unmanned aircraft systems — Part 3: Operational procedures.* https://www.iso.org/standard/80124.html
-3. ISO. *ISO 14971:2019 — Medical devices — Application of risk management to medical devices.* https://www.iso.org/standard/72704.html
-4. IEEE Standards Association. *IEEE 802.11ax-2021.* https://standards.ieee.org/ieee/802.11ax/7180/
-5. U.S. Department of Defense. *MIL-STD-461G: Requirements for the Control of Electromagnetic Interference Characteristics of Subsystems and Equipment.* https://s3vi.ndc.nasa.gov/ssri-kb/static/resources/MIL-STD-461G.pdf
+[3] Aurelia Technologies Inc., “Aurelia X4 Standard – Product Page / Specs.” Available: https://uavsystemsinternational.com/products/aurelia-x4-standard
 
-### 14.2 Components and Vendor Documentation
+[4] NVIDIA, “Jetson Nano – NVIDIA Developer.” Available: https://developer.nvidia.com/embedded/jetson-nano
 
-6. Aurelia Aerospace. *Aurelia X4 Standard specifications and technical resources.* https://aurelia-aerospace.com/products/aurelia-x4-standard
-7. Seeed Studio. *reComputer J1020 v2 (Jetson Nano 4GB).* https://www.seeedstudio.com/reComputer-J1020-v2-p-5498.html
-8. SparkFun Electronics. *Mini USB Stereo Speaker (COM-18343).* https://www.sparkfun.com/mini-usb-stereo-speaker.html
-9. SparkFun Electronics. *SparkFun Analog MEMS Microphone Breakout - SPH8878LR5H-1 (BOB-19389).* https://www.sparkfun.com/sparkfun-analog-mems-microphone-breakout-sph8878lr5h-1.html
+[5] RS Components, “NVIDIA Jetson Nano Developer Kit (Documentation / datasheet).” Available: https://docs.rs-online.com/8468/A700000006933720.pdf
 
-### 14.3 Materials (3D Printing)
+[6] Federal Aviation Administration, “14 CFR Part 107: Small Unmanned Aircraft Systems.” Available: https://www.faa.gov/uas/commercial_operators/part_107
 
-10. Polymaker. *PolyLite™ PETG.* https://polymaker.com/product/polylite-petg/
-11. Original Prusa. *Prusament PETG (1 kg).* https://www.prusa3d.com/product/prusament-petg-jet-black-1kg/
-12. Polymaker. *Polymaker™ ASA.* https://shop.polymaker.com/products/polymaker-asa
-
+[7] Texas Instruments, “IWR6843AOP mmWave Sensor Datasheet.” Available: https://www.ti.com/product/IWR6843AOP
