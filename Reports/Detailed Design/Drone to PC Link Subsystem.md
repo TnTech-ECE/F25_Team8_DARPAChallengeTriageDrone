@@ -420,9 +420,6 @@ This flowchart ensures that all critical communication elements are validated be
 
 ## Bill of Materials (BOM)
 
-
-### **Bill of Materials (BOM)**
-
 | Item | Description | Manufacturer | Part Number | Distributor | Qty | Unit Cost | Total Cost |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Wi-Fi Adapter (Primary)** | Dual Band USB 3.0 Wi-Fi Adapter (802.11ac) with high-gain antennas | TP-Link | Archer T4U Plus | [Amazon](https://www.amazon.com/dp/B08KHV7H1S) | 1 | $29.99 | $29.99 |
