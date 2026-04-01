@@ -4,6 +4,8 @@ This project uses an Infineon Avian 60 GHz radar sensor to detect heart rate and
 
 ## Requirements
 
+- Note: Idk why im making this because its gonna take so much to run this prototype, it is not worth it bro. If you do want to run this yourself you'll need to update the inclusion path to the radar sdk in the cmake text file.
+
 ### Hardware
 - Infineon Avian / XENSIV 60 GHz radar board (BGT60UTR11AIP)
 - Connected via USB
@@ -12,7 +14,7 @@ This project uses an Infineon Avian 60 GHz radar sensor to detect heart rate and
 - Windows 10 / 11 (64-bit)
 - **Visual Studio** (any edition) with **C++ desktop development** workload installed
 - **CMake** (latest version recommended)
-- The Infineon Avian SDK (with headers and libraries) [included]
+- The Infineon Radar SDK (with headers and libraries)
 
 ### Project Structure
 ```
