@@ -83,8 +83,8 @@ It is expected that the radar's heart rate measurements will closely match the p
 ### Data Analysis
 
 <!-- Upload your HR chart screenshots to GitHub and replace these URLs -->
-![HR @ 1.0m Chart](REPLACE_WITH_HR_1M_CHART_URL)
-![HR @ 0.5m Chart](REPLACE_WITH_HR_05M_CHART_URL)
+![HR @ 1.0m Chart](https://raw.githubusercontent.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/refs/heads/Gideon-B3-Vitals-n-DSP-experimental/Reports/Experimental%20Analysis/Radar%20Testing%20Graphs/HR-1.0m.png)
+![HR @ 0.5m Chart](https://raw.githubusercontent.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/refs/heads/Gideon-B3-Vitals-n-DSP-experimental/Reports/Experimental%20Analysis/Radar%20Testing%20Graphs/HR-0.5m.png)
 
 Across both distances, the radar system consistently overestimated heart rate, with all 40 measurements reading higher than the oximeter reference. At **1.0 m**, the overall mean percent error was **50.75%**, with Person 1 averaging **43.72%** and Person 2 averaging **57.79%**. At **0.5 m**, the overall mean percent error was slightly lower at **48.82%**, with Person 1 at **44.91%** and Person 2 at **52.72%**. The system produced readings clustered in the 101–120 bpm range regardless of each subject's actual heart rate (66–81 bpm), indicating a consistent positive bias. This suggests the signal processing subsystem is locking onto a secondary frequency component — likely a breathing harmonic or cardiac overtone — rather than the fundamental heart rate frequency.
 
@@ -179,8 +179,8 @@ It is expected that the radar's breathing rate measurements will closely match t
 ### Data Analysis
 
 <!-- Upload your BR chart screenshots to GitHub and replace these URLs -->
-![BR @ 1.0m Chart](REPLACE_WITH_BR_1M_CHART_URL)
-![BR @ 0.5m Chart](REPLACE_WITH_BR_05M_CHART_URL)
+![BR @ 1.0m Chart](https://raw.githubusercontent.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/refs/heads/Gideon-B3-Vitals-n-DSP-experimental/Reports/Experimental%20Analysis/Radar%20Testing%20Graphs/BR-1.0m.png)
+![BR @ 0.5m Chart](https://raw.githubusercontent.com/TnTech-ECE/F25_Team8_DARPAChallengeTriageDrone/refs/heads/Gideon-B3-Vitals-n-DSP-experimental/Reports/Experimental%20Analysis/Radar%20Testing%20Graphs/BR-0.5m.png)
 
 The breathing rate subsystem performed meaningfully better than the heart rate subsystem. At **1.0 m**, the overall mean percent error was **21.25%**, with Person 2 performing particularly well at **16.71%**. At **0.5 m**, performance was worse at **32.85%** overall — contrary to the expectation that closer range would improve accuracy. This suggests that at 0.5 m, chest displacement at closer range may be saturating the phase signal or introducing aliasing in the breathing frequency band. Unlike the consistent positive bias seen in heart rate, breathing rate errors were bidirectional — both over- and underestimation occurred — indicating the algorithm is tracking the correct frequency region but with inconsistent precision. Performance was strongest in the 12–17 breaths/min range, which falls squarely within the specified **0.13–1.0 Hz** window.
 
