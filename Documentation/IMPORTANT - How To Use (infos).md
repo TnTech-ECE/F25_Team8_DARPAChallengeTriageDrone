@@ -26,9 +26,9 @@
 ## **To access the Jetson**
 1. Connect Jetson via USB-C
 2. Open Command Prompt
-3. Type this command:
+3. Type this command:               
    ssh f2024-team5@192.168.55.1
-4. Will ask for password and it wont show what you've typed so be careful. Password:
+4. Will ask for password and it wont show what you've typed so be careful. Password:               
    Team5Rox
 5. Once it changes to "f2024-team5@f2024team5-desktop:~$" then you're in!
 6. Below are our codes. Figure out how to edit these:      
