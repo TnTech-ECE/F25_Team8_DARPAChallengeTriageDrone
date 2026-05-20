@@ -11,9 +11,9 @@
     chrome://flags      
 7. Find "Anonymize local IPs exposed by WebRTC" and "Insecure origins treated as secure"
 8. Under the "Insecure origins treated as secure", place this URL:      
-     http://172.20.10.6
+     http://172.20.10.6               
    Not gonna lie, not sure if this is actual url (I wrote this after I graduated)      
-   You're gonna have to check it yourself in the wifi IP address settings thing or in the Command prompt using the "hostname -I" command (i think)
+   You're gonna have to check it yourself in the wifi IP address setting or in the Command prompt using the "hostname -I" command (i think)
 10. Open a new tab, then go the URL/IP above to access the Jetson's WebRTC
 11. Click the "Connect" button, wait a few seconds then BOOM SHAKALAKA!
 12. You're welcome bro
