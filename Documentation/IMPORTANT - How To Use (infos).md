@@ -13,12 +13,16 @@
 8. Under the "Insecure origins treated as secure", place this URL:      
      http://172.20.10.6               
    Not gonna lie, not sure if this is actual url (I wrote this "how to" after I graduated)      
-   You're gonna have to check it yourself in the wifi IP address setting or in the Command prompt using the "hostname -I" command (i think)
+   You're gonna have to check it yourself in the wifi IP address setting or in the Command prompt using the "hostname -I" command (i think)               
+   You'll prolly get something similar to this:               
+     192.168.55.1 172.17.0.1 192.168.1.206
+                    
+     USB Link: 192.168.55.1                
+     Docker Bridge: 172.17.0.1                
+     **Wi-Fi IP: 192.168.1.206** (Use this ip address right here to open the WebRTC)                
 10. Open a new tab, then go the URL/IP above to access the Jetson's WebRTC
 11. Click the "Connect" button, wait a few seconds then BOOM SHAKALAKA!
 12. You're welcome bro
-
-
 
 
 
